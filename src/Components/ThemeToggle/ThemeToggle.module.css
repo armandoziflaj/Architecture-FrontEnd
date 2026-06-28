@@ -1,0 +1,16 @@
+.toggleBtn {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-family: var(--font-sans), serif;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+    padding: 0.5rem 0;
+}
+
+.toggleBtn:hover {
+    opacity: 1;
+}

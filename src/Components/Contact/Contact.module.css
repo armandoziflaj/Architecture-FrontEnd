@@ -1,0 +1,146 @@
+.section {
+    margin-top: 12rem;
+    width: 100%;
+    padding-top: 4rem;
+    border-top: 1px solid var(--border-color);
+    margin-bottom: 4rem;
+}
+
+.headerBlock {
+    margin-bottom: 5rem;
+}
+
+.subtitle {
+    font-size: 0.75rem;
+    color: var(--accent-color);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 1.5rem;
+}
+
+.title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+}
+
+.contentLayout {
+    display: grid;
+    grid-template-columns: 4fr 8fr;
+    gap: 4rem;
+}
+
+.infoColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.infoGroup h4 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+    font-weight: 400;
+}
+
+.infoGroup p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    line-height: 1.6;
+}
+
+.link {
+    position: relative;
+    padding-bottom: 2px;
+}
+
+.link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--text-color);
+    transform: scaleX(1);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.link:hover::after {
+    transform: scaleX(0);
+    transform-origin: right;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.inputGroup label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+}
+
+.inputGroup input,
+.inputGroup textarea {
+    background: none;
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-color);
+    font-family: var(--font-sans), serif;
+    font-size: 1rem;
+    padding: 0.5rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.inputGroup input:focus,
+.inputGroup textarea:focus {
+    border-color: var(--text-color);
+}
+.inputGroup input:-webkit-autofill,
+.inputGroup input:-webkit-autofill:hover,
+.inputGroup input:-webkit-autofill:focus,
+.inputGroup textarea:-webkit-autofill,
+.inputGroup textarea:-webkit-autofill:hover,
+.inputGroup textarea:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px var(--bg-color) inset !important;
+    -webkit-text-fill-color: var(--text-color) !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+.submitBtn {
+    align-self: flex-start;
+    background: none;
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
+    padding: 1rem 2.5rem;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.submitBtn:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+}
+
+@media (max-width: 768px) {
+    .contentLayout {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+    }
+}
