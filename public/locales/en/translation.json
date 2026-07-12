@@ -1,0 +1,64 @@
+{
+  "nav": {
+    "works": "Works",
+    "profile": "Profile"
+  },
+  "works": {
+    "title": "Selected Works",
+    "loading": "Loading Architectural Frameworks...",
+    "error": "Something went wrong",
+    "viewProject": "View Project"
+  },
+  "contact": {
+    "subtitle": "Inquiries",
+    "title": "Let's build something meaningful.",
+    "general": "General / Press",
+    "address": "Address",
+    "street": "12 Clean Lines Ave.",
+    "city": "Athens, 105 57",
+    "labels": {
+      "name": "Full Name",
+      "email": "Email",
+      "message": "Project Brief"
+    },
+    "placeholders": {
+      "name": "John Doe",
+      "email": "john@example.com",
+      "message": "Tell us about your space..."
+    },
+    "submit": "Send Inquiry"
+  },
+  "profile": {
+  "subtitle": "Our Philosophy",
+  "manifesto": "We believe that architecture is the silent backdrop to human life. Our practice strips away the unnecessary to reveal raw material honesty, natural light integration, and spatial clarity.",
+  "titles": {
+    "expertise": "Expertise",
+    "recognition": "Recognition"
+  },
+  "expertiseList": [
+    "Residential Architecture",
+    "Commercial Concepts",
+    "Interior Design",
+    "Sustainable Systems"
+  ],
+  "recognitionList": [
+    "A+ Awards 2025 — Winner",
+    "Mies van der Rohe Nominee",
+    "Architectural Digest — Featured"
+  ]},
+  "hero": {
+    "subtitle": "Form & Space",
+    "title": "We design spaces that filter light, form, and raw texture."
+  },
+  "projectPage": {
+    "back": "Back to Projects",
+    "loading": "Loading Project Details...",
+    "notFound": "Project not found.",
+    "overview": "Project Overview",
+    "meta": {
+      "location": "LOCATION",
+      "year": "YEAR",
+      "size": "SIZE"
+    }
+  }
+}

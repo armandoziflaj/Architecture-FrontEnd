@@ -21,7 +21,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
 
             <footer className={styles.footer}>
                 <div className="container">
-                    <p>© {new Date().getFullYear()} STUDIO. All rights reserved.</p>
+                    <p>© {new Date().getFullYear()} Sulozeqi Constructions. All rights reserved.</p>
                 </div>
             </footer>
         </div>

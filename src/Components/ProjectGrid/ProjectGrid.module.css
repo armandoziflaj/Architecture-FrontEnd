@@ -74,7 +74,23 @@
 .meta {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: flex-start; /* Ευθυγράμμιση στην κορυφή για σωστό vertical layout */
+}
+
+.titleGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.detailsGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-family: monospace; /* Καθαρή, technical αίσθηση για έτος και m² */
 }
 
 .projectTitle {
@@ -88,6 +104,15 @@
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.05em;
+}
+
+.loading, .error {
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 8rem 0;
+    text-align: center;
 }
 
 /* Clean breakpoints for tablet and mobile devices */

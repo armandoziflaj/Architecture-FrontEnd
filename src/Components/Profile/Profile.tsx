@@ -1,36 +1,35 @@
 import styles from './Profile.module.css';
+import { useTranslation } from "react-i18next";
 
 export const Profile = () => {
-    const expertise = ['Residential Architecture', 'Commercial Concepts', 'Interior Design', 'Sustainable Systems'];
-    const recognition = ['A+ Awards 2025 — Winner', 'Mies van der Rohe Nominee', 'Architectural Digest — Featured'];
+    const { t } = useTranslation();
+
+    const expertise = t('profile.expertiseList', { returnObjects: true }) as string[];
+    const recognition = t('profile.recognitionList', { returnObjects: true }) as string[];
 
     return (
         <section className={styles.section} id="profile">
-            {/* 1. Manifesto / Core Statement */}
             <div className={styles.manifestoBlock}>
-                <span className={styles.subtitle}>Our Philosophy</span>
+                <span className={styles.subtitle}>{t('profile.subtitle')}</span>
                 <h2 className={styles.manifestoText}>
-                    We believe that architecture is the silent backdrop to human life. Our practice strips away the unnecessary to reveal raw material honesty, natural light integration, and spatial clarity.
+                    {t('profile.manifesto')}
                 </h2>
             </div>
 
-            {/* 2. Two-Column Detail Layout */}
             <div className={styles.detailsGrid}>
-                {/* Left Column: Expertise */}
                 <div className={styles.column}>
-                    <h3 className={styles.columnTitle}>Expertise</h3>
+                    <h3 className={styles.columnTitle}>{t('profile.titles.expertise')}</h3>
                     <ul className={styles.list}>
-                        {expertise.map((item, index) => (
+                        {Array.isArray(expertise) && expertise.map((item, index) => (
                             <li key={index} className={styles.listItem}>{item}</li>
                         ))}
                     </ul>
                 </div>
 
-                {/* Right Column: Awards/Recognition */}
                 <div className={styles.column}>
-                    <h3 className={styles.columnTitle}>Recognition</h3>
+                    <h3 className={styles.columnTitle}>{t('profile.titles.recognition')}</h3>
                     <ul className={styles.list}>
-                        {recognition.map((item, index) => (
+                        {Array.isArray(recognition) && recognition.map((item, index) => (
                             <li key={index} className={styles.listItem}>{item}</li>
                         ))}
                     </ul>
