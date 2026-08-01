@@ -4,6 +4,7 @@ import './index.css';
 import './i18n';
 import App from './App.tsx';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {AuthProvider} from "./Context/AuthContext.tsx";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -18,7 +19,9 @@ createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <QueryClientProvider client={queryClient}>
             <Suspense fallback={<div style={{ padding: '2rem', fontFamily: 'var(--font-sans)' }}>Loading framework...</div>}>
-                <App />
+                <AuthProvider>
+                    <App />
+                </AuthProvider>
             </Suspense>
         </QueryClientProvider>
     </StrictMode>,

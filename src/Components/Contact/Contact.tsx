@@ -1,8 +1,61 @@
-import styles from './Contact.module.css';
+import { useState } from 'react';
 import { useTranslation } from "react-i18next";
+import styles from './Contact.module.css';
+import { type FormField, GenericForm } from "../GenericForm/GenericForm.tsx";
+import type { InquiryRequest } from "../../Types/InquiryRequest.ts";
+import { useSubmitContactInquiry } from "../../hooks/useContactInquiry.ts";
 
 export const Contact = () => {
     const { t } = useTranslation();
+
+    const [formData, setFormData] = useState<InquiryRequest>({
+        fullName: '',
+        email: '',
+        message: '',
+        phoneNumber: ''
+    });
+
+    const { mutate, isPending, isError, error, isSuccess } = useSubmitContactInquiry();
+
+    const handleContactSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+
+        mutate(formData, {
+            onSuccess: () => {
+                setFormData({ fullName: '', email: '', message: '', phoneNumber: '' });
+            }
+        });
+    };
+    const contactFields: FormField[] = [
+        {
+            id: 'fullName',
+            label: t('contact.labels.name'),
+            type: 'text',
+            placeholder: t('contact.placeholders.name'),
+            value: formData.fullName,
+            onChange: (val) => setFormData(prev => ({ ...prev, fullName: val })),
+            required: true
+        },
+        {
+            id: 'email',
+            label: t('contact.labels.email'),
+            type: 'email',
+            placeholder: t('contact.placeholders.email'),
+            value: formData.email,
+            onChange: (val) => setFormData(prev => ({ ...prev, email: val })),
+            required: true
+        },
+        {
+            id: 'message',
+            label: t('contact.labels.message'),
+            type: 'textarea',
+            placeholder: t('contact.placeholders.message'),
+            value: formData.message,
+            onChange: (val) => setFormData(prev => ({ ...prev, message: val })),
+            required: true,
+            rows: 4
+        }
+    ];
 
     return (
         <section className={styles.section} id="contact">
@@ -15,7 +68,11 @@ export const Contact = () => {
                 <div className={styles.infoColumn}>
                     <div className={styles.infoGroup}>
                         <h4>{t('contact.general')}</h4>
-                        <p><a href="mailto:hello@studio.com" className={styles.link}>hello@studio.com</a></p>
+                        <p>
+                            <a href="mailto:hello@example.com" className={styles.link}>
+                                hello@example.com
+                            </a>
+                        </p>
                         <p>+30 210 000 0000</p>
                     </div>
 
@@ -26,41 +83,17 @@ export const Contact = () => {
                     </div>
                 </div>
 
-                <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
-                    <div className={styles.inputGroup}>
-                        <label htmlFor="name">{t('contact.labels.name')}</label>
-                        <input
-                            type="text"
-                            id="name"
-                            required
-                            placeholder={t('contact.placeholders.name')}
-                        />
-                    </div>
+                <div className={styles.formContainer}>
+                    {isSuccess && <div className={styles.successBanner}>Inquiry sent successfully.</div>}
+                    {isError && <div className={styles.errorBanner}>{error?.message || "An error occurred."}</div>}
 
-                    <div className={styles.inputGroup}>
-                        <label htmlFor="email">{t('contact.labels.email')}</label>
-                        <input
-                            type="email"
-                            id="email"
-                            required
-                            placeholder={t('contact.placeholders.email')}
-                        />
-                    </div>
-
-                    <div className={styles.inputGroup}>
-                        <label htmlFor="message">{t('contact.labels.message')}</label>
-                        <textarea
-                            id="message"
-                            rows={4}
-                            required
-                            placeholder={t('contact.placeholders.message')}
-                        />
-                    </div>
-
-                    <button type="submit" className={styles.submitBtn}>
-                        {t('contact.submit')}
-                    </button>
-                </form>
+                    <GenericForm
+                        fields={contactFields}
+                        submitLabel={isPending ? 'Sending...' : t('contact.submit')}
+                        onSubmit={handleContactSubmit}
+                        disabled={isPending}
+                    />
+                </div>
             </div>
         </section>
     );

@@ -1,0 +1,45 @@
+.loginPageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--bg-color);
+    padding: var(--page-padding);
+    transition: background-color var(--transition-speed) ease;
+}
+
+.formWrapper {
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.headerGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.title {
+    color: var(--text-color);
+    font-size: 1.75rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.errorBanner {
+    border-left: 2px solid #ef4444;
+    color: #ef4444;
+    padding: 0.5rem 0 0.5rem 1rem;
+    font-size: 0.9rem;
+}

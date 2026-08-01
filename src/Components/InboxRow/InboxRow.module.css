@@ -1,0 +1,96 @@
+.row {
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color var(--transition-speed) ease;
+    cursor: pointer;
+}
+
+.row:hover {
+    background-color: rgba(var(--text-color-rgb, 0, 0, 0), 0.02);
+}
+
+td {
+    padding: 1.5rem 0;
+    font-size: 0.95rem;
+    font-weight: 300;
+    vertical-align: middle;
+}
+
+.senderInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.senderName {
+    font-weight: 400;
+    color: var(--text-color);
+}
+
+.senderEmail {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.subjectText {
+    color: var(--text-color);
+}
+
+.dateText {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.unreadBadge {
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.dot {
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+.readBadge {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+@media (max-width: 768px) {
+    .row {
+        display: block;
+        padding: 1.5rem 0;
+    }
+
+    td {
+        display: block;
+        border: none;
+        position: relative;
+        padding-left: 45%;
+        text-align: right;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 40%;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: 400;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        letter-spacing: 0.05em;
+    }
+
+    .senderInfo {
+        align-items: flex-end;
+    }
+}

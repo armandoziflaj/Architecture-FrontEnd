@@ -7,7 +7,6 @@ export const ProjectGrid = () => {
     const { t, i18n } = useTranslation();
     const { data: projects = [], isLoading, isError, error } = useProjects(i18n.language);
 
-    // Χρήση του t() για τα loading και error states
     if (isLoading) return <div className={styles.loading}>{t('works.loading')}</div>;
     if (isError) return <div className={styles.error}>{t('works.error')}: {error?.message || 'Something went wrong'}</div>;
 

@@ -13,10 +13,10 @@ export const Navbar = () => {
             </a>
 
             <div className={styles.links}>
-                <a href={"#works"} className={styles.linkItem}>
+                <a href={"/#works"} className={styles.linkItem}>
                     {t('nav.works')}
                 </a>
-                <a href={"#profile"} className={styles.linkItem}>
+                <a href={"/#profile"} className={styles.linkItem}>
                     {t('nav.profile')}
                 </a>
             </div>

@@ -3,6 +3,7 @@ import i18n from '../i18n'; // Πρόσθεσε αυτό το import
 
 export const api = axios.create({
     baseURL: 'http://localhost:5188/api',
+    withCredentials: true,
     headers: {
         'Content-Type': 'application/json',
     },

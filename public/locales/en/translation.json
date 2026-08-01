@@ -60,5 +60,12 @@
       "year": "YEAR",
       "size": "SIZE"
     }
+  },
+  "admin": {
+    "login": {
+      "title": "System Access",
+      "subtitle": "00 — Admin Authentication",
+      "loginButton" : "Login"
+    }
   }
 }
