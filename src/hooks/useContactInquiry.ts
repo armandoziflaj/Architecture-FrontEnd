@@ -1,36 +1,50 @@
-import {submitContactInquiry} from "../api/contactInquiryApi.ts";
+import {getAllInquiries, getVisitorCount, submitContactInquiry, toggleInquiryRead} from "../api/contactInquiryApi.ts";
 import type {InquiryRequest} from "../Types/InquiryRequest.ts";
-import type {BaseResponse} from "../Types/BaseResponse.ts";
-import {useMutation} from "@tanstack/react-query";
+import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
+import {handleApiError} from "./handleApiError.ts";
 
-export const useSubmitContactInquiry = () => {
-    return useMutation<BaseResponse<void>, Error, InquiryRequest>({
-        mutationFn: async (contactInquiry: InquiryRequest) => {
-            const result = await submitContactInquiry(contactInquiry);
-            if (!result.success) {
-                throw new Error(result.message || "Failed to submit inquiry");
+export const useSubmitInquiry = () => {
+    return useMutation({
+        mutationFn: async (data: InquiryRequest) => {
+            try {
+                await submitContactInquiry(data);
+            } catch (err) {
+                return handleApiError(err);
             }
-            return result;
-        }
+        },
     });
 };
 
-// export const useProjectById = (id: string, lang: string) => {
-//     return useApiQuery<ProjectResponse>(
-//         ['project', id, lang],
-//         async ({ signal }) => {
-//             try {
-//                 const result = await fetchProjectById(id, signal);
-//
-//                 if (!result.success) {
-//                     return handleApiError( new Error(result.message || "Failed to load project"));
-//                 }
-//
-//                 return result.data;
-//             } catch (err) {
-//                 return handleApiError(err);
-//             }
-//         },
-//         { enabled: !!id }
-//     );
-// };
+export const useContactInquiries = () => {
+    return useQuery({
+        queryKey: ['admin-inquiries'],
+        queryFn: ({ signal }) => getAllInquiries(signal),
+        staleTime: 1000 * 60 * 2,
+        select: (data) => data.data,
+    });
+};
+
+export const useToggleInquiryRead = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: async (id: number) => {
+            try {
+                return await toggleInquiryRead(id);
+            } catch (err) {
+                return handleApiError(err);
+            }
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['admin-inquiries'] });
+        },
+    });
+};
+
+export const useVisitorCount = () => {
+    return useQuery({
+        queryKey: ['visitor-count'],
+        queryFn: ({ signal }) => getVisitorCount(signal),
+        staleTime: 1000 * 60 * 3,
+    });
+};

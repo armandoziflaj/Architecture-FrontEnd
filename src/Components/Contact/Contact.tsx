@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from "react-i18next";
 import styles from './Contact.module.css';
 import { type FormField, GenericForm } from "../GenericForm/GenericForm.tsx";
 import type { InquiryRequest } from "../../Types/InquiryRequest.ts";
-import { useSubmitContactInquiry } from "../../hooks/useContactInquiry.ts";
+import {useSubmitInquiry} from "../../hooks/useContactInquiry.ts";
 
 export const Contact = () => {
     const { t } = useTranslation();
@@ -15,9 +15,9 @@ export const Contact = () => {
         phoneNumber: ''
     });
 
-    const { mutate, isPending, isError, error, isSuccess } = useSubmitContactInquiry();
+    const { mutate, isPending, isError, error, isSuccess } = useSubmitInquiry();
 
-    const handleContactSubmit = (e: React.FormEvent) => {
+    const handleContactSubmit = (e: React.SubmitEvent) => {
         e.preventDefault();
 
         mutate(formData, {

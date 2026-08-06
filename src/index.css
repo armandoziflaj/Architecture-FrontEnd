@@ -38,7 +38,7 @@ html {
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
-  font-family: var(--font-sans), serif;
+    font-family: var(--font-sans), serif;
   overflow-x: hidden;
   transition: background-color var(--transition-speed) ease,
   color var(--transition-speed) ease;

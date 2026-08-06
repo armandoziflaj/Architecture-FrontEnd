@@ -1,21 +1,27 @@
 .nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem var(--page-padding);
-    background-color: var(--bg-color);
-    border-bottom: 1px solid var(--border-color);
     position: sticky;
     top: 0;
     z-index: 1000;
+    width: 100%;
+    background-color: var(--bg-color);
+    border-bottom: 1px solid var(--border-color);
     transition: background-color var(--transition-speed) ease,
     border-color var(--transition-speed) ease;
 }
 
+.navWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: var(--max-content-width);
+    margin: 0 auto;
+    padding: 1.5rem var(--page-padding);
+}
+
 .logo {
     font-weight: 700;
-    font-size: 1.25rem;
-    letter-spacing: 0.05em;
+    font-size: 1.2rem;
     text-decoration: none;
     color: var(--text-color);
     transition: color var(--transition-speed) ease;
@@ -28,15 +34,15 @@
 .links {
     display: flex;
     gap: 2.5rem;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
 }
 
 .linkItem {
     text-decoration: none;
     color: var(--text-muted);
-    font-size: 0.9rem;
     font-weight: 500;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
     transition: color var(--transition-speed) ease;
 }
 

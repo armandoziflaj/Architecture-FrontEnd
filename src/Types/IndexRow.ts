@@ -1,13 +1,14 @@
 export interface MessageData {
-    id: string;
-    name: string;
+    id: number;
+    fullName: string;
     email: string;
-    subject: string;
-    date: string;
-    unread: boolean;
+    phoneNumber?: string;
+    message: string;
+    isRead: boolean;
+    createdAt: string;
 }
 
 export interface InboxRowProps {
     message: MessageData;
-    onClick?: (id: string) => void;
+    onClick?: (id: number) => void;
 }

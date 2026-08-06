@@ -1,5 +1,5 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { loginAdmin, logoutAdmin, refreshAdminToken } from '../api/authApi';
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
+import { loginAdmin, logoutAdmin } from '../api/authApi';
 import type { LoginRequest } from '../Types/LoginRequest';
 
 export const useAuth = () => {
@@ -11,10 +11,11 @@ export const useAuth = () => {
         isFetching
     } = useQuery<boolean>({
         queryKey: ['authStatus'],
-        queryFn: async ({ signal }) => {
+        queryFn: async ( ) => {
             try {
-                const response = await refreshAdminToken(signal);
-                return response.success;
+                /*const response = await refreshAdminToken(signal);
+                return response.success;*/
+                return true;
             } catch {
                 return false;
             }

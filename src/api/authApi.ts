@@ -10,11 +10,11 @@ export const loginAdmin =
     return response.data;
 };
 
-export const refreshAdminToken = async (signal?: AbortSignal): Promise<BaseResponse<void>> => {
+/*export const refreshAdminToken = async (signal?: AbortSignal): Promise<BaseResponse<void>> => {
     const response
         = await api.post<BaseResponse<void>>('/authentication/refresh', {}, { signal });
     return response.data;
-};
+};*/
 
 export const logoutAdmin = async (): Promise<BaseResponse<void>> => {
     const response

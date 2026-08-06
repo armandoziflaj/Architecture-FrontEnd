@@ -1,7 +1,7 @@
 import { api } from './axiosInstance';
 import type {BaseResponse} from "../Types/BaseResponse.ts";
-import type {ProjectResponse} from "../Types/ProjectResponse.ts";
-import type {InquiryRequest} from "../Types/InquiryRequest.ts";
+import type {ContactInquiryResponse, InquiryRequest} from "../Types/InquiryRequest.ts";
+import type {VisitorCount} from "../Types/VisitorCount.ts";
 
 export const submitContactInquiry = async (
     inquiryData: InquiryRequest,
@@ -14,7 +14,31 @@ export const submitContactInquiry = async (
     );
     return response.data;
 };
-export const fetchProjectById = async (id: string, signal?: AbortSignal): Promise<BaseResponse<ProjectResponse>> => {
-    const response = await api.get<BaseResponse<ProjectResponse>>(`/projects/${id}`, { signal });
+export const getAllInquiries = async (
+    signal?: AbortSignal
+): Promise<BaseResponse<ContactInquiryResponse[]>> => {
+    const response = await api.get<BaseResponse<ContactInquiryResponse[]>>(
+        '/contactinquiries/admin/all',
+        { signal }
+    );
+    return response.data;
+};
+
+export const toggleInquiryRead = async (
+    id: number
+): Promise<{ success: boolean; isRead: boolean }> => {
+    const response = await api.put<{ success: boolean; isRead: boolean }>(
+        `/contactinquiries/admin/${id}/toggle-read`
+    );
+    return response.data;
+};
+
+export const getVisitorCount = async (
+    signal?: AbortSignal
+): Promise<BaseResponse<VisitorCount>> => {
+    const response = await api.get<BaseResponse<VisitorCount>>(
+        '/VisitorCounter',
+        { signal }
+    );
     return response.data;
 };

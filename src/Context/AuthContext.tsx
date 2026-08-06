@@ -1,6 +1,6 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState } from 'react';
 import type { LoginRequest } from '../Types/LoginRequest';
-import {loginAdmin, logoutAdmin, refreshAdminToken} from "../api/authApi.ts";
+import {loginAdmin, logoutAdmin} from "../api/authApi.ts";
 
 interface AuthContextType {
     isAuthenticated: boolean;
@@ -15,10 +15,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
-    useEffect(() => {
+    /*useEffect(() => {
         const controller = new AbortController();
 
-        const checkSession = async () => {
+            const checkSession = async () => {
             try {
                 const response = await refreshAdminToken(controller.signal);
 
@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         return () => {
             controller.abort();
         };
-    }, []);
+    }, []);*/
 
     const login = async (credentials: LoginRequest) => {
         setIsLoading(true);

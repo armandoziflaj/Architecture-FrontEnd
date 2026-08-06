@@ -8,22 +8,24 @@ export const Navbar = () => {
 
     return (
         <nav className={styles.nav}>
-            <a href="/" className={styles.logo}>
-                Sulozeqi Constructions<span className={styles.dot}>.</span>
-            </a>
-
-            <div className={styles.links}>
-                <a href={"/#works"} className={styles.linkItem}>
-                    {t('nav.works')}
+            <div className={styles.navWrapper}>
+                <a href="/" className={styles.logo}>
+                    Sulozeqi<span className={styles.dot}>.</span>
                 </a>
-                <a href={"/#profile"} className={styles.linkItem}>
-                    {t('nav.profile')}
-                </a>
-            </div>
 
-            <div className={styles.actions}>
-                <LanguageSwitcher />
-                <ThemeToggle />
+                <div className={styles.links}>
+                    <a href={"/#works"} className={styles.linkItem}>
+                        {t('nav.works')}
+                    </a>
+                    <a href={"/#profile"} className={styles.linkItem}>
+                        {t('nav.profile')}
+                    </a>
+                </div>
+
+                <div className={styles.actions}>
+                    <LanguageSwitcher />
+                    <ThemeToggle />
+                </div>
             </div>
         </nav>
     );
