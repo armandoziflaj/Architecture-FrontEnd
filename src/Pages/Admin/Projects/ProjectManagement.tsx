@@ -8,8 +8,11 @@ import { useProjectFormState } from './useProjectFormState.ts';
 import {type ExistingPhotoDto, mapToCreateProjectPayload, type UpdateProjectRequest} from '../../../Types/ProjectAdmin';
 import { useCreateProject, useUpdateProject, useProjectById } from "../../../hooks/useProjects.ts";
 import styles from './ProjectManagement.module.css';
+import { useTranslation } from 'react-i18next';
+import { toast } from 'react-hot-toast';
 
 export const ProjectManagement = () => {
+    const { t } = useTranslation();
     const [searchParams, setSearchParams] = useSearchParams();
     const editIdParam = searchParams.get('edit');
     const activeProjectId = editIdParam ? Number(editIdParam) : null;
@@ -31,7 +34,7 @@ export const ProjectManagement = () => {
         setIsFormOpen(true);
     };
 
-    const handleFormSubmit = (e: React.FormEvent) => {
+    const handleFormSubmit = (e: React.SubmitEvent) => {
         e.preventDefault();
 
         if (isEditMode && activeProjectId) {
@@ -70,7 +73,7 @@ export const ProjectManagement = () => {
 
             updateProject(updatePayload, {
                 onSuccess: () => {
-                    alert("Structure updated successfully!");
+                    toast.success(t('admin.projectManagement.updateSuccess'));
                     handleCloseOrOpenCreate();
                 }
             });
@@ -89,7 +92,7 @@ export const ProjectManagement = () => {
 
             createProject(payload, {
                 onSuccess: () => {
-                    alert("Project created successfully!");
+                    toast.success(t('admin.projectManagement.createSuccess'));
                     resetForm();
                 }
             });
@@ -104,21 +107,21 @@ export const ProjectManagement = () => {
     const projectFields: FormField[] = [
         {
             id: 'title',
-            label: `Project Title (${activeLang.toUpperCase()})`,
+            label: t('admin.projectManagement.titleLabel', { lang: activeLang.toUpperCase() }),
             type: 'text',
-            placeholder: 'Enter structure name',
+            placeholder: t('admin.projectManagement.titlePlaceholder'),
             value: currentTitle,
             onChange: currentTitleSetter,
             required: true
         },
-        { id: 'location', label: 'Location', type: 'text', placeholder: 'e.g., Voula, Athens', value: state.location, onChange: setters.setLocation, required: true },
-        { id: 'year', label: 'Year', type: 'text', placeholder: 'e.g., 2026', value: state.year, onChange: setters.setYear, required: true },
-        { id: 'size', label: 'Size', type: 'text', placeholder: 'e.g., 240m²', value: state.size, onChange: setters.setSize, required: true },
+        { id: 'location', label: t('admin.projectManagement.locationLabel'), type: 'text', placeholder: t('admin.projectManagement.locationPlaceholder'), value: state.location, onChange: setters.setLocation, required: true },
+        { id: 'year', label: t('admin.projectManagement.yearLabel'), type: 'text', placeholder: t('admin.projectManagement.yearPlaceholder'), value: state.year, onChange: setters.setYear, required: true },
+        { id: 'size', label: t('admin.projectManagement.sizeLabel'), type: 'text', placeholder: t('admin.projectManagement.sizePlaceholder'), value: state.size, onChange: setters.setSize, required: true },
         {
             id: 'description',
-            label: `Architectural Narrative (${activeLang.toUpperCase()})`,
+            label: t('admin.projectManagement.descriptionLabel', { lang: activeLang.toUpperCase() }),
             type: 'textarea',
-            placeholder: 'Describe the concept...',
+            placeholder: t('admin.projectManagement.descriptionPlaceholder'),
             value: currentDesc,
             onChange: currentDescSetter,
             required: true,
@@ -127,14 +130,14 @@ export const ProjectManagement = () => {
     ];
 
     if (isLoadingProject) {
-        return <div className={styles.loadingText}>Loading structure framework...</div>;
+        return <div className={styles.loadingText}>{t('admin.projectManagement.loading')}</div>;
     }
 
     return (
         <div className={styles.managementContainer}>
             <SectionHeader
-                title={isEditMode ? `Edit Framework #${activeProjectId}` : "Project Management"}
-                actionLabel={isFormOpen ? "← Back to Frameworks" : "+ New Framework ↗"}
+                title={isEditMode ? t('admin.projectManagement.editTitle', { id: activeProjectId }) : t('admin.projectManagement.createTitle')}
+                actionLabel={isFormOpen ? t('admin.projectManagement.backButton') : t('admin.projectManagement.newButton')}
                 onActionClick={isFormOpen ? () => setIsFormOpen(false) : handleCloseOrOpenCreate}
             />
 
@@ -146,14 +149,14 @@ export const ProjectManagement = () => {
                         <GenericForm fields={projectFields} submitLabel="" onSubmit={() => {}} />
 
                         <div className={styles.mediaFramework}>
-                            <h4 className={styles.frameworkTitle}>03 — Sequenced Visual Assets</h4>
+                            <h4 className={styles.frameworkTitle}>{t('admin.projectManagement.mediaTitle')}</h4>
                             <ImageManager images={state.images} onImagesChange={setters.setImages} />
                         </div>
 
                         <button type="submit" className={styles.submitStructureBtn} disabled={isPending}>
                             {isPending
-                                ? (isEditMode ? 'Committing Changes...' : 'Publishing...')
-                                : (isEditMode ? 'Commit Changes ↗' : 'Commit & Publish Package ↗')
+                                ? (isEditMode ? t('admin.projectManagement.committing') : t('admin.projectManagement.publishing'))
+                                : (isEditMode ? t('admin.projectManagement.commitButton') : t('admin.projectManagement.publishButton'))
                             }
                         </button>
                     </form>

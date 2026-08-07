@@ -20,14 +20,17 @@ export const ProjectPage = () => {
 
     return (
         <main className={styles.container}>
-            <Link to="/" className={styles.backLink}>← {t('projectPage.back')}</Link>
+            <Link to="/" className={styles.backLink}>
+                <span>←</span>
+                <span>{t('projectPage.back')}</span>
+            </Link>
 
             <header className={styles.header}>
                 <h1>{activeTitle}</h1>
                 <div className={styles.meta}>
-                    <span>{t('projectPage.meta.location')}: {project.location}</span>
-                    <span>{t('projectPage.meta.year')}: {project.completionYear}</span>
-                    <span>{t('projectPage.meta.size')}: {project.size} m²</span>
+                    <span>{project.location}</span>
+                    <span>{project.completionYear}</span>
+                    <span>{project.size} m²</span>
                 </div>
             </header>
 
@@ -44,6 +47,7 @@ export const ProjectPage = () => {
                             src={fullImageUrl}
                             alt={photo.altText || `${activeTitle} photo ${index + 1}`}
                             className={styles.galleryImage}
+                            style={{ animationDelay: `${200 + index * 100}ms` }}
                             onError={(e) => {
                                 (e.target as HTMLImageElement).src = '/placeholder.jpg';
                             }}
@@ -52,12 +56,13 @@ export const ProjectPage = () => {
                 })}
             </section>
 
-            <section className={styles.content}>
-                <h3 className={styles.overviewTitle}>{t('projectPage.overview')}</h3>
-                <p className={styles.text}>
-                    {activeSummary}
-                </p>
-            </section>
+            <div className={styles.contentWrapper}>
+                <div className={styles.decoration}></div>
+                <section className={styles.content}>
+                    <h3>{t('projectPage.overview')}</h3>
+                    <p>{activeSummary}</p>
+                </section>
+            </div>
         </main>
     );
 };

@@ -1,31 +1,31 @@
 .container {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--spacing-sm);
 }
 
 .btn {
     background: none;
     border: none;
-    color: var(--text-muted);
-    font-size: 0.85rem;
-    font-weight: 600;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
     cursor: pointer;
-    padding: 0.2rem 0.4rem;
-    transition: color var(--transition-speed) ease;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    transition: color var(--transition-duration) ease;
 }
 
 .btn:hover {
-    color: var(--text-color);
+    color: var(--color-text);
 }
 
 .btn.active {
-    color: var(--text-color);
-    font-weight: 700;
+    color: var(--color-text);
+    font-weight: var(--font-weight-bold);
 }
 
 .divider {
-    color: var(--border-color);
-    font-size: 0.85rem;
+    color: var(--color-border);
+    font-size: var(--font-size-sm);
     user-select: none;
 }

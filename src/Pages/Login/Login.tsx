@@ -14,8 +14,8 @@ export const Login = () => {
     const navigate = useNavigate();
 
     const loginFields: FormField[] = [
-        { id: 'username', label: 'Username', type: 'text', placeholder: 'Enter admin username', value: username, onChange: setUsername, required: true },
-        { id: 'password', label: 'Password', type: 'password', placeholder: 'Enter secret password', value: password, onChange: setPassword, required: true }
+        { id: 'username', label: t('admin.login.usernameLabel'), type: 'text', placeholder: t('admin.login.usernamePlaceholder'), value: username, onChange: setUsername, required: true },
+        { id: 'password', label: t('admin.login.passwordLabel'), type: 'password', placeholder: t('admin.login.passwordPlaceholder'), value: password, onChange: setPassword, required: true }
     ];
 
     const handleLoginSubmit = async (e: React.SubmitEvent) => {
@@ -24,9 +24,9 @@ export const Login = () => {
         try {
             const response = await login({ username, password });
             if (response.success) navigate('/dashboard');
-            else setErrorMsg(response.message || 'Invalid credentials.');
+            else setErrorMsg(response.message || t('admin.login.invalidCredentials'));
         } catch {
-            setErrorMsg('An error occurred. Please try again.');
+            setErrorMsg(t('admin.login.genericError'));
         }
     };
 
@@ -42,7 +42,7 @@ export const Login = () => {
 
                 <GenericForm
                     fields={loginFields}
-                    submitLabel={isLoggingIn ? 'Verifying...' : t('admin.login.loginButton')+''}
+                    submitLabel={isLoggingIn ? t('admin.login.verifying') : t('admin.login.loginButton')}
                     onSubmit={handleLoginSubmit}
                     disabled={isLoggingIn}
                 />

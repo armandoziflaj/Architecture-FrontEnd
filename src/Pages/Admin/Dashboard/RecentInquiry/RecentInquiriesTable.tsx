@@ -2,6 +2,7 @@ import React from 'react';
 import type { MessageData } from '../../../../Types/IndexRow.ts';
 import styles from '../Dashboard.module.css';
 import { InboxRow } from "../../../../Components/InboxRow/InboxRow.tsx";
+import { useTranslation } from 'react-i18next';
 
 interface RecentInquiriesTableProps {
     messages?: MessageData[];
@@ -14,12 +15,14 @@ export const RecentInquiriesTable: React.FC<RecentInquiriesTableProps> = ({
                                                                               isLoading = false,
                                                                               onMessageClick
                                                                           }) => {
+    const { t } = useTranslation();
+
     if (isLoading) {
-        return <div className={styles.loadingText}>Loading client inquiries...</div>;
+        return <div className={styles.loadingText}>{t('admin.dashboard.inquiries.loading')}</div>;
     }
 
     if (!messages || !Array.isArray(messages) || messages.length === 0) {
-        return <div className={styles.emptyText}>No recent inquiries found.</div>;
+        return <div className={styles.emptyText}>{t('admin.dashboard.inquiries.empty')}</div>;
     }
 
     return (
@@ -27,10 +30,10 @@ export const RecentInquiriesTable: React.FC<RecentInquiriesTableProps> = ({
             <table className={styles.adminTable}>
                 <thead>
                 <tr>
-                    <th>Client</th>
-                    <th>Message Preview</th>
-                    <th>Date</th>
-                    <th style={{ textAlign: 'right' }}>Status</th>
+                    <th>{t('admin.dashboard.inquiries.client')}</th>
+                    <th>{t('admin.dashboard.inquiries.message')}</th>
+                    <th>{t('admin.dashboard.inquiries.date')}</th>
+                    <th style={{ textAlign: 'right' }}>{t('admin.dashboard.inquiries.status')}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -39,6 +42,12 @@ export const RecentInquiriesTable: React.FC<RecentInquiriesTableProps> = ({
                         key={msg.id}
                         message={msg}
                         onClick={() => onMessageClick(msg.id)}
+                        labels={{
+                            client: t('admin.dashboard.inquiries.client'),
+                            message: t('admin.dashboard.inquiries.message'),
+                            date: t('admin.dashboard.inquiries.date'),
+                            status: t('admin.dashboard.inquiries.status'),
+                        }}
                     />
                 ))}
                 </tbody>

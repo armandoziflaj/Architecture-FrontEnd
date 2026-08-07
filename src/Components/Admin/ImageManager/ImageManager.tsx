@@ -1,6 +1,7 @@
 import React from 'react';
 import type { ProjectImage } from '../../../Types/ProjectAdmin';
 import styles from './ImageManager.module.css';
+import { useTranslation } from 'react-i18next';
 
 interface ImageManagerProps {
     images: ProjectImage[];
@@ -8,6 +9,7 @@ interface ImageManagerProps {
 }
 
 export const ImageManager = ({ images, onImagesChange }: ImageManagerProps) => {
+    const { t } = useTranslation();
 
     const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (!e.target.files) return;
@@ -54,7 +56,7 @@ export const ImageManager = ({ images, onImagesChange }: ImageManagerProps) => {
     return (
         <div className={styles.container}>
             <label className={styles.uploadBox}>
-                <span>+ Upload Architectural Media</span>
+                <span>{t('admin.imageManager.uploadBox')}</span>
                 <input
                     type="file"
                     multiple
@@ -67,7 +69,7 @@ export const ImageManager = ({ images, onImagesChange }: ImageManagerProps) => {
             <div className={styles.imagesGrid}>
                 {images.map((img, index) => (
                     <div key={img.id} className={styles.imageCard}>
-                        <img src={img.url} alt={`Structure visual ${img.sortOrder}`} />
+                        <img src={img.url} alt={t('admin.imageManager.altText', { order: img.sortOrder })} />
 
                         {/* Order Badge */}
                         <span className={styles.orderBadge}>#{img.sortOrder}</span>

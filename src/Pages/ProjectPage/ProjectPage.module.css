@@ -1,88 +1,172 @@
+/* ==========================================================================
+   Modern Animations
+   ========================================================================== */
+
+@keyframes fadeUpIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes drawIn {
+    from {
+        transform: scaleY(0);
+    }
+    to {
+        transform: scaleY(1);
+    }
+}
+
+/* ==========================================================================
+   Page Layout & Structure
+   ========================================================================== */
+
 .container {
-    max-width: var(--max-content-width);
-    margin: 8rem auto 4rem;
+    max-width: var(--content-max-width);
+    margin: var(--spacing-xxl) auto;
     padding: 0 var(--page-padding);
 }
 
+.backLink, .header, .gallery, .contentWrapper {
+    opacity: 0;
+    animation: fadeUpIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.header { animation-delay: 100ms; }
+.gallery { animation-delay: 200ms; }
+.contentWrapper { animation-delay: 300ms; }
+
 .backLink {
-    display: inline-block;
-    color: var(--text-color);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--color-text-muted);
     text-decoration: none;
-    font-size: 0.85rem;
+    font-size: var(--font-size-sm);
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    margin-bottom: 2rem;
-    transition: opacity var(--transition-speed) ease;
+    margin-bottom: var(--spacing-xxl);
+    transition: color var(--transition-duration) ease;
 }
 
 .backLink:hover {
-    opacity: 0.5;
+    color: var(--color-text);
 }
 
 .header {
-    margin-bottom: 4rem;
+    margin-bottom: var(--spacing-xxl);
+    text-align: center;
 }
 
 .header h1 {
-    font-size: clamp(3rem, 8vw, 6rem);
-    font-weight: 300;
-    line-height: 0.95;
-    margin: 0;
+    font-size: clamp(3rem, 7vw, 5rem);
+    font-weight: var(--font-weight-regular);
+    line-height: 1.1;
+    margin: 0 0 var(--spacing-lg) 0;
     letter-spacing: -0.02em;
-    color: var(--text-color);
+    color: var(--color-text);
 }
 
 .meta {
-    margin-top: 2rem;
     display: flex;
     flex-wrap: wrap;
-    gap: 3rem;
-    font-size: 0.9rem;
-    color: var(--text-muted);
+    justify-content: center;
+    gap: var(--spacing-sm) var(--spacing-xl);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
 }
+
+/* ==========================================================================
+   Cascading Gallery
+   ========================================================================== */
 
 .gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-    gap: 2rem;
-    margin: 4rem 0;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: var(--spacing-lg);
+    margin: var(--spacing-xxl) 0;
 }
 
 .galleryImage {
     width: 100%;
-    height: 500px;
+    height: 450px;
     object-fit: cover;
-    background-color: var(--border-color);
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    background-color: var(--color-border);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+    opacity: 0;
+    animation: fadeUpIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .galleryImage:hover {
-    transform: scale(1.01);
+    transform: scale(1.02);
 }
 
-.content {
-    margin-top: 4rem;
-    max-width: 800px;
+/* ==========================================================================
+   Content & Decorative Elements
+   ========================================================================== */
+
+.contentWrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xxl);
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.overviewTitle {
-    font-size: 1rem;
+@media (min-width: 768px) {
+    .contentWrapper {
+        grid-template-columns: 4rem 1fr;
+        gap: var(--spacing-xxl);
+    }
+}
+
+.decoration {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .decoration {
+        display: block;
+        width: 1px;
+        background-color: var(--color-border);
+        height: 100%;
+        transform-origin: top;
+        animation: drawIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        animation-delay: 400ms;
+    }
+}
+
+.content h3 {
+    font-size: var(--font-size-sm);
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    margin-bottom: 1.5rem;
-    font-weight: 500;
-    color: var(--text-color);
+    margin-bottom: var(--spacing-lg);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text);
 }
 
-.text {
-    line-height: 1.8;
-    color: var(--text-muted);
-    font-size: 1.1rem;
+.content p {
+    line-height: 1.9;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-md);
 }
+
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
 
 @media (max-width: 600px) {
     .container {
-        padding: 0 1rem;
+        padding: 0 var(--spacing-md);
     }
 
     .gallery {

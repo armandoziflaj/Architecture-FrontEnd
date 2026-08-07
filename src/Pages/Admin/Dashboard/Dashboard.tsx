@@ -19,7 +19,7 @@ const formatNumber = (num: number | undefined): string => {
 
 export const Dashboard = () => {
     const navigate = useNavigate();
-    const { i18n } = useTranslation();
+    const { t, i18n } = useTranslation();
 
     const { data: projects, isLoading: isProjectsLoading } = useProjects(i18n.language);
     const { data: inquiries, isLoading: isInquiriesLoading } = useContactInquiries();
@@ -34,7 +34,7 @@ export const Dashboard = () => {
     const handleDeleteProject = (id: number) => {
         toast((t) => (
             <span>
-                Are you sure you want to delete this project?
+                {('admin.dashboard.deleteConfirmation.title')}
                 <button
                     style={{ marginLeft: '10px', border: '1px solid #ccc', padding: '5px 10px', borderRadius: '5px' }}
                     onClick={() => {
@@ -42,13 +42,13 @@ export const Dashboard = () => {
                         toast.dismiss(t.id);
                     }}
                 >
-                    Yes
+                    {('admin.dashboard.deleteConfirmation.yes')}
                 </button>
                 <button
                     style={{ marginLeft: '10px', border: '1px solid #ccc', padding: '5px 10px', borderRadius: '5px' }}
                     onClick={() => toast.dismiss(t.id)}
                 >
-                    No
+                    {('admin.dashboard.deleteConfirmation.no')}
                 </button>
             </span>
         ), {
@@ -59,17 +59,17 @@ export const Dashboard = () => {
     const unreadInquiries = inquiries?.filter(inquiry => !inquiry.isRead).length ?? 0;
 
     const stats = [
-        { id: '01', label: 'Active Projects', value: isProjectsLoading ? '...' : projects?.length ?? 0 },
-        { id: '02', label: 'Unread Inquiries', value: isInquiriesLoading ? '...' : unreadInquiries },
-        { id: '03', label: 'Total Views', value: isVisitorCountLoading ? '...' : formatNumber(visitorCountData!.data.count) },
+        { id: '01', labelKey: 'admin.dashboard.activeProjects', value: isProjectsLoading ? '...' : projects?.length ?? 0 },
+        { id: '02', labelKey: 'admin.dashboard.unreadInquiries', value: isInquiriesLoading ? '...' : unreadInquiries },
+        { id: '03', labelKey: 'admin.dashboard.totalViews', value: isVisitorCountLoading ? '...' : formatNumber(visitorCountData?.data.count) },
     ];
 
     return (
         <div className={styles.dashboardContainer}>
 
             <header className={styles.headerBlock}>
-                <span className={styles.subtitle}>01 — Overview</span>
-                <h1 className={styles.title}>System Dashboard</h1>
+                <span className={styles.subtitle}>{t('admin.dashboard.subtitle')}</span>
+                <h1 className={styles.title}>{t('admin.dashboard.title')}</h1>
             </header>
 
             <section className={styles.metricsGrid}>
@@ -77,7 +77,7 @@ export const Dashboard = () => {
                     <MetricCard
                         key={stat.id}
                         id={stat.id}
-                        label={stat.label}
+                        label={t(stat.labelKey)}
                         value={String(stat.value)}
                     />
                 ))}
@@ -85,8 +85,8 @@ export const Dashboard = () => {
 
             <section className={styles.sectionWrapper}>
                 <SectionHeader
-                    title="Recent Inquiries"
-                    actionLabel="View All Messages ↗"
+                    title={t('admin.dashboard.recentInquiries')}
+                    actionLabel={t('admin.dashboard.viewAllMessages')}
                     onActionClick={() => navigate('/admin/messages')}
                 />
                 <RecentInquiriesTable
@@ -98,8 +98,8 @@ export const Dashboard = () => {
 
             <section className={styles.sectionWrapper}>
                 <SectionHeader
-                    title="Active Architectural Projects"
-                    actionLabel="+ Manage Frameworks ↗"
+                    title={t('admin.dashboard.activeProjectsTitle')}
+                    actionLabel={t('admin.dashboard.manageFrameworks')}
                     onActionClick={() => navigate('/admin/projects')}
                 />
 

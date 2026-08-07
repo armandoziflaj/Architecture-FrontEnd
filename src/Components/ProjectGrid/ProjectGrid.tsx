@@ -18,11 +18,15 @@ export const ProjectGrid = () => {
             </div>
 
             <div className={styles.grid}>
-                {projects.map((project) => {
+                {projects.map((project, index) => {
                     const coverPhoto = project.photos && project.photos.length > 0 ? project.photos[0] : null;
 
                     return (
-                        <div key={project.id} className={styles.card}>
+                        <div
+                            key={project.id}
+                            className={styles.card}
+                            style={{ animationDelay: `${index * 100}ms` }}
+                        >
                             <div
                                 className={styles.imagePlaceholder}
                                 style={{

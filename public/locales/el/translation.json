@@ -26,7 +26,10 @@
       "email": "john@example.com",
       "message": "Πείτε μας για τον χώρο σας..."
     },
-    "submit": "Αποστολή Μηνύματος"
+    "submit": "Αποστολή Μηνύματος",
+    "sending": "Αποστολή...",
+    "success": "Το μήνυμα στάλθηκε με επιτυχία.",
+    "error": "Παρουσιάστηκε σφάλμα."
   },
   "profile": {
   "subtitle": "Η Φιλοσοφία Μας",
@@ -65,7 +68,68 @@
       "login": {
         "title": "Πρόσβαση Συστήματος",
         "subtitle": "00 — Αυθεντικοποίηση Διαχειριστή",
-        "loginButton" : "Σύνδεση"
+        "loginButton" : "Σύνδεση",
+        "usernameLabel": "Όνομα Χρήστη",
+        "usernamePlaceholder": "Εισαγάγετε το όνομα χρήστη διαχειριστή",
+        "passwordLabel": "Κωδικός Πρόσβασης",
+        "passwordPlaceholder": "Εισαγάγετε τον μυστικό κωδικό πρόσβασης",
+        "verifying": "Επαλήθευση...",
+        "invalidCredentials": "Μη έγκυρα διαπιστευτήρια.",
+        "genericError": "Παρουσιάστηκε σφάλμα. Παρακαλώ προσπαθήστε ξανά."
+      },
+      "dashboard": {
+        "subtitle": "01 — Επισκόπηση",
+        "title": "Πίνακας Ελέγχου Συστήματος",
+        "activeProjects": "Ενεργά Έργα",
+        "unreadInquiries": "Νέα Μηνύματα",
+        "totalViews": "Συνολικές Προβολές",
+        "recentInquiries": "Πρόσφατα Μηνύματα",
+        "viewAllMessages": "Προβολή Όλων ↗",
+        "activeProjectsTitle": "Ενεργά Αρχιτεκτονικά Έργα",
+        "manageFrameworks": "+ Διαχείριση Έργων ↗",
+        "deleteConfirmation": {
+          "title": "Είστε σίγουροι ότι θέλετε να διαγράψετε αυτό το έργο;",
+          "yes": "Ναι",
+          "no": "Όχι"
+        },
+        "inquiries": {
+          "loading": "Φόρτωση μηνυμάτων πελατών...",
+          "empty": "Δεν βρέθηκαν πρόσφατα μηνύματα.",
+          "client": "Πελάτης",
+          "message": "Προεπισκόπηση Μηνύματος",
+          "date": "Ημερομηνία",
+          "status": "Κατάσταση",
+          "new": "Νέο",
+          "read": "Διαβασμένο"
+        }
+      },
+      "projectManagement": {
+        "editTitle": "Επεξεργασία Έργου #{{id}}",
+        "createTitle": "Διαχείριση Έργων",
+        "backButton": "← Πίσω στα Έργα",
+        "newButton": "+ Νέο Έργο ↗",
+        "loading": "Φόρτωση δομής έργου...",
+        "titleLabel": "Τίτλος Έργου ({{lang}})",
+        "titlePlaceholder": "Εισαγάγετε το όνομα της δομής",
+        "locationLabel": "Τοποθεσία",
+        "locationPlaceholder": "π.χ., Βούλα, Αθήνα",
+        "yearLabel": "Έτος",
+        "yearPlaceholder": "π.χ., 2026",
+        "sizeLabel": "Μέγεθος",
+        "sizePlaceholder": "π.χ., 240m²",
+        "descriptionLabel": "Αρχιτεκτονική Αφήγηση ({{lang}})",
+        "descriptionPlaceholder": "Περιγράψτε το concept...",
+        "mediaTitle": "03 — Οπτικοακουστικό Υλικό",
+        "updateSuccess": "Η δομή ενημερώθηκε με επιτυχία!",
+        "createSuccess": "Το έργο δημιουργήθηκε με επιτυχία!",
+        "publishing": "Δημοσίευση...",
+        "committing": "Αποθήκευση Αλλαγών...",
+        "publishButton": "Δημοσίευση Πακέτου ↗",
+        "commitButton": "Αποθήκευση Αλλαγών ↗"
+      },
+      "imageManager": {
+        "uploadBox": "+ Μεταφόρτωση Οπτικοακουστικού Υλικού",
+        "altText": "Οπτικό υλικό δομής {{order}}"
       }
     }
   }

@@ -26,7 +26,10 @@
       "email": "john@example.com",
       "message": "Tell us about your space..."
     },
-    "submit": "Send Inquiry"
+    "submit": "Send Inquiry",
+    "sending": "Sending...",
+    "success": "Inquiry sent successfully.",
+    "error": "An error occurred."
   },
   "profile": {
   "subtitle": "Our Philosophy",
@@ -65,7 +68,68 @@
     "login": {
       "title": "System Access",
       "subtitle": "00 — Admin Authentication",
-      "loginButton" : "Login"
+      "loginButton" : "Login",
+      "usernameLabel": "Username",
+      "usernamePlaceholder": "Enter admin username",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Enter secret password",
+      "verifying": "Verifying...",
+      "invalidCredentials": "Invalid credentials.",
+      "genericError": "An error occurred. Please try again."
+    },
+    "dashboard": {
+      "subtitle": "01 — Overview",
+      "title": "System Dashboard",
+      "activeProjects": "Active Projects",
+      "unreadInquiries": "Unread Inquiries",
+      "totalViews": "Total Views",
+      "recentInquiries": "Recent Inquiries",
+      "viewAllMessages": "View All Messages ↗",
+      "activeProjectsTitle": "Active Architectural Projects",
+      "manageFrameworks": "+ Manage Frameworks ↗",
+      "deleteConfirmation": {
+        "title": "Are you sure you want to delete this project?",
+        "yes": "Yes",
+        "no": "No"
+      },
+      "inquiries": {
+        "loading": "Loading client inquiries...",
+        "empty": "No recent inquiries found.",
+        "client": "Client",
+        "message": "Message Preview",
+        "date": "Date",
+        "status": "Status",
+        "new": "New",
+        "read": "Read"
+      }
+    },
+    "projectManagement": {
+      "editTitle": "Edit Framework #{{id}}",
+      "createTitle": "Project Management",
+      "backButton": "← Back to Frameworks",
+      "newButton": "+ New Framework ↗",
+      "loading": "Loading structure framework...",
+      "titleLabel": "Project Title ({{lang}})",
+      "titlePlaceholder": "Enter structure name",
+      "locationLabel": "Location",
+      "locationPlaceholder": "e.g., Voula, Athens",
+      "yearLabel": "Year",
+      "yearPlaceholder": "e.g., 2026",
+      "sizeLabel": "Size",
+      "sizePlaceholder": "e.g., 240m²",
+      "descriptionLabel": "Architectural Narrative ({{lang}})",
+      "descriptionPlaceholder": "Describe the concept...",
+      "mediaTitle": "03 — Sequenced Visual Assets",
+      "updateSuccess": "Structure updated successfully!",
+      "createSuccess": "Project created successfully!",
+      "publishing": "Publishing...",
+      "committing": "Committing Changes...",
+      "publishButton": "Commit & Publish Package ↗",
+      "commitButton": "Commit Changes ↗"
+    },
+    "imageManager": {
+      "uploadBox": "+ Upload Architectural Media",
+      "altText": "Structure visual {{order}}"
     }
   }
 }

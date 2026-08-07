@@ -1,24 +1,25 @@
 .container {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    margin-top: 1rem;
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-md);
 }
 
 .uploadBox {
-    border: 1px dashed var(--border-color);
-    padding: 2.5rem;
+    border: 1px dashed var(--color-border);
+    padding: var(--spacing-xl);
     text-align: center;
     cursor: pointer;
     text-transform: uppercase;
-    font-size: 0.8rem;
+    font-size: var(--font-size-sm);
     letter-spacing: 0.1em;
-    color: var(--text-muted);
-    transition: border-color var(--transition-speed) ease;
+    color: var(--color-text-muted);
+    transition: border-color var(--transition-duration) ease, color var(--transition-duration) ease;
 }
 
 .uploadBox:hover {
-    border-color: var(--text-color);
+    border-color: var(--color-accent);
+    color: var(--color-accent);
 }
 
 .hiddenInput {
@@ -28,7 +29,7 @@
 .imagesGrid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    gap: var(--spacing-md);
 }
 
 @media (min-width: 768px) {
@@ -39,9 +40,9 @@
 
 .imageCard {
     position: relative;
-    aspect-ratio: 3/2;
-    border: 1px solid var(--border-color);
-    background-color: #000;
+    aspect-ratio: 16 / 10;
+    border-radius: var(--border-radius);
+    background-color: var(--color-border);
     overflow: hidden;
 }
 
@@ -49,18 +50,23 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.9;
+    transition: transform 0.4s ease;
+}
+
+.imageCard:hover img {
+    transform: scale(1.05);
 }
 
 .orderBadge {
     position: absolute;
-    top: 0.5rem;
-    left: 0.5rem;
-    background-color: rgba(0, 0, 0, 0.7);
+    top: var(--spacing-sm);
+    left: var(--spacing-sm);
+    background-color: rgba(0, 0, 0, 0.6);
     color: #fff;
-    font-size: 0.7rem;
-    padding: 0.2rem 0.5rem;
-    font-family: var(--font-sans), serif;
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius);
+    font-family: monospace;
 }
 
 .controlsOverlay {
@@ -68,26 +74,41 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
     display: flex;
-    justify-content: space-around;
-    padding: 0.4rem 0;
+    justify-content: flex-end;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.imageCard:hover .controlsOverlay {
+    opacity: 1;
 }
 
 .controlsOverlay button {
-    background: none;
-    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     color: #fff;
     cursor: pointer;
-    padding: 0.2rem 0.6rem;
-    font-size: 0.9rem;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: var(--font-size-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
 }
 
 .controlsOverlay button:disabled {
-    opacity: 0.2;
+    opacity: 0.3;
     cursor: not-allowed;
 }
 
 .controlsOverlay .deleteBtn {
-    color: var(--accent-color);
+    background: rgba(239, 68, 68, 0.2);
+    border-color: var(--color-error);
+    color: var(--color-error);
 }

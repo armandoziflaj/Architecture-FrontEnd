@@ -1,57 +1,53 @@
 .managementContainer {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: var(--spacing-xl);
 }
 
 .formContainer {
-    animation: slideUp var(--transition-speed) cubic-bezier(0.16, 1, 0.3, 1);
+    animation: slideUp var(--transition-duration) cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .tabsWrapper {
     display: flex;
-    gap: 2rem;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 0.75rem;
-    margin-bottom: 2.5rem;
+    gap: var(--spacing-xl);
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-xl);
 }
 
 .tabLink {
     background: none;
     border: none;
-    font-family: var(--font-sans), serif;
-    font-size: 0.8rem;
+    font-family: var(--font-primary), sans-serif;;
+    font-size: var(--font-size-sm);
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--text-muted);
+    color: var(--color-text-muted);
     cursor: pointer;
-    padding: 0.25rem 0;
+    padding: var(--spacing-xs) 0;
     position: relative;
-    transition: color var(--transition-speed) ease;
+    transition: color var(--transition-duration) ease;
 }
 
 .tabLinkActive {
-    color: var(--text-color);
+    color: var(--color-text);
 }
 
 .tabLinkActive::after {
     content: '';
     position: absolute;
-    bottom: -0.85rem;
+    bottom: calc(-1 * var(--spacing-sm));
     left: 0;
     width: 100%;
     height: 1px;
-    background-color: var(--text-color);
+    background-color: var(--color-text);
 }
 
-/*
-   Η βασική αλλαγή: Δημιουργούμε ένα grid 2 στηλών για μεγάλες οθόνες.
-   Αν ο χώρος είναι μικρότερος από 400px ανά στήλη, σπάει αυτόματα σε 1 στήλη.
-*/
 .structuralForm {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 3.5rem;
+    gap: var(--spacing-xl);
     width: 100%;
 }
 
@@ -59,10 +55,9 @@
     .structuralForm {
         grid-template-columns: repeat(2, minmax(400px, 1fr));
         align-items: start;
-        gap: 5rem; /* Περισσότερος αέρας ανάμεσα στις δύο στήλες */
+        gap: var(--spacing-xxl);
     }
 
-    /* Σπρώχνουμε το κουμπί να πιάνει όλο το πλάτος και των δύο στηλών στο τέλος */
     .submitStructureBtn {
         grid-column: span 2;
     }
@@ -71,34 +66,34 @@
 .mediaFramework {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: var(--spacing-md);
 }
 
 .frameworkTitle {
-    font-size: 0.85rem;
+    font-size: var(--font-size-sm);
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--text-muted);
-    font-weight: 400;
+    color: var(--color-text-muted);
+    font-weight: var(--font-weight-regular);
 }
 
 .submitStructureBtn {
-    background-color: var(--text-color);
-    color: var(--bg-color);
-    border: 1px solid var(--text-color);
-    padding: 1.25rem 2.5rem;
-    font-family: var(--font-sans), serif;
-    font-size: 0.85rem;
+    background-color: var(--color-text);
+    color: var(--color-background);
+    border: 1px solid var(--color-text);
+    padding: var(--spacing-lg) var(--spacing-xl);
+    font-family: var(--font-primary), sans-serif;;
+    font-size: var(--font-size-sm);
     text-transform: uppercase;
     letter-spacing: 0.15em;
     cursor: pointer;
-    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+    transition: background-color var(--transition-duration) ease, color var(--transition-duration) ease;
     width: 100%;
 }
 
 .submitStructureBtn:hover {
     background-color: transparent;
-    color: var(--text-color);
+    color: var(--color-text);
 }
 
 @keyframes slideUp {

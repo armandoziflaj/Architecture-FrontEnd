@@ -84,12 +84,12 @@ export const Contact = () => {
                 </div>
 
                 <div className={styles.formContainer}>
-                    {isSuccess && <div className={styles.successBanner}>Inquiry sent successfully.</div>}
-                    {isError && <div className={styles.errorBanner}>{error?.message || "An error occurred."}</div>}
+                    {isSuccess && <div className={styles.successBanner}>{t('contact.success')}</div>}
+                    {isError && <div className={styles.errorBanner}>{error?.message || t('contact.error')}</div>}
 
                     <GenericForm
                         fields={contactFields}
-                        submitLabel={isPending ? 'Sending...' : t('contact.submit')}
+                        submitLabel={isPending ? t('contact.sending') : t('contact.submit')}
                         onSubmit={handleContactSubmit}
                         disabled={isPending}
                     />

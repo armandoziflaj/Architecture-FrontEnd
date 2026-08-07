@@ -1,17 +1,17 @@
 .row {
-    border-bottom: 1px solid var(--border-color);
-    transition: background-color var(--transition-speed) ease;
+    border-bottom: 1px solid var(--color-border);
+    transition: background-color var(--transition-duration) ease;
     cursor: pointer;
 }
 
 .row:hover {
-    background-color: rgba(var(--text-color-rgb, 0, 0, 0), 0.02);
+    background-color: rgba(var(--color-text-rgb, 0, 0, 0), 0.02);
 }
 
 td {
-    padding: 1.5rem 0;
-    font-size: 0.95rem;
-    font-weight: 300;
+    padding: var(--spacing-lg) 0;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-regular);
     vertical-align: middle;
 }
 
@@ -21,40 +21,40 @@ td {
 }
 
 .senderName {
-    font-weight: 400;
-    color: var(--text-color);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text);
 }
 
 .senderEmail {
-    font-size: 0.8rem;
-    color: var(--text-muted);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
 }
 
 .subjectText {
-    color: var(--text-color);
+    color: var(--color-text);
 }
 
 .dateText {
-    color: var(--text-muted);
-    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
 }
 
 .unreadBadge {
-    color: var(--text-color);
-    font-weight: 500;
-    font-size: 0.85rem;
+    color: var(--color-text);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-sm);
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
 
 .dot {
-    color: var(--accent-color);
-    font-weight: bold;
+    color: var(--color-accent);
+    font-weight: var(--font-weight-bold);
 }
 
 .readBadge {
-    color: var(--text-muted);
-    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
@@ -62,7 +62,7 @@ td {
 @media (max-width: 768px) {
     .row {
         display: block;
-        padding: 1.5rem 0;
+        padding: var(--spacing-lg) 0;
     }
 
     td {
@@ -71,9 +71,9 @@ td {
         position: relative;
         padding-left: 45%;
         text-align: right;
-        padding-top: 0.5rem;
-        padding-bottom: 0.5rem;
-        font-size: 0.9rem;
+        padding-top: var(--spacing-sm);
+        padding-bottom: var(--spacing-sm);
+        font-size: var(--font-size-sm);
     }
 
     td::before {
@@ -83,10 +83,10 @@ td {
         width: 40%;
         white-space: nowrap;
         text-align: left;
-        font-weight: 400;
-        font-size: 0.75rem;
+        font-weight: var(--font-weight-regular);
+        font-size: var(--font-size-sm);
         text-transform: uppercase;
-        color: var(--text-muted);
+        color: var(--color-text-muted);
         letter-spacing: 0.05em;
     }
 

@@ -11,4 +11,10 @@ export interface MessageData {
 export interface InboxRowProps {
     message: MessageData;
     onClick?: (id: number) => void;
+    labels: {
+        client: string;
+        message: string;
+        date: string;
+        status: string;
+    };
 }
