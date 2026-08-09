@@ -17,6 +17,11 @@
     color: var(--color-text-muted);
 }
 
+.requiredAsterisk {
+    color: var(--color-error);
+    margin-left: var(--spacing-xs);
+}
+
 .inputGroup input,
 .inputGroup textarea {
     background: none;
@@ -39,6 +44,11 @@
 .inputGroup input:focus,
 .inputGroup textarea:focus {
     border-color: var(--color-text);
+}
+
+.inputGroup input.error,
+.inputGroup textarea.error {
+    border-color: var(--color-error);
 }
 
 .inputGroup input:-webkit-autofill,

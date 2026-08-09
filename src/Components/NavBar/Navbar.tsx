@@ -40,6 +40,9 @@ export const Navbar = () => {
 
             {isMenuOpen && (
                 <div className={styles.mobileMenu}>
+                    <a href={"/"} className={styles.mobileLinkItem} onClick={toggleMenu}>
+                        {t('nav.home')}
+                    </a>
                     <a href={"/#works"} className={styles.mobileLinkItem} onClick={toggleMenu}>
                         {t('nav.works')}
                     </a>

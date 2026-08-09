@@ -19,6 +19,7 @@ The architecture follows a feature-based, component-driven model. We use React Q
 | **Routing**       | [React Router](https://reactrouter.com/)   | The standard library for declarative routing in React applications.                                                                                                     |
 | **API Client**    | [Axios](https://axios-http.com/)           | A robust, promise-based HTTP client for making API requests. It provides a clean and consistent API for handling network operations.                                      |
 | **Styling**       | [CSS Modules](https://github.com/css-modules/css-modules) | Scopes CSS locally to components, preventing style conflicts and promoting modularity. All styles should be written in `.module.css` files.                     |
+| **Animations**    | [React Intersection Observer](https://www.npmjs.com/package/react-intersection-observer) | For triggering animations on component view. This is more performant and user-friendly than on-mount animations.                                                     |
 | **Testing**       | [Vitest](https://vitest.dev/) + [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) | A modern, fast, and user-friendly testing framework that integrates seamlessly with Vite. RTL encourages testing practices that resemble how users interact with the UI. |
 
 ## 3. Mandatory Coding Rules & Constraints
@@ -30,89 +31,69 @@ The architecture follows a feature-based, component-driven model. We use React Q
   - API Services: `camelCaseApi.ts` (e.g., `projectsApi.ts`)
   - Types: `PascalCase.ts` (e.g., `Project.ts`)
 - **Component Design**: Components should be small, focused, and follow the Single Responsibility Principle. Prefer functional components with hooks over class components.
-- **Styling**: All styling must use CSS Modules. Do not use global stylesheets or inline styles for layout and component-specific styling.
+- **Styling**: 
+  - All styling must use CSS Modules. Do not use global stylesheets or inline styles for layout and component-specific styling.
+  - All colors, fonts, and spacing must be defined as CSS variables in `index.css` and used throughout the application.
 - **Forbidden Practices**:
   - Do not use default exports. Always use named exports to avoid naming conflicts.
   - Do not manually manage server state with `useState` or `useEffect`. Use React Query for all data fetching.
   - Avoid prop drilling. Use React Context for deeply nested state or consider component composition.
+  - **Do not hardcode environment-specific values** (e.g., API URLs). Use environment variables.
 
 ## 4. Standard Solutions Repository
 
+### Environment Variables & Configuration
+
+To ensure the application is portable between development and production environments, all environment-specific values must be stored in `.env` files.
+
+**Creating the Development Environment File:**
+In the project root, create a file named `.env`. Add any environment-specific variables, prefixed with `VITE_`.
+
+**`.env` file:**
+```
+VITE_API_BASE_URL=http://localhost:5188
+```
+
+**Accessing Variables in Code:**
+Use `import.meta.env.VITE_VARIABLE_NAME` to access the variables in your application code.
+
+```typescript
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const imageUrl = `${API_BASE_URL}${photo.imageUrl}`;
+```
+
+**Production Configuration:**
+For production builds, these variables must be set in the hosting provider's environment variable settings (e.g., Vercel, Netlify). Do not commit production `.env` files.
+
 ### API Requests & Error Handling
 
-All API requests must be centralized in the `src/api` directory. Use the shared `axios` instance from `src/api/axiosInstance.ts`.
+All API requests must be centralized in the `src/api` directory and should use the `VITE_API_BASE_URL` environment variable.
 
-**Example API Hook (`useProjects.ts`):**
-```typescript
-import { useQuery } from '@tanstack/react-query';
-import { getProjects } from '../api/projectsApi';
+### UI/UX & Animations
 
-export const useProjects = (language: string) => {
-    return useQuery({
-        queryKey: ['projects', language],
-        queryFn: () => getProjects(language),
-        staleTime: 1000 * 60 * 5, // 5 minutes
-    });
-};
-```
+**View-Triggered Animations:**
+To create a professional and performant user experience, animations should be triggered when a component enters the viewport. This is achieved with the `useInViewAnimation` custom hook.
 
-**Error Handling:**
-API errors should be handled by a centralized function. The existing `handleApiError` is a good foundation. All mutations in React Query should use this.
+### Immersive Hero Section
 
-```typescript
-// Example Mutation
-import { useMutation } from '@tanstack/react-query';
-import { handleApiError } from './handleApiError';
-import { createProject } from '../api/projectsApi';
-
-export const useCreateProject = () => {
-    return useMutation({
-        mutationFn: async (projectData) => {
-            try {
-                return await createProject(projectData);
-            } catch (err) {
-                return handleApiError(err); // Centralized error handling
-            }
-        },
-    });
-};
-```
+For a high-impact, professional aesthetic, the hero section should be immersive, using a full-viewport background video or image.
 
 ## 5. File Structure Blueprint
 
 ```
 /
 ├── public/
+│   └── ...
 ├── src/
 │   ├── api/
-│   │   ├── axiosInstance.ts
-│   │   ├── projectsApi.ts
-│   │   └── contactInquiryApi.ts
 │   ├── assets/
-│   │   └── ...
 │   ├── Components/
-│   │   ├── Common/
-│   │   │   ├── Button/
-│   │   │   │   ├── Button.tsx
-│   │   │   │   └── Button.module.css
-│   │   │   └── ...
-│   │   └── ...
 │   ├── hooks/
-│   │   ├── useProjects.ts
-│   │   └── useContactInquiry.ts
 │   ├── Pages/
-│   │   ├── Admin/
-│   │   │   ├── Dashboard/
-│   │   │   │   ├── Dashboard.tsx
-│   │   │   │   └── Dashboard.module.css
-│   │   │   └── ...
-│   │   └── ...
 │   ├── Types/
-│   │   ├── Project.ts
-│   │   ├── Inquiry.ts
-│   │   └── BaseResponse.ts
 │   ├── App.tsx
 │   └── main.tsx
+├── .env                <-- Local development environment variables
 ├── .eslintrc.cjs
 ├── package.json
 ├── tsconfig.json
@@ -121,7 +102,7 @@ export const useCreateProject = () => {
 
 ## 6. Verification Rules
 
-- **Testing**: All new components and critical business logic (hooks, API functions) must be accompanied by unit or integration tests using Vitest and React Testing Library.
-- **Linting & Formatting**: All code must pass ESLint checks and be formatted with Prettier before being committed. A pre-commit hook should be configured to enforce this.
-- **Code Review**: All pull requests must be reviewed by at least one other team member before being merged. The review should focus on adherence to the standards outlined in this document.
-- **Manual QA**: Before final deployment, all new features must be manually tested in a staging environment to ensure they meet the requirements and are free of bugs.
+- **Testing**: All new components and critical business logic must be accompanied by tests.
+- **Linting & Formatting**: All code must pass ESLint checks and be formatted with Prettier.
+- **Code Review**: All pull requests must be reviewed, focusing on adherence to this document.
+- **Manual QA**: All new features must be manually tested in a staging environment.

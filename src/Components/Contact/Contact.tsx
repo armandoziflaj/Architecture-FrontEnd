@@ -3,10 +3,14 @@ import { useTranslation } from "react-i18next";
 import styles from './Contact.module.css';
 import { type FormField, GenericForm } from "../GenericForm/GenericForm.tsx";
 import type { InquiryRequest } from "../../Types/InquiryRequest.ts";
-import {useSubmitInquiry} from "../../hooks/useContactInquiry.ts";
+import { useSubmitInquiry } from "../../hooks/useContactInquiry.ts";
+import { useInViewAnimation } from "../../hooks/useInViewAnimation.ts";
+import { FormSubmissionStatus } from '../FormSubmissionStatus/FormSubmissionStatus.tsx';
 
 export const Contact = () => {
     const { t } = useTranslation();
+    const { ref, inView } = useInViewAnimation();
+    const [showStatus, setShowStatus] = useState(false);
 
     const [formData, setFormData] = useState<InquiryRequest>({
         fullName: '',
@@ -19,13 +23,21 @@ export const Contact = () => {
 
     const handleContactSubmit = (e: React.SubmitEvent) => {
         e.preventDefault();
-
+        setShowStatus(true);
         mutate(formData, {
             onSuccess: () => {
                 setFormData({ fullName: '', email: '', message: '', phoneNumber: '' });
+            },
+            onError: () => {
+                setShowStatus(false); 
             }
         });
     };
+
+    const handleCloseStatus = () => {
+        setShowStatus(false);
+    };
+
     const contactFields: FormField[] = [
         {
             id: 'fullName',
@@ -58,7 +70,12 @@ export const Contact = () => {
     ];
 
     return (
-        <section className={styles.section} id="contact">
+        <section 
+            ref={ref} 
+            className={styles.section} 
+            id="contact"
+            data-inview={inView}
+        >
             <div className={styles.headerBlock}>
                 <span className={styles.subtitle}>{t('contact.subtitle')}</span>
                 <h2 className={styles.title}>{t('contact.title')}</h2>
@@ -84,14 +101,21 @@ export const Contact = () => {
                 </div>
 
                 <div className={styles.formContainer}>
-                    {isSuccess && <div className={styles.successBanner}>{t('contact.success')}</div>}
-                    {isError && <div className={styles.errorBanner}>{error?.message || t('contact.error')}</div>}
+                    {(isPending || isSuccess) && showStatus && (
+                        <FormSubmissionStatus 
+                            isPending={isPending}
+                            isSuccess={isSuccess}
+                            onClose={handleCloseStatus}
+                        />
+                    )}
+
+                    {isError && !isPending && <div className={styles.errorBanner}>{error?.message || t('contact.error')}</div>}
 
                     <GenericForm
                         fields={contactFields}
-                        submitLabel={isPending ? t('contact.sending') : t('contact.submit')}
+                        submitLabel={isPending && showStatus ? t('contact.sending') : t('contact.submit')}
                         onSubmit={handleContactSubmit}
-                        disabled={isPending}
+                        disabled={isPending && showStatus}
                     />
                 </div>
             </div>

@@ -2,16 +2,19 @@ import { useProjects } from '../../hooks/useProjects';
 import styles from './ProjectGrid.module.css';
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useInViewAnimation } from '../../hooks/useInViewAnimation';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const ProjectGrid = () => {
     const { t, i18n } = useTranslation();
     const { data: projects = [], isLoading, isError, error } = useProjects(i18n.language);
+    const { ref, inView } = useInViewAnimation({ threshold: 0.1 });
 
     if (isLoading) return <div className={styles.loading}>{t('works.loading')}</div>;
     if (isError) return <div className={styles.error}>{t('works.error')}: {error?.message || 'Something went wrong'}</div>;
 
     return (
-        <section className={styles.section} id="works">
+        <section ref={ref} className={styles.section} id="works" data-inview={inView}>
             <div className={styles.gridHeader}>
                 <h2 className={styles.title}>{t('works.title')}</h2>
                 <span className={styles.count}>01 — {String(projects.length).padStart(2, '0')}</span>
@@ -25,12 +28,12 @@ export const ProjectGrid = () => {
                         <div
                             key={project.id}
                             className={styles.card}
-                            style={{ animationDelay: `${index * 100}ms` }}
+                            style={{ transitionDelay: `${index * 100}ms` }}
                         >
                             <div
                                 className={styles.imagePlaceholder}
                                 style={{
-                                    backgroundImage: coverPhoto ? `url(http://localhost:5188${coverPhoto.imageUrl})` : 'none',
+                                    backgroundImage: coverPhoto ? `url(${API_BASE_URL}${coverPhoto.imageUrl})` : 'none',
                                     backgroundSize: 'cover',
                                     backgroundPosition: 'center'
                                 }}

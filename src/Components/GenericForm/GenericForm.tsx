@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './GenericForm.module.css';
+
 export interface FormField {
     id: string;
     label: string;
@@ -19,39 +20,70 @@ interface FormProps {
 }
 
 export const GenericForm = ({ fields, submitLabel, onSubmit, disabled = false }: FormProps) => {
+    const [validationErrors, setValidationErrors] = useState<string[]>([]);
+
+    const handleValidation = (e: React.SubmitEvent) => {
+        e.preventDefault();
+        const errors: string[] = [];
+        fields.forEach(field => {
+            if (field.required && !field.value.trim()) {
+                errors.push(field.id);
+            }
+        });
+
+        setValidationErrors(errors);
+
+        if (errors.length === 0) {
+            onSubmit(e);
+        }
+    };
+
     return (
-        <form className={styles.form} onSubmit={onSubmit}>
+        <form className={styles.form} onSubmit={handleValidation} noValidate>
             {fields.map((field) => (
                 <div key={field.id} className={styles.inputGroup}>
-                    <label htmlFor={field.id}>{field.label}</label>
+                    <label htmlFor={field.id}>
+                        {field.label}
+                        {field.required && <span className={styles.requiredAsterisk}>*</span>}
+                    </label>
 
                     {field.type === 'textarea' ? (
                         <textarea
                             id={field.id}
                             rows={field.rows || 4}
-                            required={field.required}
                             placeholder={field.placeholder}
                             value={field.value}
-                            onChange={(e) => field.onChange(e.target.value)}
+                            onChange={(e) => {
+                                field.onChange(e.target.value);
+                                if (validationErrors.includes(field.id)) {
+                                    setValidationErrors(errors => errors.filter(err => err !== field.id));
+                                }
+                            }}
                             disabled={disabled}
+                            className={validationErrors.includes(field.id) ? styles.error : ''}
                         />
                     ) : (
                         <input
                             type={field.type}
                             id={field.id}
-                            required={field.required}
                             placeholder={field.placeholder}
                             value={field.value}
-                            onChange={(e) => field.onChange(e.target.value)}
+                            onChange={(e) => {
+                                field.onChange(e.target.value);
+                                if (validationErrors.includes(field.id)) {
+                                    setValidationErrors(errors => errors.filter(err => err !== field.id));
+                                }
+                            }}
                             disabled={disabled}
+                            className={validationErrors.includes(field.id) ? styles.error : ''}
                         />
-                    ) }
+                    )}
                 </div>
             ))}
             {submitLabel &&
                 <button type="submit" className={styles.submitBtn} disabled={disabled}>
                     {submitLabel}
-                </button> }
+                </button>}
         </form>
     );
 };

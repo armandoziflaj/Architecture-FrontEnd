@@ -16,6 +16,9 @@
     border-top: 1px solid var(--color-border);
     margin-bottom: var(--spacing-xxl);
     opacity: 0;
+}
+
+.section[data-inview="true"] {
     animation: fadeUpIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
@@ -97,21 +100,15 @@
     transform-origin: right;
 }
 
-.successBanner, .errorBanner {
-    padding: var(--spacing-md);
-    margin-bottom: var(--spacing-lg);
-    border-left: 3px solid;
-    font-size: var(--font-size-base);
-}
-
-.successBanner {
-    background-color: rgba(76, 175, 80, 0.1);
-    border-color: #4CAF50;
-    color: #4CAF50;
+.formContainer {
+    position: relative;
 }
 
 .errorBanner {
-    background-color: rgba(239, 68, 68, 0.1);
-    border-color: var(--color-error);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    border-left: 3px solid var(--color-error);
+    background-color: rgba(220, 53, 69, 0.1);
     color: var(--color-error);
+    font-size: var(--font-size-base);
 }

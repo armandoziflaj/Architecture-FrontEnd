@@ -1,5 +1,6 @@
 {
   "nav": {
+    "home": "Home",
     "works": "Works",
     "profile": "Profile"
   },
@@ -51,7 +52,8 @@
   ]},
   "hero": {
     "subtitle": "Form & Space",
-    "title": "We design spaces that filter light, form, and raw texture."
+    "title": "We design spaces that filter light, form, and raw texture.",
+    "cta": "Explore Our Projects"
   },
   "projectPage": {
     "back": "Back to Projects",

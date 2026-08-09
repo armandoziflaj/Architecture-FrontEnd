@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import styles from './ProjectPage.module.css';
 import { useProjectById } from "../../hooks/useProjects.ts";
 import { useTranslation } from "react-i18next";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const ProjectPage = () => {
     const { id } = useParams<{ id: string }>();
@@ -39,7 +40,7 @@ export const ProjectPage = () => {
                     const rawUrl = photo.imageUrl;
                     const fullImageUrl = rawUrl.startsWith('http')
                         ? rawUrl
-                        : `http://localhost:5188${rawUrl.startsWith('/') ? rawUrl : `/${rawUrl}`}`;
+                        : `${API_BASE_URL}${rawUrl.startsWith('/') ? rawUrl : `/${rawUrl}`}`;
 
                     return (
                         <img
