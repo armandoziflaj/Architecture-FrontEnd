@@ -31,7 +31,6 @@ export const useProjectFormState = (
         setHydratedId(null);
     };
 
-    // Adjust state during render if existingProject changes (React recommended pattern)
     const currentProjectId = existingProject?.id ?? null;
 
     if (isEditMode && existingProject && hydratedId !== currentProjectId) {
@@ -58,7 +57,7 @@ export const useProjectFormState = (
                 id: String(photo.id),
                 url: photo.imageUrl.startsWith('http')
                     ? photo.imageUrl
-                    : `http://localhost:5188${photo.imageUrl.startsWith('/') ? photo.imageUrl : `/${photo.imageUrl}`}`,
+                    : `${import.meta.env.VITE_API_BASE_URL}${photo.imageUrl.startsWith('/') ? photo.imageUrl : `/${photo.imageUrl}`}`,
                 sortOrder: photo.displayOrder || 0
             }));
             setImages(mappedImages);

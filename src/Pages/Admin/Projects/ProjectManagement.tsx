@@ -5,11 +5,9 @@ import { ImageManager } from '../../../Components/Admin/ImageManager/ImageManage
 import { SectionHeader } from "../../../Components/SectionHeader/SectionHeader.tsx";
 import { LanguageTabs } from "./LanguageTabs.tsx";
 import { useProjectFormState } from './useProjectFormState.ts';
-import {type ExistingPhotoDto, mapToCreateProjectPayload, type UpdateProjectRequest} from '../../../Types/ProjectAdmin';
 import { useCreateProject, useUpdateProject, useProjectById } from "../../../hooks/useProjects.ts";
 import styles from './ProjectManagement.module.css';
 import { useTranslation } from 'react-i18next';
-import { toast } from 'react-hot-toast';
 
 export const ProjectManagement = () => {
     const { t } = useTranslation();
@@ -19,8 +17,8 @@ export const ProjectManagement = () => {
     const isEditMode = Boolean(activeProjectId);
 
     const { data: existingProject, isLoading: isLoadingProject } = useProjectById(activeProjectId?.toString() || '');
-    const { mutate: createProject, isPending: isCreating } = useCreateProject();
-    const { mutate: updateProject, isPending: isUpdating } = useUpdateProject();
+    const { mutateAsync: createProject, isPending: isCreating } = useCreateProject();
+    const { mutateAsync: updateProject, isPending: isUpdating } = useUpdateProject();
     const isPending = isCreating || isUpdating;
 
     const [isFormOpen, setIsFormOpen] = useState(true);
@@ -34,68 +32,65 @@ export const ProjectManagement = () => {
         setIsFormOpen(true);
     };
 
-    const handleFormSubmit = (e: React.SubmitEvent) => {
+    const handleFormSubmit = async (e: React.SubmitEvent) => {
         e.preventDefault();
 
-        if (isEditMode && activeProjectId) {
-            const retainedPhotos: ExistingPhotoDto[] = [];
-            const newPhotos: File[] = [];
-            const newPhotoDisplayOrders: number[] = [];
+        const formData = new FormData();
+        const newPhotos: File[] = state.images.map(img => img.file).filter((file): file is File => !!file);
 
-            state.images.forEach((img, index) => {
-                const displayOrder = index + 1;
-                if (img.file) {
-                    newPhotos.push(img.file);
-                    newPhotoDisplayOrders.push(displayOrder);
-                } else {
-                    retainedPhotos.push({
+        try {
+            if (isEditMode && activeProjectId) {
+                const retainedPhotos = state.images
+                    .filter(img => !img.file)
+                    .map((img, index) => ({
                         id: Number(img.id),
                         imageUrl: img.url,
-                        displayOrder
-                    });
-                }
-            });
+                        displayOrder: index + 1
+                    }));
 
-            const updatePayload: UpdateProjectRequest = {
-                id: activeProjectId,
-                location: state.location,
-                completionYear: state.year,
-                size: state.size,
-                isFeatured: false,
-                translations: [
-                    { languageCode: 'en', title: state.titleEn, description: state.descEn },
-                    { languageCode: 'el', title: state.titleEl, description: state.descEl }
-                ],
-                retainedPhotos,
-                newPhotos,
-                newPhotoDisplayOrders
-            };
+                const projectData = {
+                    id: activeProjectId,
+                    location: state.location,
+                    completionYear: state.year,
+                    size: state.size,
+                    isFeatured: false,
+                    translations: [
+                        { languageCode: 'en', title: state.titleEn, description: state.descEn },
+                        { languageCode: 'el', title: state.titleEl, description: state.descEl }
+                    ],
+                    retainedPhotos
+                };
 
-            updateProject(updatePayload, {
-                onSuccess: () => {
-                    toast.success(t('admin.projectManagement.updateSuccess'));
-                    handleCloseOrOpenCreate();
-                }
-            });
-        } else {
-            const payload = mapToCreateProjectPayload(
-                state.location,
-                state.year,
-                state.size,
-                false,
-                {
-                    el: { title: state.titleEl, description: state.descEl },
-                    en: { title: state.titleEn, description: state.descEn }
-                },
-                state.images
-            );
+                formData.append('projectData', JSON.stringify(projectData));
+                newPhotos.forEach(file => {
+                    formData.append('newPhotos', file);
+                });
 
-            createProject(payload, {
-                onSuccess: () => {
-                    toast.success(t('admin.projectManagement.createSuccess'));
-                    resetForm();
-                }
-            });
+                await updateProject(formData);
+
+            } else {
+                const projectData = {
+                    location: state.location,
+                    completionYear: state.year,
+                    size: state.size,
+                    isFeatured: false,
+                    translations: [
+                        { languageCode: 'en', title: state.titleEn, description: state.descEn },
+                        { languageCode: 'el', title: state.titleEl, description: state.descEl }
+                    ],
+                    displayOrders: state.images.map((_, index) => index + 1)
+                };
+
+                formData.append('projectData', JSON.stringify(projectData));
+                newPhotos.forEach(file => {
+                    formData.append('photos', file);
+                });
+
+                await createProject(formData);
+                resetForm(); // This is correct for create mode.
+            }
+        } catch (error) {
+            console.error("Mutation failed", error);
         }
     };
 
