@@ -133,5 +133,16 @@
       "uploadBox": "+ Upload Architectural Media",
       "altText": "Structure visual {{order}}"
     }
+  },
+  "toasts": {
+    "creatingProject": "Creating project...",
+    "createSuccess": "Project created successfully!",
+    "createError": "Failed to create project.",
+    "updatingProject": "Updating project...",
+    "updateSuccess": "Project updated successfully!",
+    "updateError": "Failed to update project.",
+    "deletingProject": "Deleting project...",
+    "deleteSuccess": "Project deleted successfully!",
+    "deleteError": "Failed to delete project."
   }
 }

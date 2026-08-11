@@ -1,9 +1,9 @@
 import type {ProjectDetailedResponse, ProjectResponse} from "../Types/ProjectResponse.ts";
 import {createProject, deleteProject, fetchProjectById, fetchProjects, updateProject} from "../api/projectsApi.ts";
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
-import type {CreateProjectRequest, UpdateProjectRequest} from "../Types/ProjectAdmin.ts";
 import {toast} from "react-hot-toast";
 import {isAxiosError} from "axios";
+import { useTranslation } from "react-i18next";
 
 export const useProjects = (lang: string) => {
     return useQuery<ProjectResponse[], Error>({
@@ -40,50 +40,53 @@ export const useProjectById = (id: string) => {
 
 export const useCreateProject = () => {
     const queryClient = useQueryClient();
+    const { t } = useTranslation();
 
     return useMutation({
-        mutationFn: (newProject: CreateProjectRequest) =>
+        mutationFn: (newProject: FormData) =>
             toast.promise(createProject(newProject), {
-                loading: 'Creating project...',
-                success: 'Project created successfully!',
-                error: (err) => err.message || 'Failed to create project.',
+                loading: t('toasts.creatingProject'),
+                success: t('toasts.createSuccess'),
+                error: (err) => err.message || t('toasts.createError'),
             }),
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['projects'] });
+            return queryClient.invalidateQueries({ queryKey: ['projects'] });
         }
     });
 };
 
 export const useUpdateProject = () => {
     const queryClient = useQueryClient();
+    const { t } = useTranslation();
 
     return useMutation({
-        mutationFn: (updatedProject: UpdateProjectRequest) =>
+        mutationFn: (updatedProject: FormData) =>
             toast.promise(updateProject(updatedProject), {
-                loading: 'Updating project...',
-                success: 'Project updated successfully!',
-                error: (err) => err.message || 'Failed to update project.',
+                loading: t('toasts.updatingProject'),
+                success: t('toasts.updateSuccess'),
+                error: (err) => err.message || t('toasts.updateError'),
             }),
         onSuccess: (_, variables) => {
-            queryClient.invalidateQueries({ queryKey: ['project', String(variables.id)] });
-            queryClient.invalidateQueries({ queryKey: ['projects'] });
+            const projectData = JSON.parse(variables.get('projectData') as string);
+            return queryClient.invalidateQueries({ queryKey: ['project', String(projectData.id)] });
         }
     });
 };
 
 export const useDeleteProject = () => {
     const queryClient = useQueryClient();
+    const { t } = useTranslation();
 
     return useMutation({
         mutationFn: (id: number) =>
             toast.promise(deleteProject(id), {
-                loading: 'Deleting project...',
-                success: 'Project deleted successfully!',
-                error: (err) => err.message || 'Failed to delete project.',
+                loading: t('toasts.deletingProject'),
+                success: t('toasts.deleteSuccess'),
+                error: (err) => err.message || t('toasts.deleteError'),
             }),
         onSuccess: (_, deletedId) => {
             queryClient.removeQueries({ queryKey: ['project', String(deletedId)] });
-            queryClient.invalidateQueries({ queryKey: ['projects'] });
+            return queryClient.invalidateQueries({ queryKey: ['projects'] });
         }
     });
 };
