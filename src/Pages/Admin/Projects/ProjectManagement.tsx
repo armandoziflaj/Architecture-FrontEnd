@@ -36,17 +36,26 @@ export const ProjectManagement = () => {
         e.preventDefault();
 
         const formData = new FormData();
-        const newPhotos: File[] = state.images.map(img => img.file).filter((file): file is File => !!file);
 
         try {
             if (isEditMode && activeProjectId) {
-                const retainedPhotos = state.images
-                    .filter(img => !img.file)
-                    .map((img, index) => ({
-                        id: Number(img.id),
-                        imageUrl: img.url,
-                        displayOrder: index + 1
-                    }));
+                const newPhotoFiles: File[] = [];
+
+                const photosOrder = state.images.map((img, index) => {
+                    if (img.file) {
+                        const newPhotoIndex = newPhotoFiles.length;
+                        newPhotoFiles.push(img.file);
+                        return {
+                            newPhotoIndex: newPhotoIndex, // Placeholder to link to the file
+                            displayOrder: index + 1
+                        };
+                    } else {
+                        return {
+                            id: Number(img.id),
+                            displayOrder: index + 1
+                        };
+                    }
+                });
 
                 const projectData = {
                     id: activeProjectId,
@@ -58,17 +67,26 @@ export const ProjectManagement = () => {
                         { languageCode: 'en', title: state.titleEn, description: state.descEn },
                         { languageCode: 'el', title: state.titleEl, description: state.descEl }
                     ],
-                    retainedPhotos
+                    photos: photosOrder
                 };
 
                 formData.append('projectData', JSON.stringify(projectData));
-                newPhotos.forEach(file => {
+
+                newPhotoFiles.forEach(file => {
                     formData.append('newPhotos', file);
                 });
 
                 await updateProject(formData);
 
             } else {
+                const newPhotos: File[] = state.images
+                    .map(img => img.file)
+                    .filter((file): file is File => !!file);
+
+                const photosOrder = state.images.map((_, index) => ({
+                    displayOrder: index + 1
+                }));
+
                 const projectData = {
                     location: state.location,
                     completionYear: state.year,
@@ -78,22 +96,22 @@ export const ProjectManagement = () => {
                         { languageCode: 'en', title: state.titleEn, description: state.descEn },
                         { languageCode: 'el', title: state.titleEl, description: state.descEl }
                     ],
-                    displayOrders: state.images.map((_, index) => index + 1)
+                    photos: photosOrder
                 };
 
                 formData.append('projectData', JSON.stringify(projectData));
+
                 newPhotos.forEach(file => {
-                    formData.append('photos', file);
+                    formData.append('newPhotos', file);
                 });
 
                 await createProject(formData);
-                resetForm(); // This is correct for create mode.
+                resetForm();
             }
         } catch (error) {
             console.error("Mutation failed", error);
         }
     };
-
     const currentTitle = activeLang === 'en' ? state.titleEn : state.titleEl;
     const currentTitleSetter = activeLang === 'en' ? setters.setTitleEn : setters.setTitleEl;
     const currentDesc = activeLang === 'en' ? state.descEn : state.descEl;

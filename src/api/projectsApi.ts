@@ -34,7 +34,7 @@ export const updateProject = async (
     signal?: AbortSignal
 ): Promise<BaseResponse<void>> => {
     const projectData = JSON.parse(formData.get('projectData') as string);
-    const response = await api.put<BaseResponse<void>>( // Changed type here
+    const response = await api.put<BaseResponse<void>>(
         `/projects/${projectData.id}`,
         formData,
         {
