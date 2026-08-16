@@ -27,21 +27,25 @@ export const ImageManager = ({ images, onImagesChange }: ImageManagerProps) => {
 
     const moveImage = (index: number, direction: 'up' | 'down') => {
         const targetIndex = direction === 'up' ? index - 1 : index + 1;
-        if (targetIndex < 0 || targetIndex >= images.length) return;
+        if (index < 0 || index >= images.length || targetIndex < 0 || targetIndex >= images.length) {
+            return;
+        }
 
         const updated = [...images];
-        // Swap
-        const temp = updated[index];
-        updated[index] = updated[targetIndex];
-        updated[targetIndex] = temp;
+        const targetItem = updated[targetIndex];
+        const currentIndexItem = updated[index];
 
-        // Update sortOrder values dynamically
-        const reindexed = updated.map((img, idx) => ({
-            ...img,
-            sortOrder: idx + 1
-        }));
+        if (targetItem !== undefined && currentIndexItem !== undefined) {
+            updated[index] = targetItem;
+            updated[targetIndex] = currentIndexItem;
 
-        onImagesChange(reindexed);
+            const reindexed = updated.map((img, idx) => ({
+                ...img,
+                sortOrder: idx + 1
+            }));
+
+            onImagesChange(reindexed);
+        }
     };
 
     const removeImage = (id: string) => {
