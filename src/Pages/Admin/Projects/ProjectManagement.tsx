@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import { GenericForm, type FormField } from '../../../Components/GenericForm/GenericForm';
 import { ImageManager } from '../../../Components/Admin/ImageManager/ImageManager';
 import { SectionHeader } from "../../../Components/SectionHeader/SectionHeader.tsx";
@@ -8,6 +7,7 @@ import { useProjectFormState } from './useProjectFormState.ts';
 import { useCreateProject, useUpdateProject, useProjectById } from "../../../hooks/useProjects.ts";
 import styles from './ProjectManagement.module.css';
 import { useTranslation } from 'react-i18next';
+import {useSearchParams} from "react-router";
 
 export const ProjectManagement = () => {
     const { t } = useTranslation();

@@ -1,7 +1,7 @@
-import { useParams, Link } from 'react-router-dom';
 import styles from './ProjectPage.module.css';
 import { useProjectById } from "../../hooks/useProjects.ts";
 import { useTranslation } from "react-i18next";
+import {Link, useParams} from "react-router";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const ProjectPage = () => {

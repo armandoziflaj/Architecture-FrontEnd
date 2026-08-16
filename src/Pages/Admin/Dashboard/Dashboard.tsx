@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useDeleteProject, useProjects } from '../../../hooks/useProjects.ts';
 import { MetricCard } from '../../../Components/MetricCard/MetricCard.tsx';
@@ -8,6 +7,7 @@ import { ProjectPreviewGrid } from "./ProjectPreviewGrid/ProjectPreviewGrid.tsx"
 import { RecentInquiriesTable } from "./RecentInquiry/RecentInquiriesTable.tsx";
 import { useContactInquiries, useToggleInquiryRead, useVisitorCount } from "../../../hooks/useContactInquiry.ts";
 import { toast } from "react-hot-toast";
+import {useNavigate} from "react-router";
 
 const formatNumber = (num: number | undefined): string => {
     if (num === undefined) return '...';

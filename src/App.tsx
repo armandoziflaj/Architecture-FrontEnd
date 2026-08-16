@@ -1,4 +1,3 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { MainLayout } from "./Layout/MainLayout/MainLayout.tsx";
 import { ProjectGrid } from "./Components/ProjectGrid/ProjectGrid.tsx";
 import { Profile } from "./Components/Profile/Profile.tsx";
@@ -8,6 +7,7 @@ import { Login } from "./Pages/Login/Login.tsx";
 import { Dashboard } from "./Pages/Admin/Dashboard/Dashboard.tsx";
 import { ProjectManagement } from "./Pages/Admin/Projects/ProjectManagement.tsx";
 import { Hero } from "./Components/Hero/Hero.tsx";
+import {BrowserRouter, Route, Routes} from "react-router";
 
 function App() {
     return (

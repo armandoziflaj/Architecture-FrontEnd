@@ -14,10 +14,3 @@ export interface ContactInquiryResponse {
     isRead: boolean;
     createdAt: string;
 }
-
-export interface SubmitContactInquiryRequest {
-    fullName: string;
-    email: string;
-    phoneNumber?: string;
-    message: string;
-}

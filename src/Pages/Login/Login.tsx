@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.css';
 import {useAuth} from "../../hooks/useAuth.ts";
 import {GenericForm, type FormField} from "../../Components/GenericForm/GenericForm.tsx";
 import {useTranslation} from "react-i18next";
+import {useNavigate} from "react-router";
 
 export const Login = () => {
     const [username, setUsername] = useState('');

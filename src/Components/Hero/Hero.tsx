@@ -15,9 +15,6 @@ export const Hero = () => {
             <div className={styles.contentWrapper}>
                 <span className={styles.subtitle}>{t('hero.subtitle')}</span>
                 <h1 className={styles.title}>{t('hero.title')}</h1>
-                {/*<a href="#works" className={styles.ctaButton}>*/}
-                {/*    {t('hero.cta')}*/}
-                {/*</a>*/}
             </div>
         </section>
     );

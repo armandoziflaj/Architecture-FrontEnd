@@ -35,22 +35,21 @@ export const ImageManager = ({ images, onImagesChange }: ImageManagerProps) => {
         updated[index] = updated[targetIndex];
         updated[targetIndex] = temp;
 
-        // Update sortOrder values dynamically
-        const reindexed = updated.map((img, idx) => ({
+        const reIndexed = updated.map((img, idx) => ({
             ...img,
             sortOrder: idx + 1
         }));
 
-        onImagesChange(reindexed);
+        onImagesChange(reIndexed);
     };
 
     const removeImage = (id: string) => {
         const filtered = images.filter(img => img.id !== id);
-        const reindexed = filtered.map((img, idx) => ({
+        const reIndexed = filtered.map((img, idx) => ({
             ...img,
             sortOrder: idx + 1
         }));
-        onImagesChange(reindexed);
+        onImagesChange(reIndexed);
     };
 
     return (
