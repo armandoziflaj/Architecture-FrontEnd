@@ -27,7 +27,7 @@ export const FormSubmissionStatus: React.FC<FormSubmissionStatusProps> = ({ isPe
     return (
       <div className={styles.overlay}>
         <div className={styles.spinner}></div>
-        <p className={styles.statusText}>{t('contact.sending')}</p>
+        <p className={styles['status-text']}>{t('contact.sending')}</p>
       </div>
     );
   }
@@ -35,13 +35,13 @@ export const FormSubmissionStatus: React.FC<FormSubmissionStatusProps> = ({ isPe
   if (isSuccess) {
     return (
       <div className={styles.overlay}>
-        <div className={styles.successCheckmark}>
-          <svg className={styles.checkIcon} viewBox="0 0 52 52">
-            <circle className={styles.checkCircle} cx="26" cy="26" r="25" fill="none" />
-            <path className={styles.checkMark} fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+        <div className={styles['success-checkmark']}>
+          <svg className={styles['check-icon']} viewBox="0 0 52 52">
+            <circle className={styles['check-circle']} cx="26" cy="26" r="25" fill="none" />
+            <path className={styles['check-mark']} fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
           </svg>
         </div>
-        <p className={styles.statusText}>{t('contact.success')}</p>
+        <p className={styles['status-text']}>{t('contact.success')}</p>
       </div>
     );
   }

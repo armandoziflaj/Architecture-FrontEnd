@@ -76,14 +76,14 @@ export const Contact = () => {
             id="contact"
             data-inview={inView}
         >
-            <div className={styles.headerBlock}>
+            <div className={styles['header-block']}>
                 <span className={styles.subtitle}>{t('contact.subtitle')}</span>
                 <h2 className={styles.title}>{t('contact.title')}</h2>
             </div>
 
-            <div className={styles.contentLayout}>
-                <div className={styles.infoColumn}>
-                    <div className={styles.infoGroup}>
+            <div className={styles['content-layout']}>
+                <div className={styles['info-column']}>
+                    <div className={styles['info-group']}>
                         <h4>{t('contact.general')}</h4>
                         <p>
                             <a href="mailto:hello@example.com" className={styles.link}>
@@ -93,14 +93,14 @@ export const Contact = () => {
                         <p>+30 210 000 0000</p>
                     </div>
 
-                    <div className={styles.infoGroup}>
+                    <div className={styles['info-group']}>
                         <h4>{t('contact.address')}</h4>
                         <p>{t('contact.street')}</p>
                         <p>{t('contact.city')}</p>
                     </div>
                 </div>
 
-                <div className={styles.formContainer}>
+                <div className={styles['form-container']}>
                     {(isPending || isSuccess) && showStatus && (
                         <FormSubmissionStatus 
                             isPending={isPending}
@@ -109,7 +109,7 @@ export const Contact = () => {
                         />
                     )}
 
-                    {isError && !isPending && <div className={styles.errorBanner}>{error?.message || t('contact.error')}</div>}
+                    {isError && !isPending && <div className={styles['error-banner']}>{error?.message || t('contact.error')}</div>}
 
                     <GenericForm
                         fields={contactFields}

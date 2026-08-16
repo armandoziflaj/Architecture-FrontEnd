@@ -11,44 +11,44 @@ export const Navbar = () => {
     const toggleMenu = () => { setIsMenuOpen(!isMenuOpen); };
     return (
         <nav className={styles.nav}>
-            <div className={styles.navWrapper}>
+            <div className={styles['nav-wrapper']}>
                 <a href="/" className={styles.logo}>
                     Sulozeqi<span className={styles.dot}>.</span>
                 </a>
 
-                <div className={styles.desktopLinks}>
-                    <a href={"/#works"} className={styles.linkItem}>
+                <div className={styles['desktop-links']}>
+                    <a href={"/#works"}>
                         {t('nav.works')}
                     </a>
-                    <a href={"/#profile"} className={styles.linkItem}>
+                    <a href={"/#profile"}>
                         {t('nav.profile')}
                     </a>
                 </div>
 
-                <div className={styles.desktopActions}>
+                <div className={styles['desktop-actions']}>
                     <LanguageSwitcher />
                     <ThemeToggle />
                 </div>
 
                 <button className={styles.hamburger} onClick={toggleMenu} aria-label="Toggle menu">
-                    <div className={`${styles.bar} ${isMenuOpen ? styles.bar1Open : ''}`} />
-                    <div className={`${styles.bar} ${isMenuOpen ? styles.bar2Open : ''}`} />
-                    <div className={`${styles.bar} ${isMenuOpen ? styles.bar3Open : ''}`} />
+                    <div className={`${styles.bar} ${isMenuOpen ? styles['bar1-open'] : ''}`} />
+                    <div className={`${styles.bar} ${isMenuOpen ? styles['bar2-open'] : ''}`} />
+                    <div className={`${styles.bar} ${isMenuOpen ? styles['bar3-open'] : ''}`} />
                 </button>
             </div>
 
             {isMenuOpen && (
-                <div className={styles.mobileMenu}>
-                    <a href={"/"} className={styles.mobileLinkItem} onClick={toggleMenu}>
+                <div className={styles['mobile-menu']}>
+                    <a href={"/"} className={styles['mobile-link-item']} onClick={toggleMenu}>
                         {t('nav.home')}
                     </a>
-                    <a href={"/#works"} className={styles.mobileLinkItem} onClick={toggleMenu}>
+                    <a href={"/#works"} className={styles['mobile-link-item']} onClick={toggleMenu}>
                         {t('nav.works')}
                     </a>
-                    <a href={"/#profile"} className={styles.mobileLinkItem} onClick={toggleMenu}>
+                    <a href={"/#profile"} className={styles['mobile-link-item']} onClick={toggleMenu}>
                         {t('nav.profile')}
                     </a>
-                    <div className={styles.mobileActions}>
+                    <div className={styles['mobile-actions']}>
                         <LanguageSwitcher />
                         <ThemeToggle />
                     </div>

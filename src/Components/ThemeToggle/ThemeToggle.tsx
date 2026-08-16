@@ -14,7 +14,7 @@ export const ThemeToggle = () => {
     };
 
     return (
-        <button className={styles.toggleBtn} onClick={toggleTheme} aria-label="Toggle theme">
+        <button className={styles['toggle-btn']} onClick={toggleTheme} aria-label="Toggle theme">
             {theme === 'light' ? 'dark' : 'light'}
         </button>
     );

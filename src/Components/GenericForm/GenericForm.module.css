@@ -4,26 +4,26 @@
     gap: var(--spacing-xl);
 }
 
-.inputGroup {
+.input-group {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-sm);
 }
 
-.inputGroup label {
+.input-group label {
     font-size: var(--font-size-sm);
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--color-text-muted);
 }
 
-.requiredAsterisk {
+.required-asterisk {
     color: var(--color-error);
     margin-left: var(--spacing-xs);
 }
 
-.inputGroup input,
-.inputGroup textarea {
+.input-group input,
+.input-group textarea {
     background: none;
     border: none;
     border-bottom: 1px solid var(--color-border);
@@ -37,32 +37,32 @@
     border-radius: 0;
 }
 
-.inputGroup textarea {
+.input-group textarea {
     resize: vertical;
 }
 
-.inputGroup input:focus,
-.inputGroup textarea:focus {
+.input-group input:focus,
+.input-group textarea:focus {
     border-color: var(--color-text);
 }
 
-.inputGroup input.error,
-.inputGroup textarea.error {
+.input-group input.error,
+.input-group textarea.error {
     border-color: var(--color-error);
 }
 
-.inputGroup input:-webkit-autofill,
-.inputGroup input:-webkit-autofill:hover,
-.inputGroup input:-webkit-autofill:focus,
-.inputGroup textarea:-webkit-autofill,
-.inputGroup textarea:-webkit-autofill:hover,
-.inputGroup textarea:-webkit-autofill:focus {
+.input-group input:-webkit-autofill,
+.input-group input:-webkit-autofill:hover,
+.input-group input:-webkit-autofill:focus,
+.input-group textarea:-webkit-autofill,
+.input-group textarea:-webkit-autofill:hover,
+.input-group textarea:-webkit-autofill:focus {
     -webkit-box-shadow: 0 0 0 1000px var(--color-background) inset !important;
     -webkit-text-fill-color: var(--color-text) !important;
     transition: background-color 5000s ease-in-out 0s;
 }
 
-.submitBtn {
+.submit-btn {
     align-self: flex-start;
     background: none;
     border: 1px solid var(--color-text);
@@ -75,12 +75,12 @@
     cursor: pointer;
 }
 
-.submitBtn:hover:not(:disabled) {
+.submit-btn:hover:not(:disabled) {
     background-color: var(--color-text);
     color: var(--color-background);
 }
 
-.submitBtn:disabled {
+.submit-btn:disabled {
     opacity: 0.4;
     cursor: not-allowed;
 }

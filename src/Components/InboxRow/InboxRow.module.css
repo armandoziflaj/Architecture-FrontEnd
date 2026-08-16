@@ -15,31 +15,31 @@ td {
     vertical-align: middle;
 }
 
-.senderInfo {
+.sender-info {
     display: flex;
     flex-direction: column;
 }
 
-.senderName {
+.sender-name {
     font-weight: var(--font-weight-medium);
     color: var(--color-text);
 }
 
-.senderEmail {
+.sender-email {
     font-size: var(--font-size-sm);
     color: var(--color-text-muted);
 }
 
-.subjectText {
+.subject-text {
     color: var(--color-text);
 }
 
-.dateText {
+.date-text {
     color: var(--color-text-muted);
     font-size: var(--font-size-sm);
 }
 
-.unreadBadge {
+.unread-badge {
     color: var(--color-text);
     font-weight: var(--font-weight-medium);
     font-size: var(--font-size-sm);
@@ -52,7 +52,7 @@ td {
     font-weight: var(--font-weight-bold);
 }
 
-.readBadge {
+.read-badge {
     color: var(--color-text-muted);
     font-size: var(--font-size-sm);
     text-transform: uppercase;
@@ -90,7 +90,7 @@ td {
         letter-spacing: 0.05em;
     }
 
-    .senderInfo {
+    .sender-info {
         align-items: flex-end;
     }
 }

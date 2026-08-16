@@ -57,27 +57,27 @@ export const ImageManager = ({ images, onImagesChange }: ImageManagerProps) => {
 
     return (
         <div className={styles.container}>
-            <label className={styles.uploadBox}>
+            <label className={styles['upload-box']}>
                 <span>{t('admin.imageManager.uploadBox')}</span>
                 <input
                     type="file"
                     multiple
                     accept="image/*"
                     onChange={handleFileUpload}
-                    className={styles.hiddenInput}
+                    className={styles['hidden-input']}
                 />
             </label>
 
-            <div className={styles.imagesGrid}>
+            <div className={styles['images-grid']}>
                 {images.map((img, index) => (
-                    <div key={img.id} className={styles.imageCard}>
+                    <div key={img.id} className={styles['image-card']}>
                         <img src={img.url} alt={t('admin.imageManager.altText', { order: img.sortOrder })} />
 
                         {/* Order Badge */}
-                        <span className={styles.orderBadge}>#{img.sortOrder}</span>
+                        <span className={styles['order-badge']}>#{img.sortOrder}</span>
 
                         {/* Mobile & Desktop Friendly Controls */}
-                        <div className={styles.controlsOverlay}>
+                        <div className={styles['controls-overlay']}>
                             <button
                                 type="button"
                                 disabled={index === 0}
@@ -94,7 +94,7 @@ export const ImageManager = ({ images, onImagesChange }: ImageManagerProps) => {
                             </button>
                             <button
                                 type="button"
-                                className={styles.deleteBtn}
+                                className={styles['delete-btn']}
                                 onClick={() => img.id && removeImage(img.id)}
                             >
                                 ✕

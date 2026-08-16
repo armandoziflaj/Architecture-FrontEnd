@@ -41,10 +41,10 @@ export const GenericForm = ({ fields, submitLabel, onSubmit, disabled = false }:
     return (
         <form className={styles.form} onSubmit={handleValidation} noValidate>
             {fields.map((field) => (
-                <div key={field.id} className={styles.inputGroup}>
+                <div key={field.id} className={styles['input-group']}>
                     <label htmlFor={field.id}>
                         {field.label}
-                        {field.required && <span className={styles.requiredAsterisk}>*</span>}
+                        {field.required && <span className={styles['required-asterisk']}>*</span>}
                     </label>
 
                     {field.type === 'textarea' ? (
@@ -81,7 +81,7 @@ export const GenericForm = ({ fields, submitLabel, onSubmit, disabled = false }:
                 </div>
             ))}
             {submitLabel &&
-                <button type="submit" className={styles.submitBtn} disabled={disabled}>
+                <button type="submit" className={styles['submit-btn']} disabled={disabled}>
                     {submitLabel}
                 </button>}
         </form>
