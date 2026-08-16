@@ -16,7 +16,7 @@ export const ProjectManagement = () => {
     const activeProjectId = editIdParam ? Number(editIdParam) : null;
     const isEditMode = Boolean(activeProjectId);
 
-    const { data: existingProject, isLoading: isLoadingProject } = useProjectById(activeProjectId?.toString() || '');
+    const { data: existingProject, isLoading: isLoadingProject } = useProjectById(activeProjectId?.toString() ?? '');
     const { mutateAsync: createProject, isPending: isCreating } = useCreateProject();
     const { mutateAsync: updateProject, isPending: isUpdating } = useUpdateProject();
     const isPending = isCreating || isUpdating;
@@ -151,7 +151,7 @@ export const ProjectManagement = () => {
             <SectionHeader
                 title={isEditMode ? t('admin.projectManagement.editTitle', { id: activeProjectId }) : t('admin.projectManagement.createTitle')}
                 actionLabel={isFormOpen ? t('admin.projectManagement.backButton') : t('admin.projectManagement.newButton')}
-                onActionClick={isFormOpen ? () => setIsFormOpen(false) : handleCloseOrOpenCreate}
+                onActionClick={isFormOpen ? () => { setIsFormOpen(false); } : handleCloseOrOpenCreate}
             />
 
             {isFormOpen && (

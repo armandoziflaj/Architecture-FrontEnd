@@ -4,8 +4,8 @@ import { useTranslation } from "react-i18next";
 export const Profile = () => {
     const { t } = useTranslation();
 
-    const expertise = t('profile.expertiseList', { returnObjects: true }) as string[];
-    const recognition = t('profile.recognitionList', { returnObjects: true }) as string[];
+    const expertise = t('profile.expertiseList', { returnObjects: true });
+    const recognition = t('profile.recognitionList', { returnObjects: true });
 
     return (
         <section className={styles.section} id="profile">

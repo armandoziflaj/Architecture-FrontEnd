@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import styles from './ThemeToggle.module.css';
 
 export const ThemeToggle = () => {
-    const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
+    const [theme, setTheme] = useState(() => localStorage.getItem('theme') ?? 'light');
 
     useEffect(() => {
         document.documentElement.setAttribute('data-theme', theme);

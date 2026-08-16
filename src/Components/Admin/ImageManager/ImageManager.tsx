@@ -79,14 +79,14 @@ export const ImageManager = ({ images, onImagesChange }: ImageManagerProps) => {
                             <button
                                 type="button"
                                 disabled={index === 0}
-                                onClick={() => moveImage(index, 'up')}
+                                onClick={() => { moveImage(index, 'up'); }}
                             >
                                 ↑
                             </button>
                             <button
                                 type="button"
                                 disabled={index === images.length - 1}
-                                onClick={() => moveImage(index, 'down')}
+                                onClick={() => { moveImage(index, 'down'); }}
                             >
                                 ↓
                             </button>

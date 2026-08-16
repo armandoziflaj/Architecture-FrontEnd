@@ -7,17 +7,17 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export const ProjectPage = () => {
     const { id } = useParams<{ id: string }>();
     const { t, i18n } = useTranslation();
-    const { data: project, isLoading, error } = useProjectById(id || '');
+    const { data: project, isLoading, error } = useProjectById(id ?? '');
 
     if (isLoading) return <main className={styles.container}>{t('projectPage.loading')}</main>;
-    if (error || !project) return <main className={styles.container}>{t('projectPage.notFound')}</main>;
+    if (error ?? !project) return <main className={styles.container}>{t('projectPage.notFound')}</main>;
 
-    const currentTranslation = project.translations?.find(
+    const currentTranslation = project.translations.find(
         (trans) => trans.languageCode.toLowerCase() === i18n.language.toLowerCase()
     );
 
-    const activeTitle = currentTranslation?.title || project.title;
-    const activeSummary = currentTranslation?.summary || project.summary;
+    const activeTitle = currentTranslation?.title ?? project.title;
+    const activeSummary = currentTranslation?.summary ?? project.summary;
 
     return (
         <main className={styles.container}>
@@ -46,7 +46,7 @@ export const ProjectPage = () => {
                         <img
                             key={photo.id || index}
                             src={fullImageUrl}
-                            alt={photo.altText || `${activeTitle} photo ${index + 1}`}
+                            alt={photo.altText ?? `${activeTitle} photo ${index + 1}`}
                             className={styles.galleryImage}
                             style={{ animationDelay: `${200 + index * 100}ms` }}
                             onError={(e) => {

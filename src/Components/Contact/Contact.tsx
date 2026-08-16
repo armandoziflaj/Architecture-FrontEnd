@@ -45,7 +45,7 @@ export const Contact = () => {
             type: 'text',
             placeholder: t('contact.placeholders.name'),
             value: formData.fullName,
-            onChange: (val) => setFormData(prev => ({ ...prev, fullName: val })),
+            onChange: (val) => { setFormData(prev => ({ ...prev, fullName: val })); },
             required: true
         },
         {
@@ -54,7 +54,7 @@ export const Contact = () => {
             type: 'email',
             placeholder: t('contact.placeholders.email'),
             value: formData.email,
-            onChange: (val) => setFormData(prev => ({ ...prev, email: val })),
+            onChange: (val) => { setFormData(prev => ({ ...prev, email: val })); },
             required: true
         },
         {
@@ -63,7 +63,7 @@ export const Contact = () => {
             type: 'textarea',
             placeholder: t('contact.placeholders.message'),
             value: formData.message,
-            onChange: (val) => setFormData(prev => ({ ...prev, message: val })),
+            onChange: (val) => { setFormData(prev => ({ ...prev, message: val })); },
             required: true,
             rows: 4
         }
