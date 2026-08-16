@@ -10,7 +10,7 @@ export const useProjects = (lang: string) => {
         queryKey: ['projects', lang],
         queryFn: async ({ signal }) => {
             const result = await fetchProjects(signal);
-            if (result?.success) {
+            if (result && result.success) {
                 return result.data;
             }
             throw new Error(result.message || "Failed to load projects.");
