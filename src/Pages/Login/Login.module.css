@@ -34,7 +34,7 @@
     color: var(--color-text-muted);
     font-size: var(--font-size-sm);
     text-transform: uppercase;
-    letter-spacing: 1.5px;
+    letter-spacing: 2px;
 }
 
 .errorBanner {

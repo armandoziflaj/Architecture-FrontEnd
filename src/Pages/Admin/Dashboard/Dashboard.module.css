@@ -85,35 +85,6 @@
     border-bottom: none;
 }
 
-/* Mobile Card Styles */
-.mobileCardList {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md);
-}
-
-.mobileCard {
-    border: 1px solid var(--color-border);
-    background: var(--color-card-background);
-    border-radius: var(--border-radius);
-    padding: var(--spacing-lg);
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md);
-}
-
-.cardRow {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: var(--font-size-base);
-}
-
-.cardLabel {
-    font-weight: var(--font-weight-bold);
-    color: var(--color-text-muted);
-}
-
 .projectGrid {
     display: grid;
     grid-template-columns: 1fr;
