@@ -87,12 +87,12 @@ export const Dashboard = () => {
                 <SectionHeader
                     title={t('admin.dashboard.recentInquiries')}
                     actionLabel={t('admin.dashboard.viewAllMessages')}
-                    onActionClick={() => navigate('/admin/messages')}
+                    onActionClick={() => { navigate('/admin/messages'); }}
                 />
                 <RecentInquiriesTable
                     messages={inquiries}
                     isLoading={isInquiriesLoading}
-                    onMessageClick={(id) => toggleInquiryRead(id)}
+                    onMessageClick={(id) => { toggleInquiryRead(id); }}
                 />
             </section>
 
@@ -100,7 +100,7 @@ export const Dashboard = () => {
                 <SectionHeader
                     title={t('admin.dashboard.activeProjectsTitle')}
                     actionLabel={t('admin.dashboard.manageFrameworks')}
-                    onActionClick={() => navigate('/admin/projects')}
+                    onActionClick={() => { navigate('/admin/projects'); }}
                 />
 
                 <ProjectPreviewGrid

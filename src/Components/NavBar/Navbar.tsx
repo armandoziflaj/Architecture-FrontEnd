@@ -8,8 +8,7 @@ export const Navbar = () => {
     const { t } = useTranslation();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-
+    const toggleMenu = () => { setIsMenuOpen(!isMenuOpen); };
     return (
         <nav className={styles.nav}>
             <div className={styles.navWrapper}>

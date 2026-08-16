@@ -36,7 +36,7 @@ export const useToggleInquiryRead = () => {
             }
         },
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['admin-inquiries'] });
+            void queryClient.invalidateQueries({ queryKey: ['admin-inquiries'] });
         },
     });
 };

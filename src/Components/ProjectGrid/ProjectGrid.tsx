@@ -11,7 +11,7 @@ export const ProjectGrid = () => {
     const { ref, inView } = useInViewAnimation({ threshold: 0.1 });
 
     if (isLoading) return <div className={styles.loading}>{t('works.loading')}</div>;
-    if (isError) return <div className={styles.error}>{t('works.error')}: {error?.message || 'Something went wrong'}</div>;
+    if (isError) return <div className={styles.error}>{t('works.error')}: {error.message || 'Something went wrong'}</div>;
 
     return (
         <section ref={ref} className={styles.section} id="works" data-inview={inView}>
@@ -37,7 +37,7 @@ export const ProjectGrid = () => {
                                     backgroundSize: 'cover',
                                     backgroundPosition: 'center'
                                 }}
-                                title={coverPhoto?.altText || project.title}
+                                title={coverPhoto?.altText ?? project.title}
                             >
                                 <Link to={`/project/${project.id}`} className={styles.viewProjectLink}>
                                     <div className={styles.overlay}>

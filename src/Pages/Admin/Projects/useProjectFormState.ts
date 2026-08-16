@@ -37,20 +37,20 @@ export const useProjectFormState = (
         setHydratedId(currentProjectId);
 
         setLocation(existingProject.location || '');
-        setYear(existingProject.completionYear || '');
+        setYear(existingProject.completionYear ?? '');
         setSize(existingProject.size || '');
 
-        const elTrans = existingProject.translations?.find(
+        const elTrans = existingProject.translations.find(
             t => t.languageCode.toLowerCase() === 'el'
         );
-        const enTrans = existingProject.translations?.find(
+        const enTrans = existingProject.translations.find(
             t => t.languageCode.toLowerCase() === 'en'
         );
 
-        setTitleEl(elTrans?.title || existingProject.title || '');
-        setDescEl(elTrans?.summary || existingProject.summary || '');
-        setTitleEn(enTrans?.title || existingProject.title || '');
-        setDescEn(enTrans?.summary || existingProject.summary || '');
+        setTitleEl((elTrans?.title ?? existingProject.title) || '');
+        setDescEl((elTrans?.summary ?? existingProject.summary) || '');
+        setTitleEn((enTrans?.title ?? existingProject.title) || '');
+        setDescEn((enTrans?.summary ?? existingProject.summary) || '');
 
         if (existingProject.photos) {
             const mappedImages: ProjectImage[] = existingProject.photos.map(photo => ({
@@ -58,7 +58,7 @@ export const useProjectFormState = (
                 url: photo.imageUrl.startsWith('http')
                     ? photo.imageUrl
                     : `${import.meta.env.VITE_API_BASE_URL}${photo.imageUrl.startsWith('/') ? photo.imageUrl : `/${photo.imageUrl}`}`,
-                sortOrder: photo.displayOrder || 0
+                sortOrder: photo.displayOrder ?? 0
             }));
             setImages(mappedImages);
         }

@@ -90,7 +90,7 @@ export const mapToUpdateProjectPayload = (
     translations: { el: ProjectTranslation; en: ProjectTranslation },
     images: ProjectImage[],
     categoryId?: number,
-    apiBaseUrl: string = "http://localhost:5188"
+    apiBaseUrl = "http://localhost:5188"
 ): UpdateProjectRequest => {
     const retainedPhotos: ExistingPhotoDto[] = [];
     const newPhotos: File[] = [];

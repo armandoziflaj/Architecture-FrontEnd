@@ -50,7 +50,7 @@ export const GenericForm = ({ fields, submitLabel, onSubmit, disabled = false }:
                     {field.type === 'textarea' ? (
                         <textarea
                             id={field.id}
-                            rows={field.rows || 4}
+                            rows={field.rows ?? 4}
                             placeholder={field.placeholder}
                             value={field.value}
                             onChange={(e) => {

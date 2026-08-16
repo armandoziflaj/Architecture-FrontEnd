@@ -15,9 +15,9 @@ type ApiQueryFn<T> = (args: { signal: AbortSignal }) => Promise<T>;
 export const useApiQuery = <T>(
     queryKey: QueryKey,
     queryFn: ApiQueryFn<T>,
-    options?: Omit<UseQueryOptions<T, Error, T, QueryKey>, 'queryKey' | 'queryFn'>
+    options?: Omit<UseQueryOptions<T, Error, T>, 'queryKey' | 'queryFn'>
 ) => {
-    return useQuery<T, Error, T, QueryKey>({
+    return useQuery<T, Error, T>({
         queryKey,
         queryFn: (context: QueryFunctionContext) => queryFn({ signal: context.signal }),
         ...options,
