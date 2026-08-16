@@ -7,12 +7,12 @@ export const Hero = () => {
     const { ref, inView } = useInViewAnimation({ threshold: 0.3 });
 
     return (
-        <section ref={ref} className={styles.heroSection} data-inview={inView}>
-            <div className={styles.videoOverlay}></div>
-            <video className={styles.backgroundVideo} autoPlay loop muted playsInline>
+        <section ref={ref} className={styles['hero-section']} data-inview={inView}>
+            <div className={styles['video-overlay']}></div>
+            <video className={styles['background-video']} autoPlay loop muted playsInline>
                 <source src="/Acropolis.mp4" type="video/mp4" />
             </video>
-            <div className={styles.contentWrapper}>
+            <div className={styles['content-wrapper']}>
                 <span className={styles.subtitle}>{t('hero.subtitle')}</span>
                 <h1 className={styles.title}>{t('hero.title')}</h1>
             </div>

@@ -1,4 +1,4 @@
-.heroSection {
+.hero-section {
     position: relative;
     display: flex;
     align-items: center;
@@ -9,7 +9,7 @@
     overflow: hidden;
 }
 
-.backgroundVideo {
+.background-video {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -20,7 +20,7 @@
     z-index: -2;
 }
 
-.videoOverlay {
+.video-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -30,7 +30,7 @@
     z-index: -1;
 }
 
-.contentWrapper {
+.content-wrapper {
     position: relative;
     z-index: 1;
     max-width: 800px;
@@ -39,7 +39,7 @@
     transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.heroSection[data-inview="true"] .contentWrapper {
+.hero-section[data-inview="true"] .content-wrapper {
     opacity: 1;
     transform: translateY(0);
 }

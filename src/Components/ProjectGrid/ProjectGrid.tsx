@@ -15,7 +15,7 @@ export const ProjectGrid = () => {
 
     return (
         <section ref={ref} className={styles.section} id="works" data-inview={inView}>
-            <div className={styles.gridHeader}>
+            <div className={styles['grid-header']}>
                 <h2 className={styles.title}>{t('works.title')}</h2>
                 <span className={styles.count}>01 — {String(projects.length).padStart(2, '0')}</span>
             </div>
@@ -31,7 +31,7 @@ export const ProjectGrid = () => {
                             style={{ transitionDelay: `${index * 100}ms` }}
                         >
                             <div
-                                className={styles.imagePlaceholder}
+                                className={styles['image-placeholder']}
                                 style={{
                                     backgroundImage: coverPhoto ? `url(${API_BASE_URL}${coverPhoto.imageUrl})` : 'none',
                                     backgroundSize: 'cover',
@@ -39,7 +39,7 @@ export const ProjectGrid = () => {
                                 }}
                                 title={coverPhoto?.altText ?? project.title}
                             >
-                                <Link to={`/project/${project.id}`} className={styles.viewProjectLink}>
+                                <Link to={`/project/${project.id}`}>
                                     <div className={styles.overlay}>
                                         {t('works.viewProject')} ↗
                                     </div>
@@ -47,15 +47,15 @@ export const ProjectGrid = () => {
                             </div>
 
                             <div className={styles.meta}>
-                                <div className={styles.titleGroup}>
-                                    <h3 className={styles.projectTitle}>{project.title}</h3>
-                                    <p className={styles.projectSummary}>{project.summary}</p>
-                                    <p className={styles.projectLocation}>{project.location}</p>
+                                <div className={styles['title-group']}>
+                                    <h3 className={styles['project-title']}>{project.title}</h3>
+                                    <p>{project.summary}</p>
+                                    <p className={styles['project-location']}>{project.location}</p>
                                 </div>
 
-                                <div className={styles.detailsGroup}>
-                                    {project.completionYear && <span className={styles.projectYear}>{project.completionYear}</span>}
-                                    <span className={styles.projectSize}>{project.size} m²</span>
+                                <div className={styles['details-group']}>
+                                    {project.completionYear && <span>{project.completionYear}</span>}
+                                    <span>{project.size} m²</span>
                                 </div>
                             </div>
                         </div>

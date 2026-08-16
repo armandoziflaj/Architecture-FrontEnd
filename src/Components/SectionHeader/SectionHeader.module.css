@@ -1,4 +1,4 @@
-.sectionHeader {
+.section-header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
@@ -6,14 +6,14 @@
     padding-bottom: var(--spacing-md);
 }
 
-.sectionTitle {
+.section-title {
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-regular);
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
 
-.sectionLink {
+.section-link {
     font-size: var(--font-size-sm);
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -22,6 +22,6 @@
     transition: color var(--transition-duration) ease;
 }
 
-.sectionLink:hover {
+.section-link:hover {
     color: var(--color-text);
 }

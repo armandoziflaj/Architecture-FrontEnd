@@ -22,7 +22,7 @@
     animation: fadeUpIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.headerBlock {
+.header-block {
     margin-bottom: calc(var(--spacing-xxl) * 0.75);
 }
 
@@ -41,26 +41,26 @@
     letter-spacing: -0.02em;
 }
 
-.contentLayout {
+.content-layout {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--spacing-xl);
 }
 
 @media (min-width: 768px) {
-    .contentLayout {
+    .content-layout {
         grid-template-columns: 4fr 8fr;
         gap: var(--spacing-xxl);
     }
 }
 
-.infoColumn {
+.info-column {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-xl);
 }
 
-.infoGroup h4 {
+.info-group h4 {
     font-size: var(--font-size-sm);
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -71,7 +71,7 @@
     border-bottom: 1px solid var(--color-border);
 }
 
-.infoGroup p {
+.info-group p {
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-regular);
     line-height: 1.6;
@@ -100,11 +100,11 @@
     transform-origin: right;
 }
 
-.formContainer {
+.form-container {
     position: relative;
 }
 
-.errorBanner {
+.error-banner {
     padding: var(--spacing-md);
     margin-bottom: var(--spacing-lg);
     border-left: 3px solid var(--color-error);

@@ -1,4 +1,4 @@
-.toggleBtn {
+.toggle-btn {
     background: none;
     border: none;
     color: var(--color-text);
@@ -11,6 +11,6 @@
     padding: var(--spacing-sm) 0;
 }
 
-.toggleBtn:hover {
+.toggle-btn:hover {
     opacity: 1;
 }
