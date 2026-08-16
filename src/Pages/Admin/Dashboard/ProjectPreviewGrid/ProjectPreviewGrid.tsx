@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styles from '../Dashboard.module.css';
 import type {ProjectResponse} from "../../../../Types/ProjectResponse.ts";
+import { Link } from "react-router";
 
 interface ProjectPreviewGridProps {
     projects?: ProjectResponse[];
