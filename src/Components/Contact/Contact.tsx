@@ -109,7 +109,7 @@ export const Contact = () => {
                         />
                     )}
 
-                    {isError && !isPending && <div className={styles['error-banner']}>{error?.message || t('contact.error')}</div>}
+                    {isError && <div className={styles['error-banner']}>{error?.message || t('contact.error')}</div>}
 
                     <GenericForm
                         fields={contactFields}
