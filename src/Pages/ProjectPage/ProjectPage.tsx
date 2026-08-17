@@ -1,16 +1,23 @@
 import styles from './ProjectPage.module.css';
-import { useProjectById } from "../../hooks/useProjects.ts";
-import { useTranslation } from "react-i18next";
-import {Link, useParams} from "react-router";
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import { useProjectById } from '../../hooks/useProjects.ts';
+import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router';
+import { ProjectHeader } from './ProjectHeader.tsx';
+import { ProjectGallery } from './ProjectGallery.tsx';
+import { ProjectContent } from './ProjectContent.tsx';
 
 export const ProjectPage = () => {
     const { id } = useParams<{ id: string }>();
     const { t, i18n } = useTranslation();
     const { data: project, isLoading, error } = useProjectById(id ?? '');
 
-    if (isLoading) return <main className={styles.container}>{t('projectPage.loading')}</main>;
-    if (error ?? !project) return <main className={styles.container}>{t('projectPage.notFound')}</main>;
+    if (isLoading) {
+        return <main className={styles.container}>{t('projectPage.loading')}</main>;
+    }
+
+    if (error ?? !project) {
+        return <main className={styles.container}>{t('projectPage.notFound')}</main>;
+    }
 
     const currentTranslation = project.translations.find(
         (trans) => trans.languageCode.toLowerCase() === i18n.language.toLowerCase()
@@ -21,49 +28,9 @@ export const ProjectPage = () => {
 
     return (
         <main className={styles.container}>
-            <Link to="/" className={styles['back-link']}>
-                <span>←</span>
-                <span>{t('projectPage.back')}</span>
-            </Link>
-
-            <header className={styles.header}>
-                <h1>{activeTitle}</h1>
-                <div className={styles.meta}>
-                    <span>{project.location}</span>
-                    <span>{project.completionYear}</span>
-                    <span>{project.size} m²</span>
-                </div>
-            </header>
-
-            <section className={styles.gallery}>
-                {project.photos && project.photos.map((photo, index) => {
-                    const rawUrl = photo.imageUrl;
-                    const fullImageUrl = rawUrl.startsWith('http')
-                        ? rawUrl
-                        : `${API_BASE_URL}${rawUrl.startsWith('/') ? rawUrl : `/${rawUrl}`}`;
-
-                    return (
-                        <img
-                            key={photo.id || index}
-                            src={fullImageUrl}
-                            alt={photo.altText ?? `${activeTitle} photo ${index + 1}`}
-                            className={styles['gallery-image']}
-                            style={{ animationDelay: `${200 + index * 100}ms` }}
-                            onError={(e) => {
-                                (e.target as HTMLImageElement).src = '/placeholder.jpg';
-                            }}
-                        />
-                    );
-                })}
-            </section>
-
-            <div className={styles['content-wrapper']}>
-                <div className={styles.decoration}></div>
-                <section className={styles.content}>
-                    <h3>{t('projectPage.overview')}</h3>
-                    <p>{activeSummary}</p>
-                </section>
-            </div>
+            <ProjectHeader project={project} activeTitle={activeTitle} />
+            <ProjectGallery photos={project.photos} altTextPrefix={activeTitle} />
+            <ProjectContent summary={activeSummary} />
         </main>
     );
 };

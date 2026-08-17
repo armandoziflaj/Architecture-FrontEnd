@@ -5,7 +5,7 @@ import {loginAdmin, logoutAdmin} from "../api/authApi.ts";
 interface AuthContextType {
     isAuthenticated: boolean;
     isLoading: boolean;
-    login: (credentials: LoginRequest) => Promise<{ success: boolean; message?: string }>;
+    login: (_credentials: LoginRequest) => Promise<{ success: boolean; message?: string }>;
     logout: () => Promise<void>;
 }
 
