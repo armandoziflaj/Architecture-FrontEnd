@@ -14,7 +14,6 @@ export const useContactForm = () => {
         phoneNumber: ''
     });
     const { mutate, isPending, isError, error, isSuccess } = useSubmitInquiry();
-
     const handleContactSubmit = (e: React.SubmitEvent) => {
         e.preventDefault();
         setShowStatus(true);
@@ -22,16 +21,10 @@ export const useContactForm = () => {
             onSuccess: () => {
                 setFormData({ fullName: '', email: '', message: '', phoneNumber: '' });
             },
-            onError: () => {
-                setShowStatus(false);
-            }
+            onError: () => { setShowStatus(false); }
         });
     };
-
-    const handleCloseStatus = () => {
-        setShowStatus(false);
-    };
-
+    const handleCloseStatus = () => { setShowStatus(false); };
     const contactFields: FormField[] = [
         {
             id: 'fullName',

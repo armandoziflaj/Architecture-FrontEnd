@@ -15,7 +15,7 @@ export const ProjectPage = () => {
         return <main className={styles.container}>{t('projectPage.loading')}</main>;
     }
 
-    if (error || !project) {
+    if (error ?? !project) {
         return <main className={styles.container}>{t('projectPage.notFound')}</main>;
     }
 
@@ -29,7 +29,7 @@ export const ProjectPage = () => {
     return (
         <main className={styles.container}>
             <ProjectHeader project={project} activeTitle={activeTitle} />
-            <ProjectGallery photos={project.photos ?? []} altTextPrefix={activeTitle} />
+            <ProjectGallery photos={project.photos} altTextPrefix={activeTitle} />
             <ProjectContent summary={activeSummary} />
         </main>
     );

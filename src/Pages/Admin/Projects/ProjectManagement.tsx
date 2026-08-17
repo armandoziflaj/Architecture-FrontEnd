@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import {useNavigate, useSearchParams} from 'react-router';
+import { useNavigate, useSearchParams } from 'react-router';
 import { SectionHeader } from '../../../Components/SectionHeader/SectionHeader';
 import { useProjectById } from '../../../hooks/useProjects';
 import { useProjectForm } from './useProjectFormState';
@@ -60,12 +60,10 @@ export const ProjectManagement = () => {
             {isFormOpen && (
                 <ProjectForm
                     t={t}
-                    activeLang={activeLang}
-                    onSelectLanguage={setActiveLang}
+                    language={{ activeLang, onSelectLanguage: setActiveLang }}
+                    media={{ images, onImagesChange: setImages }}
                     handleFormSubmit={handleFormSubmit}
                     projectFields={projectFields}
-                    images={images}
-                    onImagesChange={setImages}
                     isPending={isPending}
                     isEditMode={isEditMode}
                 />

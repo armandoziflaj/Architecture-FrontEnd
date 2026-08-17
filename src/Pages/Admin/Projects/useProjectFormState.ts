@@ -106,7 +106,7 @@ export const useProjectForm = (
                     photos: photosOrder
                 };
                 formData.append('projectData', JSON.stringify(projectData));
-                newPhotos.forEach(file => formData.append('newPhotos', file));
+                newPhotos.forEach(file => { formData.append('newPhotos', file); });
                 await createProject(formData);
                 resetForm();
             }
