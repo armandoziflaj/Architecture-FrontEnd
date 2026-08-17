@@ -2,12 +2,13 @@ import React from 'react';
 import styles from '../Dashboard.module.css';
 import type {ProjectResponse} from "../../../../Types/ProjectResponse.ts";
 import { Link } from "react-router";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 interface ProjectPreviewGridProps {
     projects?: ProjectResponse[];
     isLoading: boolean;
-    onEditProject: (id: number) => void;
-    onDeleteProject: (id: number) => void;
+    onEditProject: (_id: number) => void;
+    onDeleteProject: (_id: number) => void;
     apiBaseUrl?: string;
 }
 
@@ -16,7 +17,7 @@ export const ProjectPreviewGrid: React.FC<ProjectPreviewGridProps> = ({
                                                                           isLoading,
                                                                           onEditProject,
                                                                           onDeleteProject,
-                                                                          apiBaseUrl = 'http://localhost:5188'
+                                                                          apiBaseUrl = API_BASE_URL,
                                                                       }) => {
     if (isLoading) {
         return <div className={styles['loading-text']}>Loading project portfolio...</div>;
