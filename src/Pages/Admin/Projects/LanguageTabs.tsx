@@ -8,10 +8,10 @@ interface LanguageTabsProps {
 
 export const LanguageTabs: React.FC<LanguageTabsProps> = ({ activeLang, onSelectLanguage }) => {
     return (
-        <div className={styles.tabsWrapper}>
+        <div className={styles['tabs-wrapper']}>
             <button
                 type="button"
-                className={`${styles.tabLink} ${activeLang === 'en' ? styles.tabLinkActive : ''}`}
+                className={`${styles['tab-link']} ${activeLang === 'en' ? styles['tab-link-active'] : ''}`}
                 onClick={() => onSelectLanguage('en')}
             >
                 English Database
@@ -19,7 +19,7 @@ export const LanguageTabs: React.FC<LanguageTabsProps> = ({ activeLang, onSelect
 
             <button
                 type="button"
-                className={`${styles.tabLink} ${activeLang === 'el' ? styles.tabLinkActive : ''}`}
+                className={`${styles['tab-link']} ${activeLang === 'el' ? styles['tab-link-active'] : ''}`}
                 onClick={() => onSelectLanguage('el')}
             >
                 Ελληνική Βάση

@@ -1,4 +1,4 @@
-.dashboardContainer {
+.dashboard-container {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-xl);
@@ -8,7 +8,7 @@
     width: 100%;
 }
 
-.headerBlock {
+.header-block {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-sm);
@@ -30,32 +30,32 @@
     letter-spacing: -0.02em;
 }
 
-.sectionWrapper {
+.section-wrapper {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-lg);
 }
 
-.metricsGrid {
+.metrics-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--spacing-lg);
 }
 
-@media (min-width: 640px) {
-    .metricsGrid {
+@media (width >= 640px) {
+    .metrics-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-@media (min-width: 1024px) {
-    .metricsGrid {
+@media (width >= 1024px) {
+    .metrics-grid {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
 /* Desktop Table Styles */
-.tableWrapper {
+.table-wrapper {
     width: 100%;
     overflow-x: auto;
     border: 1px solid var(--color-border);
@@ -63,41 +63,41 @@
     border-radius: var(--border-radius);
 }
 
-.adminTable {
+.admin-table {
     width: 100%;
     border-collapse: collapse;
     text-align: left;
     font-size: var(--font-size-sm);
 }
 
-.adminTable th, .adminTable td {
+.admin-table th, .admin-table td {
     padding: var(--spacing-md) var(--spacing-lg);
     border-bottom: 1px solid var(--color-border);
 }
 
-.adminTable th {
+.admin-table th {
     font-weight: var(--font-weight-bold);
     text-transform: uppercase;
     color: var(--color-text-muted);
 }
 
-.adminTable tr:last-child td {
+.admin-table tr:last-child td {
     border-bottom: none;
 }
 
-.projectGrid {
+.project-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--spacing-lg);
 }
 
-@media (min-width: 768px) {
-    .projectGrid {
+@media (width >= 768px) {
+    .project-grid {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
-.projectCard {
+.project-card {
     border: 1px solid var(--color-border);
     background: var(--color-card-background);
     display: flex;
@@ -106,11 +106,11 @@
     transition: transform var(--transition-duration) ease;
 }
 
-.projectCard:hover {
+.project-card:hover {
     transform: translateY(-3px);
 }
 
-.imageContainer {
+.image-container {
     position: relative;
     width: 100%;
     height: 180px;
@@ -118,7 +118,7 @@
     overflow: hidden;
 }
 
-.cardImage {
+.card-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -127,12 +127,12 @@
     transition: transform var(--transition-duration) ease;
 }
 
-.imageContainer:hover .cardImage {
+.image-container:hover .card-image {
     transform: scale(1.03);
 }
 
-.viewProjectOverlay,
-.viewProjectLink {
+.view-project-overlay,
+.view-project-link {
     position: absolute;
     top: 0;
     left: 0;
@@ -153,12 +153,12 @@
     z-index: 5;
 }
 
-.imageContainer:hover .viewProjectOverlay,
-.imageContainer:hover .viewProjectLink {
+.image-container:hover .view-project-overlay,
+.image-container:hover .view-project-link {
     opacity: 1;
 }
 
-.cardBody {
+.card-body {
     padding: var(--spacing-lg);
     display: flex;
     flex-direction: column;
@@ -166,7 +166,7 @@
     background-color: var(--color-card-background);
 }
 
-.projectTitle {
+.project-title {
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-bold);
     color: var(--color-text) !important;
@@ -174,7 +174,7 @@
     line-height: 1.3;
 }
 
-.projectMeta {
+.project-meta {
     font-size: var(--font-size-sm);
     color: var(--color-text-muted) !important;
     text-transform: uppercase;
@@ -182,13 +182,13 @@
     margin: 0;
 }
 
-.cardFooter {
+.card-footer {
     padding: 0 var(--spacing-lg) var(--spacing-lg) var(--spacing-lg);
     margin-top: auto;
     background-color: var(--color-card-background);
 }
 
-.editBtn {
+.edit-btn {
     width: 100%;
     padding: var(--spacing-sm) var(--spacing-md);
     background: transparent;
@@ -206,12 +206,12 @@
     justify-content: center;
 }
 
-.editBtn:hover {
+.edit-btn:hover {
     background-color: var(--color-text);
     color: #ffffff !important;
     border-color: var(--color-text);
 }
-.loadingText, .emptyText {
+.loading-text, .empty-text {
     font-size: var(--font-size-sm);
     color: var(--color-text-muted);
     text-transform: uppercase;
