@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 interface RecentInquiriesTableProps {
     messages?: MessageData[];
     isLoading?: boolean;
-    onMessageClick: (id: number) => void;
+    onMessageClick: (_id: number) => void;
 }
 
 export const RecentInquiriesTable: React.FC<RecentInquiriesTableProps> = ({

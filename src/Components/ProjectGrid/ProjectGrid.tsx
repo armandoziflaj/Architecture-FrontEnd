@@ -36,7 +36,7 @@ export const ProjectGrid = () => {
                                     backgroundSize: 'cover',
                                     backgroundPosition: 'center'
                                 }}
-                                title={coverPhoto?.altText ?? project.title}
+                                title={coverPhoto.altText ?? project.title}
                             >
                                 <Link to={`/project/${project.id}`}>
                                     <div className={styles.overlay}>
