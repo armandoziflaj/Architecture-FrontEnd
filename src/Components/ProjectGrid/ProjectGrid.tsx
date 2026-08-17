@@ -22,8 +22,7 @@ export const ProjectGrid = () => {
 
             <div className={styles.grid}>
                 {projects.map((project, index) => {
-                    const coverPhoto = project.photos && project.photos.length > 0 ? project.photos[0] : null;
-
+                    const coverPhoto = project.photos[0] ?? null;
                     return (
                         <div
                             key={project.id}

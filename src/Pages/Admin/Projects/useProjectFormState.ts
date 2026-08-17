@@ -6,7 +6,6 @@ export const useProjectFormState = (
     isEditMode: boolean,
     existingProject?: ProjectDetailedResponse | null
 ) => {
-    // Track the project ID we last hydrated from
     const [hydratedId, setHydratedId] = useState<number | null>(null);
 
     const [location, setLocation] = useState('');
@@ -52,16 +51,14 @@ export const useProjectFormState = (
         setTitleEn((enTrans?.title ?? existingProject.title) || '');
         setDescEn((enTrans?.summary ?? existingProject.summary) || '');
 
-        if (existingProject.photos) {
-            const mappedImages: ProjectImage[] = existingProject.photos.map(photo => ({
-                id: String(photo.id),
-                url: photo.imageUrl.startsWith('http')
-                    ? photo.imageUrl
-                    : `${import.meta.env.VITE_API_BASE_URL}${photo.imageUrl.startsWith('/') ? photo.imageUrl : `/${photo.imageUrl}`}`,
-                sortOrder: photo.displayOrder ?? 0
-            }));
-            setImages(mappedImages);
-        }
+        const mappedImages: ProjectImage[] = existingProject.photos.map(photo => ({
+            id: String(photo.id),
+            url: photo.imageUrl.startsWith('http')
+                ? photo.imageUrl
+                : `${import.meta.env.VITE_API_BASE_URL}${photo.imageUrl.startsWith('/') ? photo.imageUrl : `/${photo.imageUrl}`}`,
+            sortOrder: photo.displayOrder ?? 0
+        }));
+        setImages(mappedImages);
     }
 
     return {
