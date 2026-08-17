@@ -31,14 +31,14 @@ export const Login = () => {
     };
 
     return (
-        <div className={styles.loginPageContainer}>
-            <div className={styles.formWrapper}>
-                <div className={styles.headerGroup}>
+        <div className={styles['login-page-container']}>
+            <div className={styles['form-wrapper']}>
+                <div className={styles['header-group']}>
                     <h2 className={styles.title}>{t('admin.login.title')}</h2>
                     <span className={styles.subtitle}>{t('admin.login.subtitle')}</span>
                 </div>
 
-                {errorMsg && <div className={styles.errorBanner}>{errorMsg}</div>}
+                {errorMsg && <div className={styles['error-banner']}>{errorMsg}</div>}
 
                 <GenericForm
                     fields={loginFields}

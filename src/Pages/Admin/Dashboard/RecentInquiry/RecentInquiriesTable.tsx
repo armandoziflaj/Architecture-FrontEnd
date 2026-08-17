@@ -18,16 +18,16 @@ export const RecentInquiriesTable: React.FC<RecentInquiriesTableProps> = ({
     const { t } = useTranslation();
 
     if (isLoading) {
-        return <div className={styles.loadingText}>{t('admin.dashboard.inquiries.loading')}</div>;
+        return <div className={styles['loading-text']}>{t('admin.dashboard.inquiries.loading')}</div>;
     }
 
     if (!messages || !Array.isArray(messages) || messages.length === 0) {
-        return <div className={styles.emptyText}>{t('admin.dashboard.inquiries.empty')}</div>;
+        return <div className={styles['empty-text']}>{t('admin.dashboard.inquiries.empty')}</div>;
     }
 
     return (
-        <div className={styles.tableWrapper}>
-            <table className={styles.adminTable}>
+        <div className={styles['table-wrapper']}>
+            <table className={styles['admin-table']}>
                 <thead>
                 <tr>
                     <th>{t('admin.dashboard.inquiries.client')}</th>

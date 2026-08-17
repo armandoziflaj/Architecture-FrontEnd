@@ -21,7 +21,7 @@ export const ProjectPage = () => {
 
     return (
         <main className={styles.container}>
-            <Link to="/" className={styles.backLink}>
+            <Link to="/" className={styles['back-link']}>
                 <span>←</span>
                 <span>{t('projectPage.back')}</span>
             </Link>
@@ -47,7 +47,7 @@ export const ProjectPage = () => {
                             key={photo.id || index}
                             src={fullImageUrl}
                             alt={photo.altText ?? `${activeTitle} photo ${index + 1}`}
-                            className={styles.galleryImage}
+                            className={styles['gallery-image']}
                             style={{ animationDelay: `${200 + index * 100}ms` }}
                             onError={(e) => {
                                 (e.target as HTMLImageElement).src = '/placeholder.jpg';
@@ -57,7 +57,7 @@ export const ProjectPage = () => {
                 })}
             </section>
 
-            <div className={styles.contentWrapper}>
+            <div className={styles['content-wrapper']}>
                 <div className={styles.decoration}></div>
                 <section className={styles.content}>
                     <h3>{t('projectPage.overview')}</h3>

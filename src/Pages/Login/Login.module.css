@@ -1,4 +1,4 @@
-.loginPageContainer {
+.login-page-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,7 +8,7 @@
     transition: background-color var(--transition-duration) ease;
 }
 
-.formWrapper {
+.form-wrapper {
     width: 100%;
     max-width: 480px;
     display: flex;
@@ -16,7 +16,7 @@
     gap: var(--spacing-xl);
 }
 
-.headerGroup {
+.header-group {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-xs);
@@ -37,7 +37,7 @@
     letter-spacing: 2px;
 }
 
-.errorBanner {
+.error-banner {
     border-left: 2px solid var(--color-error);
     color: var(--color-error);
     padding: var(--spacing-sm) 0 var(--spacing-sm) var(--spacing-md);

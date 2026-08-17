@@ -65,14 +65,14 @@ export const Dashboard = () => {
     ];
 
     return (
-        <div className={styles.dashboardContainer}>
+        <div className={styles['dashboard-container']}>
 
-            <header className={styles.headerBlock}>
+            <header className={styles['header-block']}>
                 <span className={styles.subtitle}>{t('admin.dashboard.subtitle')}</span>
                 <h1 className={styles.title}>{t('admin.dashboard.title')}</h1>
             </header>
 
-            <section className={styles.metricsGrid}>
+            <section className={styles['metrics-grid']}>
                 {stats.map((stat) => (
                     <MetricCard
                         key={stat.id}
@@ -83,7 +83,7 @@ export const Dashboard = () => {
                 ))}
             </section>
 
-            <section className={styles.sectionWrapper}>
+            <section className={styles['section-wrapper']}>
                 <SectionHeader
                     title={t('admin.dashboard.recentInquiries')}
                     actionLabel={t('admin.dashboard.viewAllMessages')}
@@ -96,7 +96,7 @@ export const Dashboard = () => {
                 />
             </section>
 
-            <section className={styles.sectionWrapper}>
+            <section className={styles['section-wrapper']}>
                 <SectionHeader
                     title={t('admin.dashboard.activeProjectsTitle')}
                     actionLabel={t('admin.dashboard.manageFrameworks')}

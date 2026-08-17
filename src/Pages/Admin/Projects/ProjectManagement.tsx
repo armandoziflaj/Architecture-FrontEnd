@@ -143,11 +143,11 @@ export const ProjectManagement = () => {
     ];
 
     if (isLoadingProject) {
-        return <div className={styles.loadingText}>{t('admin.projectManagement.loading')}</div>;
+        return <div className={styles['loading-text']}>{t('admin.projectManagement.loading')}</div>;
     }
 
     return (
-        <div className={styles.managementContainer}>
+        <div className={styles['management-container']}>
             <SectionHeader
                 title={isEditMode ? t('admin.projectManagement.editTitle', { id: activeProjectId }) : t('admin.projectManagement.createTitle')}
                 actionLabel={isFormOpen ? t('admin.projectManagement.backButton') : t('admin.projectManagement.newButton')}
@@ -155,18 +155,18 @@ export const ProjectManagement = () => {
             />
 
             {isFormOpen && (
-                <div className={styles.formContainer}>
+                <div className={styles['form-container']}>
                     <LanguageTabs activeLang={activeLang} onSelectLanguage={setActiveLang} />
 
-                    <form onSubmit={handleFormSubmit} className={styles.structuralForm}>
+                    <form onSubmit={handleFormSubmit} className={styles['structural-form']}>
                         <GenericForm fields={projectFields} submitLabel="" onSubmit={() => {}} />
 
-                        <div className={styles.mediaFramework}>
-                            <h4 className={styles.frameworkTitle}>{t('admin.projectManagement.mediaTitle')}</h4>
+                        <div className={styles['media-framework']}>
+                            <h4 className={styles['framework-title']}>{t('admin.projectManagement.mediaTitle')}</h4>
                             <ImageManager images={state.images} onImagesChange={setters.setImages} />
                         </div>
 
-                        <button type="submit" className={styles.submitStructureBtn} disabled={isPending}>
+                        <button type="submit" className={styles['submit-structure-btn']} disabled={isPending}>
                             {isPending
                                 ? (isEditMode ? t('admin.projectManagement.committing') : t('admin.projectManagement.publishing'))
                                 : (isEditMode ? t('admin.projectManagement.commitButton') : t('admin.projectManagement.publishButton'))

@@ -19,11 +19,11 @@ export const ProjectPreviewGrid: React.FC<ProjectPreviewGridProps> = ({
                                                                           apiBaseUrl = 'http://localhost:5188'
                                                                       }) => {
     if (isLoading) {
-        return <div className={styles.loadingText}>Loading project portfolio...</div>;
+        return <div className={styles['loading-text']}>Loading project portfolio...</div>;
     }
 
     return (
-        <div className={styles.projectGrid}>
+        <div className={styles['project-grid']}>
             {projects?.slice(0, 3).map((project) => {
                 const rawPath = project.photos[0]?.imageUrl;
                 const fullImageUrl = rawPath
@@ -31,12 +31,12 @@ export const ProjectPreviewGrid: React.FC<ProjectPreviewGridProps> = ({
                     : '/placeholder.jpg';
 
                 return (
-                    <div key={project.id} className={styles.projectCard}>
-                        <div className={styles.imageContainer}>
+                    <div key={project.id} className={styles['project-card']}>
+                        <div className={styles['image-container']}>
                             <img
                                 src={fullImageUrl}
                                 alt={project.title}
-                                className={styles.cardImage}
+                                className={styles['card-image']}
                                 onError={(e) => {
                                     (e.target as HTMLImageElement).src = '/placeholder.jpg';
                                 }}
@@ -44,24 +44,24 @@ export const ProjectPreviewGrid: React.FC<ProjectPreviewGridProps> = ({
 
                             <Link
                                 to={`/project/${project.id}`}
-                                className={styles.viewProjectOverlay}
+                                className={styles['view-project-overlay']}
                             >
                                 <span>View Project ↗</span>
                             </Link>
                         </div>
 
-                        <div className={styles.cardBody}>
-                            <h4 className={styles.projectTitle}>{project.title}</h4>
-                            <p className={styles.projectMeta}>
+                        <div className={styles['card-body']}>
+                            <h4 className={styles['project-title']}>{project.title}</h4>
+                            <p className={styles['project-meta']}>
                                 {project.location} • {project.completionYear}
                             </p>
                         </div>
 
-                        <div className={styles.cardFooter}>
+                        <div className={styles['card-footer']}>
                             <button
                                 type="button"
                                 onClick={() => onEditProject(project.id)}
-                                className={styles.editBtn}
+                                className={styles['edit-btn']}
                             >
                                 Edit Structure ↗
                             </button>
@@ -69,7 +69,7 @@ export const ProjectPreviewGrid: React.FC<ProjectPreviewGridProps> = ({
                             <button
                                 type="button"
                                 onClick={() => onDeleteProject(project.id)}
-                                className={styles.deleteBtn || styles.editBtn}
+                                className={styles['edit-btn']}
                             >
                                 Delete
                             </button>
