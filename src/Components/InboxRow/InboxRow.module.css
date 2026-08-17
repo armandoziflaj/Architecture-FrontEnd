@@ -59,7 +59,7 @@ td {
     letter-spacing: 0.05em;
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
     .row {
         display: block;
         padding: var(--spacing-lg) 0;
