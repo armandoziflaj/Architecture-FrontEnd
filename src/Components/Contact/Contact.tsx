@@ -57,8 +57,7 @@ export const Contact = () => {
                         />
                     )}
 
-                    {isError && <div className={styles['error-banner']}>{error?.message || t('contact.error')}</div>}
-                    <GenericForm
+                    {isError && <div className={styles['error-banner']}>{error?.message ?? t('contact.error')}</div>}                    <GenericForm
                         fields={contactFields}
                         submitLabel={isPending && showStatus ? t('contact.sending') : t('contact.submit')}
                         onSubmit={handleContactSubmit}

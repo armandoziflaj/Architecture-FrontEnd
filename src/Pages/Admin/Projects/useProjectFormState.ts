@@ -89,7 +89,7 @@ export const useProjectForm = (
                     photos: photosOrder
                 };
                 formData.append('projectData', JSON.stringify(projectData));
-                newPhotoFiles.forEach(file => formData.append('newPhotos', file));
+                newPhotoFiles.forEach(file => { formData.append('newPhotos', file); });
                 await updateProject(formData);
             } else {
                 const newPhotos: File[] = images.map(img => img.file).filter((file): file is File => !!file);
