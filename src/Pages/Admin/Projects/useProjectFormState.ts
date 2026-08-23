@@ -1,9 +1,112 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import type { TFunction } from 'i18next';
 import { useCreateProject, useUpdateProject } from '../../../hooks/useProjects';
 import type { ProjectImage } from '../../../Types/ProjectAdmin';
 import type { ProjectDetailedResponse } from '../../../Types/ProjectResponse';
 import type { FormField } from '../../../Components/GenericForm/GenericForm';
+
+const mapPhotosToImages = (photos: ProjectDetailedResponse['photos']): ProjectImage[] =>
+    photos.map(photo => ({
+        id: String(photo.id),
+        url: photo.imageUrl.startsWith('http')
+            ? photo.imageUrl
+            : `${import.meta.env.VITE_API_BASE_URL}${photo.imageUrl.startsWith('/') ? photo.imageUrl : `/${photo.imageUrl}`}`,
+        sortOrder: photo.displayOrder ?? 0
+    }));
+
+interface TranslatedFields {
+    location: string;
+    year: string;
+    size: string;
+    titleEl: string;
+    descEl: string;
+    titleEn: string;
+    descEn: string;
+    images: ProjectImage[];
+}
+
+const hydrateFromProject = (project: ProjectDetailedResponse): TranslatedFields => {
+    const elTrans = project.translations.find(trans => trans.languageCode.toLowerCase() === 'el');
+    const enTrans = project.translations.find(trans => trans.languageCode.toLowerCase() === 'en');
+
+    return {
+        location: project.location || '',
+        year: project.completionYear ?? '',
+        size: project.size || '',
+        titleEl: (elTrans?.title ?? project.title) || '',
+        descEl: (elTrans?.summary ?? project.summary) || '',
+        titleEn: (enTrans?.title ?? project.title) || '',
+        descEn: (enTrans?.summary ?? project.summary) || '',
+        images: mapPhotosToImages(project.photos)
+    };
+};
+
+interface ProjectPayloadInput {
+    location: string;
+    year: string;
+    size: string;
+    titleEn: string;
+    descEn: string;
+    titleEl: string;
+    descEl: string;
+    id?: number;
+}
+
+const buildProjectData = ({ location, year, size, titleEn, descEn, titleEl, descEl, id }: ProjectPayloadInput) => ({
+    ...(id !== undefined && { id }),
+    location,
+    completionYear: year,
+    size,
+    isFeatured: false,
+    translations: [
+        { languageCode: 'en', title: titleEn, description: descEn },
+        { languageCode: 'el', title: titleEl, description: descEl }
+    ]
+});
+
+const buildEditPhotosOrder = (images: ProjectImage[]) => {
+    const newPhotoFiles: File[] = [];
+    const photosOrder = images.map((img, index) => {
+        if (img.file) {
+            const newPhotoIndex = newPhotoFiles.length;
+            newPhotoFiles.push(img.file);
+            return { newPhotoIndex, displayOrder: index + 1 };
+        }
+        return { id: Number(img.id), displayOrder: index + 1 };
+    });
+    return { photosOrder, newPhotoFiles };
+};
+
+const buildProjectFields = (
+    t: TFunction,
+    activeLang: 'el' | 'en',
+    fields: TranslatedFields,
+    setters: {
+        setTitleEn: (value: string) => void;
+        setTitleEl: (value: string) => void;
+        setDescEn: (value: string) => void;
+        setDescEl: (value: string) => void;
+        setLocation: (value: string) => void;
+        setYear: (value: string) => void;
+        setSize: (value: string) => void;
+    }
+): FormField[] => {
+    const isEn = activeLang === 'en';
+    const currentTitle = isEn ? fields.titleEn : fields.titleEl;
+    const currentTitleSetter = isEn ? setters.setTitleEn : setters.setTitleEl;
+    const currentDesc = isEn ? fields.descEn : fields.descEl;
+    const currentDescSetter = isEn ? setters.setDescEn : setters.setDescEl;
+    const lang = activeLang.toUpperCase();
+
+    return [
+        { id: 'title', label: t('admin.projectManagement.titleLabel', { lang }), type: 'text', placeholder: t('admin.projectManagement.titlePlaceholder'), value: currentTitle, onChange: currentTitleSetter, required: true },
+        { id: 'location', label: t('admin.projectManagement.locationLabel'), type: 'text', placeholder: t('admin.projectManagement.locationPlaceholder'), value: fields.location, onChange: setters.setLocation, required: true },
+        { id: 'year', label: t('admin.projectManagement.yearLabel'), type: 'text', placeholder: t('admin.projectManagement.yearPlaceholder'), value: fields.year, onChange: setters.setYear, required: true },
+        { id: 'size', label: t('admin.projectManagement.sizeLabel'), type: 'text', placeholder: t('admin.projectManagement.sizePlaceholder'), value: fields.size, onChange: setters.setSize, required: true },
+        { id: 'description', label: t('admin.projectManagement.descriptionLabel', { lang }), type: 'textarea', placeholder: t('admin.projectManagement.descriptionPlaceholder'), value: currentDesc, onChange: currentDescSetter, required: true, rows: 5 }
+    ];
+};
 
 export const useProjectForm = (
     isEditMode: boolean,
@@ -42,91 +145,56 @@ export const useProjectForm = (
 
     if (isEditMode && existingProject && hydratedId !== currentProjectId) {
         setHydratedId(currentProjectId);
-        setLocation(existingProject.location || '');
-        setYear(existingProject.completionYear ?? '');
-        setSize(existingProject.size || '');
-
-        const elTrans = existingProject.translations.find(t => t.languageCode.toLowerCase() === 'el');
-        const enTrans = existingProject.translations.find(t => t.languageCode.toLowerCase() === 'en');
-
-        setTitleEl((elTrans?.title ?? existingProject.title) || '');
-        setDescEl((elTrans?.summary ?? existingProject.summary) || '');
-        setTitleEn((enTrans?.title ?? existingProject.title) || '');
-        setDescEn((enTrans?.summary ?? existingProject.summary) || '');
-
-        const mappedImages: ProjectImage[] = existingProject.photos.map(photo => ({
-            id: String(photo.id),
-            url: photo.imageUrl.startsWith('http') ? photo.imageUrl : `${import.meta.env.VITE_API_BASE_URL}${photo.imageUrl.startsWith('/') ? photo.imageUrl : `/${photo.imageUrl}`}`,
-            sortOrder: photo.displayOrder ?? 0
-        }));
-        setImages(mappedImages);
+        const hydrated = hydrateFromProject(existingProject);
+        setLocation(hydrated.location);
+        setYear(hydrated.year);
+        setSize(hydrated.size);
+        setTitleEl(hydrated.titleEl);
+        setDescEl(hydrated.descEl);
+        setTitleEn(hydrated.titleEn);
+        setDescEn(hydrated.descEn);
+        setImages(hydrated.images);
     }
+
+    const submitEdit = async (formData: FormData) => {
+        if (!activeProjectId) return;
+        const { photosOrder, newPhotoFiles } = buildEditPhotosOrder(images);
+        const projectData = { ...buildProjectData({ location, year, size, titleEn, descEn, titleEl, descEl, id: activeProjectId }), photos: photosOrder };
+        formData.append('projectData', JSON.stringify(projectData));
+        newPhotoFiles.forEach(file => { formData.append('newPhotos', file); });
+        await updateProject(formData);
+    };
+
+    const submitCreate = async (formData: FormData) => {
+        const newPhotos = images.map(img => img.file).filter((file): file is File => !!file);
+        const photosOrder = images.map((_, index) => ({ displayOrder: index + 1 }));
+        const projectData = { ...buildProjectData({ location, year, size, titleEn, descEn, titleEl, descEl }), photos: photosOrder };
+        formData.append('projectData', JSON.stringify(projectData));
+        newPhotos.forEach(file => { formData.append('newPhotos', file); });
+        await createProject(formData);
+        resetForm();
+    };
 
     const handleFormSubmit = async (e: React.SubmitEvent) => {
         e.preventDefault();
         const formData = new FormData();
         try {
             if (isEditMode && activeProjectId) {
-                const newPhotoFiles: File[] = [];
-                const photosOrder = images.map((img, index) => {
-                    if (img.file) {
-                        const newPhotoIndex = newPhotoFiles.length;
-                        newPhotoFiles.push(img.file);
-                        return { newPhotoIndex, displayOrder: index + 1 };
-                    }
-                    return { id: Number(img.id), displayOrder: index + 1 };
-                });
-                const projectData = {
-                    id: activeProjectId,
-                    location,
-                    completionYear: year,
-                    size,
-                    isFeatured: false,
-                    translations: [
-                        { languageCode: 'en', title: titleEn, description: descEn },
-                        { languageCode: 'el', title: titleEl, description: descEl }
-                    ],
-                    photos: photosOrder
-                };
-                formData.append('projectData', JSON.stringify(projectData));
-                newPhotoFiles.forEach(file => { formData.append('newPhotos', file); });
-                await updateProject(formData);
+                await submitEdit(formData);
             } else {
-                const newPhotos: File[] = images.map(img => img.file).filter((file): file is File => !!file);
-                const photosOrder = images.map((_, index) => ({ displayOrder: index + 1 }));
-                const projectData = {
-                    location,
-                    completionYear: year,
-                    size,
-                    isFeatured: false,
-                    translations: [
-                        { languageCode: 'en', title: titleEn, description: descEn },
-                        { languageCode: 'el', title: titleEl, description: descEl }
-                    ],
-                    photos: photosOrder
-                };
-                formData.append('projectData', JSON.stringify(projectData));
-                newPhotos.forEach(file => { formData.append('newPhotos', file); });
-                await createProject(formData);
-                resetForm();
+                await submitCreate(formData);
             }
         } catch (error) {
             console.error("Mutation failed", error);
         }
     };
 
-    const currentTitle = activeLang === 'en' ? titleEn : titleEl;
-    const currentTitleSetter = activeLang === 'en' ? setTitleEn : setTitleEl;
-    const currentDesc = activeLang === 'en' ? descEn : descEl;
-    const currentDescSetter = activeLang === 'en' ? setDescEn : setDescEl;
-
-    const projectFields: FormField[] = [
-        { id: 'title', label: t('admin.projectManagement.titleLabel', { lang: activeLang.toUpperCase() }), type: 'text', placeholder: t('admin.projectManagement.titlePlaceholder'), value: currentTitle, onChange: currentTitleSetter, required: true },
-        { id: 'location', label: t('admin.projectManagement.locationLabel'), type: 'text', placeholder: t('admin.projectManagement.locationPlaceholder'), value: location, onChange: setLocation, required: true },
-        { id: 'year', label: t('admin.projectManagement.yearLabel'), type: 'text', placeholder: t('admin.projectManagement.yearPlaceholder'), value: year, onChange: setYear, required: true },
-        { id: 'size', label: t('admin.projectManagement.sizeLabel'), type: 'text', placeholder: t('admin.projectManagement.sizePlaceholder'), value: size, onChange: setSize, required: true },
-        { id: 'description', label: t('admin.projectManagement.descriptionLabel', { lang: activeLang.toUpperCase() }), type: 'textarea', placeholder: t('admin.projectManagement.descriptionPlaceholder'), value: currentDesc, onChange: currentDescSetter, required: true, rows: 5 }
-    ];
+    const projectFields = buildProjectFields(
+        t,
+        activeLang,
+        { location, year, size, titleEl, descEl, titleEn, descEn, images },
+        { setTitleEn, setTitleEl, setDescEn, setDescEl, setLocation, setYear, setSize }
+    );
 
     return {
         t,

@@ -8,3 +8,7 @@ exclude_paths:
   - "CLAUDE.md"
   - "GEMINI.md"
   - "PROJECT_KNOWLEDGE.md"
+  # Generated/vendored files — not hand-written code, shouldn't be scanned
+  # for complexity/style at all.
+  - "package-lock.json"
+  - "dist/**"

@@ -5,6 +5,18 @@ import { useParams } from 'react-router';
 import { ProjectHeader } from './ProjectHeader.tsx';
 import { ProjectGallery } from './ProjectGallery.tsx';
 import { ProjectContent } from './ProjectContent.tsx';
+import type { ProjectDetailedResponse } from '../../Types/ProjectResponse.ts';
+
+const resolveActiveContent = (project: ProjectDetailedResponse, lang: string) => {
+    const currentTranslation = project.translations.find(
+        (trans) => trans.languageCode.toLowerCase() === lang.toLowerCase()
+    );
+
+    return {
+        activeTitle: currentTranslation?.title ?? project.title,
+        activeSummary: currentTranslation?.summary ?? project.summary,
+    };
+};
 
 export const ProjectPage = () => {
     const { id } = useParams<{ id: string }>();
@@ -19,12 +31,7 @@ export const ProjectPage = () => {
         return <main className={styles.container}>{t('projectPage.notFound')}</main>;
     }
 
-    const currentTranslation = project.translations.find(
-        (trans) => trans.languageCode.toLowerCase() === i18n.language.toLowerCase()
-    );
-
-    const activeTitle = currentTranslation?.title ?? project.title;
-    const activeSummary = currentTranslation?.summary ?? project.summary;
+    const { activeTitle, activeSummary } = resolveActiveContent(project, i18n.language);
 
     return (
         <main className={styles.container}>

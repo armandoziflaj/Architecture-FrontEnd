@@ -5,6 +5,7 @@ import { SectionHeader } from '../../../Components/SectionHeader/SectionHeader.t
 import styles from './Dashboard.module.css';
 import { ProjectPreviewGrid } from "./ProjectPreviewGrid/ProjectPreviewGrid.tsx";
 import { RecentInquiriesTable } from "./RecentInquiry/RecentInquiriesTable.tsx";
+import { DeleteConfirmToast } from "./DeleteConfirmToast.tsx";
 import { useContactInquiries, useToggleInquiryRead, useVisitorCount } from "../../../hooks/useContactInquiry.ts";
 import { toast } from "react-hot-toast";
 import {useNavigate} from "react-router";
@@ -33,22 +34,14 @@ export const Dashboard = () => {
 
     const handleDeleteProject = (id: number) => {
         toast((a) => (
-            <span className={styles['confirm-toast']}>
-                {t('admin.dashboard.deleteConfirmation.title')}
-                <button
-                    className={styles['confirm-toast-btn']}
-                    onClick={() => {
-                        removeProject(id);
-                        toast.dismiss(a.id); }} >
-                    {t('admin.dashboard.deleteConfirmation.yes')}
-                </button>
-                <button
-                    className={styles['confirm-toast-btn']}
-                    onClick={() => toast.dismiss(a.id)}
-                >
-                    {t('admin.dashboard.deleteConfirmation.no')}
-                </button>
-            </span>
+            <DeleteConfirmToast
+                t={t}
+                onConfirm={() => {
+                    removeProject(id);
+                    toast.dismiss(a.id);
+                }}
+                onCancel={() => { toast.dismiss(a.id); }}
+            />
         ), {
             duration: Infinity,
         });
