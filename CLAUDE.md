@@ -9,7 +9,7 @@ _Last reviewed: 2026-08-23._
 1. **Search Before Implementation:** Check `./PROJECT_KNOWLEDGE.md` for an existing pattern/dependency before introducing a new one.
 2. **Strict Architecture Adherence:** React + TypeScript + Vite + CSS Modules, feature-based structure, React Query for server state, named exports only.
 3. **i18n is non-negotiable:** every user-facing string goes through `react-i18next`'s `t()`. Add the key to **both** `public/locales/en/translation.json` and `public/locales/el/translation.json` in the same change — never one without the other. Never hardcode English (or any language) directly in JSX.
-4. **No API changes without asking.** Don't touch `src/api/*`, hook contracts, or request/response types unless the user's request names an API/type change directly — for example "add a field" or "change the endpoint." If a task only *seems* to need one, confirm with the user first.
+4. **No API changes without asking.** Don't touch `src/api/*`, hook contracts, or request/response types unless the user's request names an API/type change directly — for example "add a field" or "change the endpoint." If a task only _seems_ to need one, confirm with the user first.
 5. **English only** for code, comments, commit messages, and chat explanations (per `GEMINI.md`).
 
 ## Design System — "Mediterranean Minimalism"
@@ -41,7 +41,7 @@ Introduced to replace the earlier generic "corporate minimal" look (Bootstrap bl
 
 ## Working Notes (lessons from past sessions)
 
-**Triaging Codacy/static-analysis findings:** fix real issues. Push back on findings that misapply a generic rule to this file's actual context, rather than silently "resolving" them. State *why* a finding is rejected — don't just ignore it, and don't blindly apply a bad fix either.
+**Triaging Codacy/static-analysis findings:** fix real issues. Push back on findings that misapply a generic rule to this file's actual context, rather than silently "resolving" them. State _why_ a finding is rejected — don't just ignore it, and don't blindly apply a bad fix either.
 
 False positives already seen on this file — don't re-flag or re-fix these:
 
@@ -51,7 +51,7 @@ False positives already seen on this file — don't re-flag or re-fix these:
 
 **Array indexing and "unnecessary conditional" lint flags:**
 
-- This tsconfig doesn't set `noUncheckedIndexedAccess`, so `someArray[0]` types as `T`, not `T | undefined`.
+- The tsconfig here doesn't set `noUncheckedIndexedAccess`, so `someArray[0]` types as `T`, not `T | undefined`.
 - A linter will then flag `someArray[0] ?? fallback` as dead code, even though the array can genuinely be empty at runtime.
 - Don't just delete the null check to silence that — it reintroduces a real crash risk, unless you've actually confirmed the array can never be empty (e.g. a fixed-length tuple).
 - Use `someArray.at(0) ?? fallback` instead: `Array.prototype.at` always types its return as `T | undefined` regardless of tsconfig, so the safety check becomes real again for the type-checker too.
