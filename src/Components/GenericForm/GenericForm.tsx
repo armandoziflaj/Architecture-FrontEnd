@@ -7,7 +7,7 @@ export interface FormField {
     type: 'text' | 'email' | 'password' | 'textarea';
     placeholder?: string;
     value: string;
-    onChange: (value: string) => void;
+    onChange: (_value: string) => void;
     required?: boolean;
     rows?: number;
 }
@@ -15,7 +15,7 @@ export interface FormField {
 interface FormProps {
     fields: FormField[];
     submitLabel: string;
-    onSubmit: (e: React.SubmitEvent) => void;
+    onSubmit: (_e: React.SubmitEvent) => void;
     disabled?: boolean;
 }
 
