@@ -11,7 +11,7 @@ export const useAuth = () => {
         isFetching
     } = useQuery<boolean>({
         queryKey: ['authStatus'],
-        queryFn: async ( ) => {
+        queryFn: () => {
             try {
                 /*const response = await refreshAdminToken(signal);
                 return response.success;*/

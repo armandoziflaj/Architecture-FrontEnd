@@ -2,6 +2,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import styles from './Contact.module.css';
 import { GenericForm } from "../GenericForm/GenericForm.tsx";
 import { FormSubmissionStatus } from '../FormSubmissionStatus/FormSubmissionStatus.tsx';
+import { ContactInfo } from './ContactInfo.tsx';
 import { useContactForm } from '../../hooks/useContactForm.ts';
 import { fadeUp, viewportOnce, withReducedMotion } from '../../animations/variants';
 
@@ -39,23 +40,7 @@ export const Contact = () => {
             </div>
 
             <div className={styles['content-layout']}>
-                <div className={styles['info-column']}>
-                    <div className={styles['info-group']}>
-                        <h4>{t('contact.general')}</h4>
-                        <p>
-                            <a href="mailto:hello@example.com" className={styles.link}>
-                                hello@example.com
-                            </a>
-                        </p>
-                        <p>+30 210 000 0000</p>
-                    </div>
-
-                    <div className={styles['info-group']}>
-                        <h4>{t('contact.address')}</h4>
-                        <p>{t('contact.street')}</p>
-                        <p>{t('contact.city')}</p>
-                    </div>
-                </div>
+                <ContactInfo t={t} />
 
                 <div className={styles['form-container']}>
                     {(isPending || isSuccess) && showStatus && (

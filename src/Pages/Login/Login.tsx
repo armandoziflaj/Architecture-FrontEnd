@@ -50,7 +50,7 @@ export const Login = () => {
                 <GenericForm
                     fields={loginFields}
                     submitLabel={isLoggingIn ? t('admin.login.verifying') : t('admin.login.loginButton')}
-                    onSubmit={handleLoginSubmit}
+                    onSubmit={(e) => { void handleLoginSubmit(e); }}
                     disabled={isLoggingIn}
                 />
             </motion.div>

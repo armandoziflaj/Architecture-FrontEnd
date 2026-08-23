@@ -29,21 +29,22 @@ export const ImageManager = ({ images, onImagesChange }: ImageManagerProps) => {
         const targetIndex = direction === 'up' ? index - 1 : index + 1;
         if (index < 0 || index >= images.length || targetIndex < 0 || targetIndex >= images.length) return;
 
-        const updated = [...images];
-        const currentItem = updated.at(index);
-        const targetItem = updated.at(targetIndex);
+        const currentItem = images.at(index);
+        const targetItem = images.at(targetIndex);
+        if (currentItem === undefined || targetItem === undefined) return;
 
-        if (currentItem !== undefined && targetItem !== undefined) {
-            updated[index] = targetItem;
-            updated[targetIndex] = currentItem;
+        const swapped = images.map((img, idx) => {
+            if (idx === index) return targetItem;
+            if (idx === targetIndex) return currentItem;
+            return img;
+        });
 
-            const reIndexed = updated.map((img, idx) => ({
-                ...img,
-                sortOrder: idx + 1
-            }));
+        const reIndexed = swapped.map((img, idx) => ({
+            ...img,
+            sortOrder: idx + 1
+        }));
 
-            onImagesChange(reIndexed);
-        }
+        onImagesChange(reIndexed);
     };
 
     const removeImage = (id: string) => {
@@ -95,7 +96,7 @@ export const ImageManager = ({ images, onImagesChange }: ImageManagerProps) => {
                             <button
                                 type="button"
                                 className={styles['delete-btn']}
-                                onClick={() => img.id && removeImage(img.id)}
+                                onClick={() => { if (img.id) removeImage(img.id); }}
                             >
                                 ✕
                             </button>
