@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { MainLayout } from "./Layout/MainLayout/MainLayout.tsx";
 import { ProjectGrid } from "./Components/ProjectGrid/ProjectGrid.tsx";
 import { Profile } from "./Components/Profile/Profile.tsx";
@@ -10,6 +12,12 @@ import { Hero } from "./Components/Hero/Hero.tsx";
 import {BrowserRouter, Route, Routes} from "react-router";
 
 function App() {
+    const { i18n } = useTranslation();
+
+    useEffect(() => {
+        document.documentElement.lang = i18n.language;
+    }, [i18n.language]);
+
     return (
         <BrowserRouter>
             <MainLayout>

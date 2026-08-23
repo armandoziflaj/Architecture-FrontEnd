@@ -21,7 +21,8 @@
 }
 
 .logo {
-    font-weight: var(--font-weight-bold);
+    font-family: var(--font-display), serif;
+    font-weight: var(--font-weight-medium);
     font-size: var(--font-size-lg);
     text-decoration: none;
     color: var(--color-text);

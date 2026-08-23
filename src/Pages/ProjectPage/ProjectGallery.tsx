@@ -1,6 +1,8 @@
-import React from 'react';
-import {type PhotosResponse} from '../../Types/ProjectResponse';
+import type { SyntheticEvent } from 'react';
+import { motion, useReducedMotion } from "framer-motion";
+import { type PhotosResponse } from '../../Types/ProjectResponse';
 import styles from './ProjectPage.module.css';
+import { fadeUp, staggerContainer, viewportOnce, withReducedMotion } from '../../animations/variants';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -9,7 +11,10 @@ interface ProjectGalleryProps {
     altTextPrefix: string;
 }
 
-export const ProjectGallery: React.FC<ProjectGalleryProps> = ({ photos, altTextPrefix }) => {
+export const ProjectGallery = ({ photos, altTextPrefix }: ProjectGalleryProps) => {
+    const reduceMotion = useReducedMotion();
+    const itemVariants = withReducedMotion(fadeUp, !!reduceMotion);
+
     const getFullImageUrl = (rawUrl: string) => {
         if (rawUrl.startsWith('http')) {
             return rawUrl;
@@ -17,22 +22,28 @@ export const ProjectGallery: React.FC<ProjectGalleryProps> = ({ photos, altTextP
         return `${API_BASE_URL}${rawUrl.startsWith('/') ? rawUrl : `/${rawUrl}`}`;
     };
 
-    const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    const handleImageError = (e: SyntheticEvent<HTMLImageElement>) => {
         (e.target as HTMLImageElement).src = '/placeholder.jpg';
     };
 
     return (
-        <section className={styles.gallery}>
+        <motion.section
+            className={styles.gallery}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            variants={staggerContainer(0.08)}
+        >
             {photos.map((photo, index) => (
-                <img
+                <motion.img
                     key={photo.id || index}
                     src={getFullImageUrl(photo.imageUrl)}
                     alt={photo.altText ?? `${altTextPrefix} photo ${index + 1}`}
                     className={styles['gallery-image']}
-                    style={{ animationDelay: `${200 + index * 100}ms` }}
+                    variants={itemVariants}
                     onError={handleImageError}
                 />
             ))}
-        </section>
+        </motion.section>
     );
 };

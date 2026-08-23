@@ -23,14 +23,15 @@
 }
 
 .title {
+    font-family: var(--font-display), serif;
     color: var(--color-text);
     font-size: var(--font-size-xl);
     font-weight: var(--font-weight-regular);
-    text-transform: uppercase;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.01em;
 }
 
 .subtitle {
+    font-family: var(--font-mono), monospace;
     color: var(--color-text-muted);
     font-size: var(--font-size-sm);
     text-transform: uppercase;
@@ -39,6 +40,7 @@
 
 .error-banner {
     border-left: 2px solid var(--color-error);
+    border-radius: var(--radius-sm);
     color: var(--color-error);
     padding: var(--spacing-sm) 0 var(--spacing-sm) var(--spacing-md);
     font-size: var(--font-size-base);

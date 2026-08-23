@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import styles from './Login.module.css';
 import {useAuth} from "../../hooks/useAuth.ts";
 import {GenericForm, type FormField} from "../../Components/GenericForm/GenericForm.tsx";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router";
+import { fadeUp } from "../../animations/variants.ts";
 
 export const Login = () => {
     const [username, setUsername] = useState('');
@@ -32,7 +34,12 @@ export const Login = () => {
 
     return (
         <div className={styles['login-page-container']}>
-            <div className={styles['form-wrapper']}>
+            <motion.div
+                className={styles['form-wrapper']}
+                initial="hidden"
+                animate="visible"
+                variants={fadeUp}
+            >
                 <div className={styles['header-group']}>
                     <h2 className={styles.title}>{t('admin.login.title')}</h2>
                     <span className={styles.subtitle}>{t('admin.login.subtitle')}</span>
@@ -46,7 +53,7 @@ export const Login = () => {
                     onSubmit={handleLoginSubmit}
                     disabled={isLoggingIn}
                 />
-            </div>
+            </motion.div>
         </div>
     );
 };

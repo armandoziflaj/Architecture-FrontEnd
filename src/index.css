@@ -1,19 +1,22 @@
 :root {
-    /* -------------------- Color Palette (Light Theme) -------------------- */
-    --color-background: #ffffff;
-    --color-background-secondary: #f8f9fa; /* Subtle off-white */
-    --color-text: #212529; /* Darker, more readable text */
-    --color-text-muted: #6c757d;
-    --color-primary: #0d6efd; /* A standard, corporate blue */
-    --color-primary-dark: #0b5ed7; /* A darker shade for hover */
-    --color-border: #dee2e6;
+    /* -------------------- Color Palette — "Mediterranean Minimalism" (Light) -------------------- */
+    --color-background: #fbf8f3; /* warm plaster */
+    --color-background-secondary: #f2ead9; /* warm sand, alternate sections */
+    --color-text: #221d17; /* warm ink, not pure black */
+    --color-text-muted: #6b6153; /* warm stone grey */
+    --color-primary: #2e5c57; /* muted Aegean teal */
+    --color-primary-dark: #244742;
+    --color-border: #e6dcc8;
     --color-card-background: #ffffff;
-    --color-success: #198754; /* A deep, professional green */
-    --color-error: #dc3545;
-    --color-accent: #a89f91; /* Kept for legacy, but prefer primary */
+    --color-success: #3f7d5c;
+    --color-error: #c43d3d;
+    --color-accent: #bc6b3a; /* terracotta / clay */
+    --color-accent-rgb: 188, 107, 58;
 
     /* -------------------- Typography -------------------- */
+    --font-display: 'Fraunces', 'Georgia', serif;
     --font-primary: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
     --font-size-sm: 0.875rem; /* 14px */
     --font-size-base: 1rem;    /* 16px */
     --font-size-md: 1.125rem; /* 18px */
@@ -34,24 +37,36 @@
 
     --page-padding: clamp(1.5rem, 5vw, 5rem);
     --content-max-width: 1600px;
-    --border-radius: 8px;
+
+    /* -------------------- Geometry -------------------- */
+    --radius-sm: 4px;  /* inputs, buttons */
+    --radius-md: 12px; /* cards */
+    --radius-lg: 24px; /* image / media containers */
+
+    /* -------------------- Elevation -------------------- */
+    --shadow-sm: 0 1px 3px rgba(58, 45, 26, 0.08), 0 1px 2px rgba(58, 45, 26, 0.06);
+    --shadow-md: 0 8px 24px rgba(58, 45, 26, 0.10), 0 2px 6px rgba(58, 45, 26, 0.06);
 
     /* -------------------- Transitions & Effects -------------------- */
     --transition-duration: 0.3s;
 }
 
 [data-theme="dark"] {
-    --color-background: #121212;
-    --color-background-secondary: #1c1c1c;
-    --color-text: #e9ecef;
-    --color-text-muted: #adb5bd;
-    --color-primary: #0d6efd;
-    --color-primary-dark: #0c63e4;
-    --color-border: #343a40;
-    --color-card-background: #1c1c1c;
-    --color-success: #20c997;
-    --color-error: #f87171;
-    --color-accent: #c4bbae;
+    --color-background: #171310; /* warm near-black */
+    --color-background-secondary: #201b16;
+    --color-text: #f2ead9;
+    --color-text-muted: #a89a85;
+    --color-primary: #6fa89e; /* lighter Aegean teal for contrast */
+    --color-primary-dark: #5c8f86;
+    --color-border: #332c23;
+    --color-card-background: #1d1813;
+    --color-success: #6fae87;
+    --color-error: #e2645b;
+    --color-accent: #e08a57; /* brighter terracotta glow */
+    --color-accent-rgb: 224, 138, 87;
+
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.24);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.36), 0 2px 6px rgba(0, 0, 0, 0.24);
 }
 
 
@@ -90,6 +105,24 @@ button {
     background: none;
     font-family: inherit;
     color: inherit;
+}
+
+:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+    }
 }
 
 .container {

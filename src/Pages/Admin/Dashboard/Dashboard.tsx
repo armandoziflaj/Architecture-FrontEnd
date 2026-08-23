@@ -33,18 +33,19 @@ export const Dashboard = () => {
 
     const handleDeleteProject = (id: number) => {
         toast((a) => (
-            <span>
+            <span className={styles['confirm-toast']}>
                 {t('admin.dashboard.deleteConfirmation.title')}
                 <button
-                    style={{ marginLeft: '10px', border: '1px solid #ccc', padding: '5px 10px', borderRadius: '5px' }}
+                    className={styles['confirm-toast-btn']}
                     onClick={() => {
                         removeProject(id);
                         toast.dismiss(a.id); }} >
                     {t('admin.dashboard.deleteConfirmation.yes')}
                 </button>
                 <button
-                    style={{ marginLeft: '10px', border: '1px solid #ccc', padding: '5px 10px', borderRadius: '5px' }}
-                    onClick={() => toast.dismiss(a.id)} >
+                    className={styles['confirm-toast-btn']}
+                    onClick={() => toast.dismiss(a.id)}
+                >
                     {t('admin.dashboard.deleteConfirmation.no')}
                 </button>
             </span>
