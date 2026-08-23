@@ -45,7 +45,7 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: var(--spacing-sm) var(--spacing-xl);
-    font-family: var(--font-mono), serif;
+    font-family: var(--font-mono), monospace;
     font-size: var(--font-size-sm);
     color: var(--color-text-muted);
     text-transform: uppercase;

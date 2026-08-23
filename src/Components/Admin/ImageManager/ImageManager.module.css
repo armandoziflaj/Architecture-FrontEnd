@@ -67,7 +67,7 @@
     font-size: var(--font-size-sm);
     padding: var(--spacing-xs) var(--spacing-sm);
     border-radius: var(--radius-sm);
-    font-family: var(--font-mono), serif;
+    font-family: var(--font-mono), monospace;
 }
 
 .controls-overlay {

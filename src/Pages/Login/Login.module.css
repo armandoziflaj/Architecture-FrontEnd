@@ -31,7 +31,7 @@
 }
 
 .subtitle {
-    font-family: var(--font-mono), serif;
+    font-family: var(--font-mono), monospace;
     color: var(--color-text-muted);
     font-size: var(--font-size-sm);
     text-transform: uppercase;

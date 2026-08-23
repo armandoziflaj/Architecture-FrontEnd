@@ -36,14 +36,12 @@ export const viewportOnce = { once: true, amount: 0.2 } as const;
 export const withReducedMotion = (variants: Variants, reduceMotion: boolean): Variants => {
     if (!reduceMotion) return variants;
 
-    const stripped: Variants = {};
-    for (const key of Object.keys(variants)) {
-        const state = variants[key];
+    const entries = Object.entries(variants).map(([key, state]) => {
         if (typeof state === 'object' && state !== null) {
-            stripped[key] = { ...state, y: 0, x: 0, scale: 1, transition: { duration: 0.15 } };
-        } else {
-            stripped[key] = state;
+            return [key, { ...state, y: 0, x: 0, scale: 1, transition: { duration: 0.15 } }] as const;
         }
-    }
-    return stripped;
+        return [key, state] as const;
+    });
+
+    return Object.fromEntries(entries);
 };

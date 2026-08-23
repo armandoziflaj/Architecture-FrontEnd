@@ -75,7 +75,7 @@
 }
 
 .index {
-    font-family: var(--font-mono), serif;
+    font-family: var(--font-mono), monospace;
     font-size: var(--font-size-sm);
     color: var(--color-accent);
 }
@@ -98,7 +98,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: var(--spacing-md);
-    font-family: var(--font-mono), serif;
+    font-family: var(--font-mono), monospace;
     font-size: var(--font-size-sm);
     color: var(--color-text-muted);
     text-transform: uppercase;

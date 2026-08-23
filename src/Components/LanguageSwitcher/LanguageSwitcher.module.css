@@ -12,7 +12,7 @@
     min-height: 2.75rem;
     background: none;
     border: none;
-    font-family: var(--font-mono), serif;
+    font-family: var(--font-mono), monospace;
     color: var(--color-text-muted);
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-medium);

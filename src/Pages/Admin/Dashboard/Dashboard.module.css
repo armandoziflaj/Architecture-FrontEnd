@@ -15,7 +15,7 @@
 }
 
 .subtitle {
-    font-family: var(--font-mono), serif;
+    font-family: var(--font-mono), monospace;
     font-size: var(--font-size-sm);
     text-transform: uppercase;
     letter-spacing: 0.12em;

@@ -16,7 +16,7 @@
 }
 
 .num {
-    font-family: var(--font-mono), serif;
+    font-family: var(--font-mono), monospace;
     font-size: var(--font-size-sm);
     color: var(--color-accent);
     font-weight: var(--font-weight-regular);
@@ -37,7 +37,7 @@
 }
 
 .value {
-    font-family: var(--font-mono), serif;
+    font-family: var(--font-mono), monospace;
     font-size: var(--font-size-xl);
     font-weight: var(--font-weight-medium);
     line-height: 1;

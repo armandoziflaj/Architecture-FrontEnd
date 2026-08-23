@@ -16,7 +16,7 @@ export const ProjectRow = ({ project, index }: ProjectRowProps) => {
     const { t } = useTranslation();
     const reduceMotion = useReducedMotion();
     const rowVariants = withReducedMotion(fadeUp, !!reduceMotion);
-    const coverPhoto = project.photos[0] ?? null;
+    const coverPhoto = project.photos.at(0) ?? null;
     const isReversed = index % 2 === 1;
 
     return (

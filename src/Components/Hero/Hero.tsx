@@ -34,7 +34,7 @@ export const Hero = () => {
             >
                 <span className={styles.subtitle}>{t('hero.subtitle')}</span>
                 <h1 className={styles.title}>{t('hero.title')}</h1>
-                <a href="/#work" className={styles.cta}>
+                <a href="#works" className={styles.cta}>
                     {t('hero.cta')}
                     <span className={styles['cta-arrow']}>&#8594;</span>
                 </a>
