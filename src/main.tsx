@@ -23,7 +23,7 @@ if (!rootElement) {
 createRoot(rootElement).render(
     <StrictMode>
         <QueryClientProvider client={queryClient}>
-            <Suspense fallback={<div style={{ padding: '2rem', fontFamily: 'var(--font-sans)' }}>Loading framework...</div>}>
+            <Suspense fallback={<div style={{ padding: '2rem', fontFamily: 'var(--font-primary)' }}>Loading framework...</div>}>
                 <AuthProvider>
                     <App />
                 </AuthProvider>

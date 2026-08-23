@@ -19,7 +19,7 @@ The architecture follows a feature-based, component-driven model. We use React Q
 | **Routing**      | [React Router](https://reactrouter.com/)                                                                               | The standard library for declarative routing in React applications.                                                                                                      |
 | **API Client**   | [Axios](https://axios-http.com/)                                                                                       | A robust, promise-based HTTP client for making API requests. It provides a clean and consistent API for handling network operations.                                     |
 | **Styling**      | [CSS Modules](https://github.com/css-modules/css-modules)                                                              | Scopes CSS locally to components, preventing style conflicts and promoting modularity. All styles should be written in `.module.css` files.                              |
-| **Animations**   | [React Intersection Observer](https://www.npmjs.com/package/react-intersection-observer)                               | For triggering animations on component view. This is more performant and user-friendly than on-mount animations.                                                         |
+| **Animations**   | [Framer Motion](https://www.framer.com/motion/)                                                                        | Single consistent motion system (shared variants, `whileInView` scroll reveals, `AnimatePresence` for mount/unmount transitions) with built-in `prefers-reduced-motion` support via `useReducedMotion`.  |
 | **Testing**      | [Vitest](https://vitest.dev/) + [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) | A modern, fast, and user-friendly testing framework that integrates seamlessly with Vite. RTL encourages testing practices that resemble how users interact with the UI. |
 
 ## 3. Mandatory Coding Rules & Constraints
@@ -72,7 +72,10 @@ All API requests must be centralized in the `src/api` directory and should use t
 ### UI/UX & Animations
 
 **View-Triggered Animations:**
-To create a professional and performant user experience, animations should be triggered when a component enters the viewport. This is achieved with the `useInViewAnimation` custom hook.
+To create a professional and performant user experience, animations should be triggered when a component enters the viewport. This is achieved with Framer Motion's `whileInView` prop, driven by shared variants defined in `src/animations/variants.ts` (`fadeUp`, `staggerContainer`, `scaleIn`) rather than ad-hoc per-component keyframes — this keeps duration/easing consistent across the app. Wrap variants with `withReducedMotion(variants, useReducedMotion())` so scroll reveals collapse to instant fades under `prefers-reduced-motion`.
+
+**Design Tokens:**
+Colors, typography, radius, and shadow tokens live in `src/index.css` as CSS variables (`--color-*`, `--font-display`/`--font-primary`/`--font-mono`, `--radius-sm/md/lg`, `--shadow-sm/md`). Always consume these instead of hardcoding values — see `CLAUDE.md` for the full design system reference.
 
 ### Immersive Hero Section
 

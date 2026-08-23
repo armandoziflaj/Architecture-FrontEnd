@@ -1,11 +1,13 @@
+import { motion, useReducedMotion } from "framer-motion";
 import styles from './Contact.module.css';
 import { GenericForm } from "../GenericForm/GenericForm.tsx";
-import { useInViewAnimation } from "../../hooks/useInViewAnimation.ts";
 import { FormSubmissionStatus } from '../FormSubmissionStatus/FormSubmissionStatus.tsx';
 import { useContactForm } from '../../hooks/useContactForm.ts';
+import { fadeUp, viewportOnce, withReducedMotion } from '../../animations/variants';
 
 export const Contact = () => {
-    const { ref, inView } = useInViewAnimation();
+    const reduceMotion = useReducedMotion();
+    const sectionVariants = withReducedMotion(fadeUp, !!reduceMotion);
     const {
         t,
         showStatus,
@@ -19,11 +21,18 @@ export const Contact = () => {
     } = useContactForm();
 
     return (
-        <section
-            ref={ref}
+        <motion.section
             className={styles.section}
             id="contact"
-            data-inview={inView}>
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            variants={sectionVariants}
+        >
+            <svg className={styles.arch} viewBox="0 0 160 200" aria-hidden="true">
+                <path d="M4 196V80C4 38.6 38.6 4 80 4s76 34.6 76 76v116" fill="none" strokeWidth="1.5" />
+            </svg>
+
             <div className={styles['header-block']}>
                 <span className={styles.subtitle}>{t('contact.subtitle')}</span>
                 <h2 className={styles.title}>{t('contact.title')}</h2>
@@ -57,7 +66,9 @@ export const Contact = () => {
                         />
                     )}
 
-                    {isError && <div className={styles['error-banner']}>{error?.message ?? t('contact.error')}</div>}                    <GenericForm
+                    {isError && <div className={styles['error-banner']}>{error?.message ?? t('contact.error')}</div>}
+
+                    <GenericForm
                         fields={contactFields}
                         submitLabel={isPending && showStatus ? t('contact.sending') : t('contact.submit')}
                         onSubmit={handleContactSubmit}
@@ -65,6 +76,6 @@ export const Contact = () => {
                     />
                 </div>
             </div>
-        </section>
+        </motion.section>
     );
 };

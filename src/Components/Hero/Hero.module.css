@@ -3,7 +3,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 80vh;
+    min-height: 88vh; /* fallback for browsers without dvh/svh support */
+    min-height: 88svh;
+    min-height: 88dvh;
     padding: var(--spacing-xl);
     text-align: center;
     overflow: hidden;
@@ -26,38 +28,73 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.3);
+    background: linear-gradient(180deg, rgba(23, 19, 16, 0.55) 0%, rgba(23, 19, 16, 0.35) 45%, rgba(23, 19, 16, 0.6) 100%);
     z-index: -1;
+}
+
+.arch {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(60vw, 480px);
+    height: auto;
+    stroke: rgba(251, 248, 243, 0.18);
+    pointer-events: none;
+    z-index: 0;
 }
 
 .content-wrapper {
     position: relative;
     z-index: 1;
     max-width: 800px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.hero-section[data-inview="true"] .content-wrapper {
-    opacity: 1;
-    transform: translateY(0);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .subtitle {
-    color: var(--color-accent);
+    color: #f2ead9;
+    font-family: var(--font-mono), serif;
     font-size: var(--font-size-sm);
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    transition-delay: 0.1s;
 }
 
 .title {
+    font-family: var(--font-display), serif;
     font-size: clamp(2.5rem, 6vw, 4.5rem);
     font-weight: var(--font-weight-regular);
-    line-height: 1.1;
+    line-height: 1.15;
     margin-top: var(--spacing-md);
-    letter-spacing: -0.02em;
-    transition-delay: 0.2s;
+    letter-spacing: -0.01em;
     color: #ffffff;
+}
+
+.cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-xl);
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-accent);
+    color: #ffffff;
+    font-size: var(--font-size-sm);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: transform var(--transition-duration) ease, background-color var(--transition-duration) ease;
+}
+
+.cta:hover {
+    filter: brightness(0.9);
+    transform: translateY(-2px);
+}
+
+.cta-arrow {
+    transition: transform var(--transition-duration) ease;
+}
+
+.cta:hover .cta-arrow {
+    transform: translateX(4px);
 }

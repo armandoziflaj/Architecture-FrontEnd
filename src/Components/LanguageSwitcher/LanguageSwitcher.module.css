@@ -5,8 +5,14 @@
 }
 
 .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
     background: none;
     border: none;
+    font-family: var(--font-mono), serif;
     color: var(--color-text-muted);
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-medium);
@@ -16,7 +22,7 @@
 }
 
 .btn:hover {
-    color: var(--color-text);
+    color: var(--color-accent);
 }
 
 .btn.active {

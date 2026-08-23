@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import styles from '../Dashboard.module.css';
 import type {ProjectResponse} from "../../../../Types/ProjectResponse.ts";
 import { Link } from "react-router";
@@ -19,8 +20,10 @@ export const ProjectPreviewGrid: React.FC<ProjectPreviewGridProps> = ({
                                                                           onDeleteProject,
                                                                           apiBaseUrl = API_BASE_URL,
                                                                       }) => {
+    const { t } = useTranslation();
+
     if (isLoading) {
-        return <div className={styles['loading-text']}>Loading project portfolio...</div>;
+        return <div className={styles['loading-text']}>{t('admin.dashboard.projectPreview.loading')}</div>;
     }
 
     return (
@@ -47,7 +50,7 @@ export const ProjectPreviewGrid: React.FC<ProjectPreviewGridProps> = ({
                                 to={`/project/${project.id}`}
                                 className={styles['view-project-overlay']}
                             >
-                                <span>View Project ↗</span>
+                                <span>{t('works.viewProject')} ↗</span>
                             </Link>
                         </div>
 
@@ -64,7 +67,7 @@ export const ProjectPreviewGrid: React.FC<ProjectPreviewGridProps> = ({
                                 onClick={() => onEditProject(project.id)}
                                 className={styles['edit-btn']}
                             >
-                                Edit Structure ↗
+                                {t('admin.dashboard.projectPreview.edit')}
                             </button>
 
                             <button
@@ -72,7 +75,7 @@ export const ProjectPreviewGrid: React.FC<ProjectPreviewGridProps> = ({
                                 onClick={() => onDeleteProject(project.id)}
                                 className={styles['edit-btn']}
                             >
-                                Delete
+                                {t('admin.dashboard.projectPreview.delete')}
                             </button>
                     </div>
                     </div>

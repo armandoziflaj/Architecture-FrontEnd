@@ -1,65 +1,26 @@
 import { useProjects } from '../../hooks/useProjects';
 import styles from './ProjectGrid.module.css';
 import { useTranslation } from "react-i18next";
-import { useInViewAnimation } from '../../hooks/useInViewAnimation';
-import { Link } from "react-router";
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import { ProjectRow } from './ProjectRow.tsx';
 
 export const ProjectGrid = () => {
     const { t, i18n } = useTranslation();
     const { data: projects = [], isLoading, isError, error } = useProjects(i18n.language);
-    const { ref, inView } = useInViewAnimation({ threshold: 0.1 });
 
     if (isLoading) return <div className={styles.loading}>{t('works.loading')}</div>;
     if (isError) return <div className={styles.error}>{t('works.error')}: {error.message || 'Something went wrong'}</div>;
 
     return (
-        <section ref={ref} className={styles.section} id="works" data-inview={inView}>
+        <section className={styles.section} id="works">
             <div className={styles['grid-header']}>
                 <h2 className={styles.title}>{t('works.title')}</h2>
                 <span className={styles.count}>01 — {String(projects.length).padStart(2, '0')}</span>
             </div>
 
-            <div className={styles.grid}>
-                {projects.map((project, index) => {
-                    const coverPhoto = project.photos[0] ?? null;
-                    return (
-                        <div
-                            key={project.id}
-                            className={styles.card}
-                            style={{ transitionDelay: `${index * 100}ms` }}
-                        >
-                            <div
-                                className={styles['image-placeholder']}
-                                style={{
-                                    backgroundImage: coverPhoto ? `url(${API_BASE_URL}${coverPhoto.imageUrl})` : 'none',
-                                    backgroundSize: 'cover',
-                                    backgroundPosition: 'center'
-                                }}
-                                title={coverPhoto?.altText ?? project.title}
-                            >
-                                <Link to={`/project/${project.id}`}>
-                                    <div className={styles.overlay}>
-                                        {t('works.viewProject')} ↗
-                                    </div>
-                                </Link>
-                            </div>
-
-                            <div className={styles.meta}>
-                                <div className={styles['title-group']}>
-                                    <h3 className={styles['project-title']}>{project.title}</h3>
-                                    <p>{project.summary}</p>
-                                    <p className={styles['project-location']}>{project.location}</p>
-                                </div>
-
-                                <div className={styles['details-group']}>
-                                    {project.completionYear && <span>{project.completionYear}</span>}
-                                    <span>{project.size} m²</span>
-                                </div>
-                            </div>
-                        </div>
-                    );
-                })}
+            <div className={styles.list}>
+                {projects.map((project, index) => (
+                    <ProjectRow key={project.id} project={project} index={index} />
+                ))}
             </div>
         </section>
     );

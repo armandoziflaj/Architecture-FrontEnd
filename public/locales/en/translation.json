@@ -4,6 +4,10 @@
     "works": "Works",
     "profile": "Profile"
   },
+  "theme": {
+    "switchToDark": "Switch to dark mode",
+    "switchToLight": "Switch to light mode"
+  },
   "works": {
     "title": "Selected Works",
     "loading": "Loading Architectural Frameworks...",
@@ -89,6 +93,11 @@
       "viewAllMessages": "View All Messages ↗",
       "activeProjectsTitle": "Active Architectural Projects",
       "manageFrameworks": "+ Manage Frameworks ↗",
+      "projectPreview": {
+        "loading": "Loading project portfolio...",
+        "edit": "Edit Structure ↗",
+        "delete": "Delete"
+      },
       "deleteConfirmation": {
         "title": "Are you sure you want to delete this project?",
         "yes": "Yes",

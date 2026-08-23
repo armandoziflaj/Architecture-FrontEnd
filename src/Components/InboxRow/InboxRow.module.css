@@ -5,7 +5,7 @@
 }
 
 .row:hover {
-    background-color: rgba(var(--color-text-rgb, 0, 0, 0), 0.02);
+    background-color: rgba(var(--color-accent-rgb), 0.05);
 }
 
 td {

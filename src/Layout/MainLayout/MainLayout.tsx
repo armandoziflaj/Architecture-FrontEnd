@@ -15,9 +15,10 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                 toastOptions={{
                     duration: 3000,
                     style: {
-                        background: 'var(--bg-color)',
-                        color: 'var(--text-color)',
-                        border: '1px solid var(--border-color)',
+                        background: 'var(--color-card-background)',
+                        color: 'var(--color-text)',
+                        border: '1px solid var(--color-border)',
+                        borderRadius: 'var(--radius-sm)',
                     },
                 }}
             />
