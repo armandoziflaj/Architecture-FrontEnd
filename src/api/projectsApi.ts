@@ -3,9 +3,11 @@ import type {BaseResponse} from "../Types/BaseResponse.ts";
 import type {ProjectDetailedResponse, ProjectResponse} from "../Types/ProjectResponse.ts";
 
 export const fetchProjects = async (
-    signal?: AbortSignal,): Promise<BaseResponse<ProjectResponse[]>> => {
+    onlyFeatured: boolean,
+    signal?: AbortSignal,
+): Promise<BaseResponse<ProjectResponse[]>> => {
     const response =
-        await api.get<BaseResponse<ProjectResponse[]>>('/projects', { signal });
+        await api.get<BaseResponse<ProjectResponse[]>>('/projects', { params: { onlyFeatured }, signal });
     return response.data;
 };
 export const fetchProjectById = async (id: string, signal?: AbortSignal): Promise<BaseResponse<ProjectDetailedResponse>> => {

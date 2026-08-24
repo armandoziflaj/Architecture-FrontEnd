@@ -69,6 +69,90 @@
     gap: var(--spacing-md);
 }
 
+.visibility-framework {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+@media (width >= 1024px) {
+    .visibility-framework {
+        grid-column: span 2;
+    }
+}
+
+.featured-toggle {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: border-color var(--transition-duration) ease;
+}
+
+.featured-toggle:hover {
+    border-color: var(--color-accent);
+}
+
+.featured-toggle input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.featured-checkbox {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-top: 0.125rem;
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: transparent;
+    background-color: var(--color-background);
+    transition: background-color var(--transition-duration) ease,
+                border-color var(--transition-duration) ease,
+                color var(--transition-duration) ease;
+}
+
+.featured-toggle input:checked + .featured-checkbox {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #ffffff;
+}
+
+.featured-toggle input:focus-visible + .featured-checkbox {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.featured-copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.featured-label {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text);
+}
+
+.featured-hint {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+}
+
 .framework-title {
     font-size: var(--font-size-sm);
     text-transform: uppercase;

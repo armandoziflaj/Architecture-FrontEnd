@@ -5,11 +5,11 @@ import {toast} from "react-hot-toast";
 import {isAxiosError} from "axios";
 import { useTranslation } from "react-i18next";
 
-export const useProjects = (lang: string) => {
+export const useProjects = (lang: string, onlyFeatured = true) => {
     return useQuery<ProjectResponse[]>({
-        queryKey: ['projects', lang],
+        queryKey: ['projects', lang, onlyFeatured],
         queryFn: async ({ signal }) => {
-            const result = await fetchProjects(signal);
+            const result = await fetchProjects(onlyFeatured, signal);
             if (result.success) {
                 return result.data;
             }

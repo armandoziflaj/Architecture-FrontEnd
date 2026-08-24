@@ -21,6 +21,8 @@ export const ProjectManagement = () => {
         setActiveLang,
         images,
         setImages,
+        isFeatured,
+        setIsFeatured,
         projectFields,
         handleFormSubmit,
         resetForm,
@@ -62,6 +64,7 @@ export const ProjectManagement = () => {
                     t={t}
                     language={{ activeLang, onSelectLanguage: setActiveLang }}
                     media={{ images, onImagesChange: setImages }}
+                    visibility={{ isFeatured, onFeaturedChange: setIsFeatured }}
                     handleFormSubmit={handleFormSubmit}
                     projectFields={projectFields}
                     isPending={isPending}

@@ -22,7 +22,7 @@ export const Dashboard = () => {
     const navigate = useNavigate();
     const { t, i18n } = useTranslation();
 
-    const { data: projects, isLoading: isProjectsLoading } = useProjects(i18n.language);
+    const { data: projects, isLoading: isProjectsLoading } = useProjects(i18n.language, false);
     const { data: inquiries, isLoading: isInquiriesLoading } = useContactInquiries();
     const { data: visitorCountData, isLoading: isVisitorCountLoading } = useVisitorCount();
     const { mutate: removeProject } = useDeleteProject();
