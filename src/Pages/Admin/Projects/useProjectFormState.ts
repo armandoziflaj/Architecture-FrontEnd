@@ -24,6 +24,7 @@ interface TranslatedFields {
     titleEn: string;
     descEn: string;
     images: ProjectImage[];
+    isFeatured: boolean;
 }
 
 const hydrateFromProject = (project: ProjectDetailedResponse): TranslatedFields => {
@@ -38,7 +39,8 @@ const hydrateFromProject = (project: ProjectDetailedResponse): TranslatedFields 
         descEl: (elTrans?.summary ?? project.summary) || '',
         titleEn: (enTrans?.title ?? project.title) || '',
         descEn: (enTrans?.summary ?? project.summary) || '',
-        images: mapPhotosToImages(project.photos)
+        images: mapPhotosToImages(project.photos),
+        isFeatured: project.isFeatured ?? false
     };
 };
 
@@ -50,15 +52,16 @@ interface ProjectPayloadInput {
     descEn: string;
     titleEl: string;
     descEl: string;
+    isFeatured: boolean;
     id?: number;
 }
 
-const buildProjectData = ({ location, year, size, titleEn, descEn, titleEl, descEl, id }: ProjectPayloadInput) => ({
+const buildProjectData = ({ location, year, size, titleEn, descEn, titleEl, descEl, isFeatured, id }: ProjectPayloadInput) => ({
     ...(id !== undefined && { id }),
     location,
     completionYear: year,
     size,
-    isFeatured: false,
+    isFeatured,
     translations: [
         { languageCode: 'en', title: titleEn, description: descEn },
         { languageCode: 'el', title: titleEl, description: descEl }
@@ -124,6 +127,7 @@ export const useProjectForm = (
     const [titleEn, setTitleEn] = useState('');
     const [descEn, setDescEn] = useState('');
     const [activeLang, setActiveLang] = useState<'el' | 'en'>('en');
+    const [isFeatured, setIsFeatured] = useState(false);
 
     const { mutateAsync: createProject, isPending: isCreating } = useCreateProject();
     const { mutateAsync: updateProject, isPending: isUpdating } = useUpdateProject();
@@ -138,6 +142,7 @@ export const useProjectForm = (
         setDescEl('');
         setTitleEn('');
         setDescEn('');
+        setIsFeatured(false);
         setHydratedId(null);
     };
 
@@ -154,12 +159,13 @@ export const useProjectForm = (
         setTitleEn(hydrated.titleEn);
         setDescEn(hydrated.descEn);
         setImages(hydrated.images);
+        setIsFeatured(hydrated.isFeatured);
     }
 
     const submitEdit = async (formData: FormData) => {
         if (!activeProjectId) return;
         const { photosOrder, newPhotoFiles } = buildEditPhotosOrder(images);
-        const projectData = { ...buildProjectData({ location, year, size, titleEn, descEn, titleEl, descEl, id: activeProjectId }), photos: photosOrder };
+        const projectData = { ...buildProjectData({ location, year, size, titleEn, descEn, titleEl, descEl, isFeatured, id: activeProjectId }), photos: photosOrder };
         formData.append('projectData', JSON.stringify(projectData));
         newPhotoFiles.forEach(file => { formData.append('newPhotos', file); });
         await updateProject(formData);
@@ -168,7 +174,7 @@ export const useProjectForm = (
     const submitCreate = async (formData: FormData) => {
         const newPhotos = images.map(img => img.file).filter((file): file is File => !!file);
         const photosOrder = images.map((_, index) => ({ displayOrder: index + 1 }));
-        const projectData = { ...buildProjectData({ location, year, size, titleEn, descEn, titleEl, descEl }), photos: photosOrder };
+        const projectData = { ...buildProjectData({ location, year, size, titleEn, descEn, titleEl, descEl, isFeatured }), photos: photosOrder };
         formData.append('projectData', JSON.stringify(projectData));
         newPhotos.forEach(file => { formData.append('newPhotos', file); });
         await createProject(formData);
@@ -192,7 +198,7 @@ export const useProjectForm = (
     const projectFields = buildProjectFields(
         t,
         activeLang,
-        { location, year, size, titleEl, descEl, titleEn, descEn, images },
+        { location, year, size, titleEl, descEl, titleEn, descEn, images, isFeatured },
         { setTitleEn, setTitleEl, setDescEn, setDescEl, setLocation, setYear, setSize }
     );
 
@@ -203,6 +209,8 @@ export const useProjectForm = (
         setActiveLang,
         images,
         setImages,
+        isFeatured,
+        setIsFeatured,
         projectFields,
         handleFormSubmit,
         resetForm
