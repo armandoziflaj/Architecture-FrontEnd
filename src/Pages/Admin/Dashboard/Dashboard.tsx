@@ -38,10 +38,8 @@ export const Dashboard = () => {
                 t={t}
                 onConfirm={() => {
                     removeProject(id);
-                    toast.dismiss(a.id);
-                }}
-                onCancel={() => { toast.dismiss(a.id); }}
-            />
+                    toast.dismiss(a.id); }}
+                onCancel={() => { toast.dismiss(a.id); }} />
         ), {
             duration: Infinity,
         });
