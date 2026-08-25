@@ -15,6 +15,10 @@ td {
     vertical-align: middle;
 }
 
+.status-cell {
+    text-align: right;
+}
+
 .sender-info {
     display: flex;
     flex-direction: column;
@@ -61,36 +65,54 @@ td {
 
 @media (width <= 768px) {
     .row {
-        display: block;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        column-gap: var(--spacing-md);
+        row-gap: var(--spacing-xs);
+        grid-template-areas:
+            "sender status"
+            "message message"
+            "date date";
         padding: var(--spacing-lg) 0;
     }
 
     td {
         display: block;
         border: none;
-        position: relative;
-        padding-left: 45%;
-        text-align: right;
-        padding-top: var(--spacing-sm);
-        padding-bottom: var(--spacing-sm);
+        padding: 0;
+        text-align: left;
         font-size: var(--font-size-sm);
     }
 
     td::before {
-        content: attr(data-label);
-        position: absolute;
-        left: 0;
-        width: 40%;
-        white-space: nowrap;
-        text-align: left;
-        font-weight: var(--font-weight-regular);
-        font-size: var(--font-size-sm);
-        text-transform: uppercase;
-        color: var(--color-text-muted);
-        letter-spacing: 0.05em;
+        content: none;
+    }
+
+    td:nth-child(1) {
+        grid-area: sender;
+    }
+
+    td:nth-child(2) {
+        grid-area: message;
+    }
+
+    td:nth-child(3) {
+        grid-area: date;
+    }
+
+    .status-cell {
+        grid-area: status;
+        text-align: right;
     }
 
     .sender-info {
-        align-items: flex-end;
+        align-items: flex-start;
+    }
+
+    .subject-text {
+        color: var(--color-text-muted);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 }

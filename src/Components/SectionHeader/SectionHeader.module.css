@@ -14,6 +14,9 @@
 }
 
 .section-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
     font-size: var(--font-size-sm);
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -24,4 +27,12 @@
 
 .section-link:hover {
     color: var(--color-accent);
+}
+
+@media (width <= 480px) {
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
 }

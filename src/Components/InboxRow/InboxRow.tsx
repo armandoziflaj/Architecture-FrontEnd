@@ -31,7 +31,7 @@ export const InboxRow = ({ message, onClick, labels }: InboxRowProps) => {
                 {formattedDate}
             </td>
 
-            <td data-label={labels.status} style={{ textAlign: 'right' }}>
+            <td data-label={labels.status} className={styles['status-cell']}>
                 {!message.isRead ? (
                     <span className={styles['unread-badge']}>
                         {t('admin.dashboard.inquiries.new')}<span className={styles.dot}>.</span>
