@@ -13,6 +13,12 @@
     --color-accent: #bc6b3a; /* terracotta / clay */
     --color-accent-rgb: 188, 107, 58;
 
+    /* Fixed treatment for text/scrims overlaid directly on photos (e.g. the
+       ProjectPage hero) — intentionally does NOT flip with [data-theme],
+       since it's read against an image, not the page background. */
+    --color-overlay-rgb: 23, 19, 16;
+    --color-overlay-text: #f7f2e7;
+
     /* -------------------- Typography -------------------- */
     --font-display: 'Fraunces', 'Georgia', serif;
     --font-primary: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;

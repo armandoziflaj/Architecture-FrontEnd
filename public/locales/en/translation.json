@@ -2,7 +2,8 @@
   "nav": {
     "home": "Home",
     "works": "Works",
-    "profile": "Profile"
+    "profile": "Profile",
+    "contact": "Contact"
   },
   "theme": {
     "switchToDark": "Switch to dark mode",

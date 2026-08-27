@@ -2,7 +2,7 @@ import styles from './ProjectPage.module.css';
 import { useProjectById } from '../../hooks/useProjects.ts';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
-import { ProjectHeader } from './ProjectHeader.tsx';
+import { ProjectHero } from './ProjectHero.tsx';
 import { ProjectGallery } from './ProjectGallery.tsx';
 import { ProjectContent } from './ProjectContent.tsx';
 import type { ProjectDetailedResponse } from '../../Types/ProjectResponse.ts';
@@ -32,11 +32,13 @@ export const ProjectPage = () => {
     }
 
     const { activeTitle, activeSummary } = resolveActiveContent(project, i18n.language);
+    const coverPhoto = project.photos.at(0);
+    const galleryPhotos = coverPhoto ? project.photos.slice(1) : project.photos;
 
     return (
         <main className={styles.container}>
-            <ProjectHeader project={project} activeTitle={activeTitle} />
-            <ProjectGallery photos={project.photos} altTextPrefix={activeTitle} />
+            <ProjectHero project={project} activeTitle={activeTitle} coverPhoto={coverPhoto} />
+            <ProjectGallery photos={galleryPhotos} altTextPrefix={activeTitle} />
             <ProjectContent summary={activeSummary} />
         </main>
     );

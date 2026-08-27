@@ -24,6 +24,9 @@ export const Navbar = () => {
                     <a href={"/#profile"}>
                         {t('nav.profile')}
                     </a>
+                    <a href={"/#contact"}>
+                        {t('nav.contact')}
+                    </a>
                 </div>
 
                 <div className={styles['desktop-actions']}>
@@ -60,6 +63,9 @@ export const Navbar = () => {
                         </a>
                         <a href={"/#profile"} className={styles['mobile-link-item']} onClick={toggleMenu}>
                             {t('nav.profile')}
+                        </a>
+                        <a href={"/#contact"} className={styles['mobile-link-item']} onClick={toggleMenu}>
+                            {t('nav.contact')}
                         </a>
                         <div className={styles['mobile-actions']}>
                             <LanguageSwitcher />
