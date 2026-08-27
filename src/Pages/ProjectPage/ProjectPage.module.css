@@ -4,7 +4,7 @@
 
 .container {
     max-width: var(--content-max-width);
-    margin: var(--spacing-xxl) auto;
+    margin: var(--spacing-lg) auto var(--spacing-xxl);
     padding: 0 var(--page-padding);
 }
 
@@ -17,7 +17,7 @@
     font-size: var(--font-size-sm);
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    margin-bottom: var(--spacing-xxl);
+    margin-bottom: var(--spacing-lg);
     transition: color var(--transition-duration) ease;
 }
 
@@ -52,6 +52,86 @@
 }
 
 /* ==========================================================================
+   Immersive Hero — breaks out of .container to true viewport edges
+   ========================================================================== */
+
+.hero {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    overflow: hidden;
+}
+
+/* Landscape/standard photos (the common case): full-bleed width, natural
+   height, no cap — the image drives the box, never cropped, never boxed. */
+.hero-image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* Portrait/story photos (4:5, 9:16): full width would make these absurdly
+   tall, so instead they're height-capped and centered. The box shrinks to
+   match the image exactly (rather than staying 100vw with the photo
+   floating inside it), so the scrim/title below always land on the photo,
+   never on bare page background. Orientation is detected at runtime — see
+   ProjectHero.tsx — since CSS alone can't branch on an image's own ratio. */
+.hero.portrait {
+    display: flex;
+    justify-content: center;
+}
+
+.hero.portrait .hero-image {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 80dvh;
+}
+
+.hero-scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(var(--color-overlay-rgb), 0) 40%, rgba(var(--color-overlay-rgb), 0.78) 100%);
+}
+
+.hero-content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    padding: 0 var(--page-padding) var(--spacing-xxl);
+    max-width: 900px;
+}
+
+.hero-title {
+    font-family: var(--font-display), serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: var(--font-weight-regular);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--color-overlay-text);
+    margin: 0 0 var(--spacing-md) 0;
+}
+
+.hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm) var(--spacing-xl);
+    font-family: var(--font-mono), monospace;
+    font-size: var(--font-size-sm);
+    color: var(--color-overlay-text);
+    text-transform: uppercase;
+}
+
+@media (width <= 600px) {
+    .hero-content {
+        padding: 0 var(--spacing-md) var(--spacing-xl);
+    }
+}
+
+/* ==========================================================================
    Cascading Gallery
    ========================================================================== */
 
@@ -64,10 +144,11 @@
 
 .gallery-image {
     width: 100%;
-    height: 450px;
-    object-fit: cover;
+    max-height: 80dvh;
+    height: auto;
+    object-fit: contain;
     border-radius: var(--radius-lg);
-    background-color: var(--color-border);
+    background-color: var(--color-background-secondary);
     box-shadow: var(--shadow-sm);
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow var(--transition-duration) ease;
 }
@@ -138,9 +219,5 @@
 
     .gallery {
         grid-template-columns: 1fr;
-    }
-
-    .gallery-image {
-        height: 300px;
     }
 }

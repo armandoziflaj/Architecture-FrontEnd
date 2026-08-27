@@ -9,6 +9,7 @@ import { Login } from "./Pages/Login/Login.tsx";
 import { Dashboard } from "./Pages/Admin/Dashboard/Dashboard.tsx";
 import { ProjectManagement } from "./Pages/Admin/Projects/ProjectManagement.tsx";
 import { Hero } from "./Components/Hero/Hero.tsx";
+import { ScrollToTop } from "./Components/ScrollToTop/ScrollToTop.tsx";
 import {BrowserRouter, Route, Routes} from "react-router";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
 
     return (
         <BrowserRouter>
+            <ScrollToTop />
             <MainLayout>
                 <Routes>
                     <Route path="/" element={
