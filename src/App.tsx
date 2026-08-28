@@ -8,6 +8,7 @@ import { ProjectPage } from "./Pages/ProjectPage/ProjectPage.tsx";
 import { Login } from "./Pages/Login/Login.tsx";
 import { Dashboard } from "./Pages/Admin/Dashboard/Dashboard.tsx";
 import { ProjectManagement } from "./Pages/Admin/Projects/ProjectManagement.tsx";
+import { MessagesPage } from "./Pages/Admin/Messages/MessagesPage.tsx";
 import { Hero } from "./Components/Hero/Hero.tsx";
 import { ScrollToTop } from "./Components/ScrollToTop/ScrollToTop.tsx";
 import {BrowserRouter, Route, Routes} from "react-router";
@@ -35,6 +36,7 @@ function App() {
                     <Route path="/Login" element={<Login />} />
                     <Route path="/admin/projects" element={<ProjectManagement />} />
                     <Route path="/Dashboard" element={<Dashboard />} />
+                    <Route path="/admin/messages" element={<MessagesPage />} />
                     <Route path="/project/:id" element={<ProjectPage />} />
                 </Routes>
             </MainLayout>

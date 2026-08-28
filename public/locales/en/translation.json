@@ -90,7 +90,6 @@
       "activeProjects": "Active Projects",
       "unreadInquiries": "Unread Inquiries",
       "totalViews": "Total Views",
-      "recentInquiries": "Recent Inquiries",
       "viewAllMessages": "View All Messages ↗",
       "activeProjectsTitle": "Active Architectural Projects",
       "manageFrameworks": "+ Manage Frameworks ↗",
@@ -101,19 +100,30 @@
       },
       "deleteConfirmation": {
         "title": "Are you sure you want to delete this project?",
+        "messageTitle": "Are you sure you want to delete this message?",
         "yes": "Yes",
         "no": "No"
       },
       "inquiries": {
         "loading": "Loading client inquiries...",
         "empty": "No recent inquiries found.",
+        "emptyUnread": "No unread messages.",
         "client": "Client",
         "message": "Message Preview",
         "date": "Date",
         "status": "Status",
+        "actions": "Actions",
         "new": "New",
-        "read": "Read"
+        "read": "Read",
+        "delete": "Delete message"
       }
+    },
+    "messages": {
+      "title": "All Messages",
+      "backButton": "← Back to Dashboard",
+      "previous": "← Previous",
+      "next": "Next →",
+      "pageStatus": "Page {{page}} of {{totalPages}}"
     },
     "projectManagement": {
       "editTitle": "Edit Framework #{{id}}",
@@ -156,6 +166,9 @@
     "updateError": "Failed to update project.",
     "deletingProject": "Deleting project...",
     "deleteSuccess": "Project deleted successfully!",
-    "deleteError": "Failed to delete project."
+    "deleteError": "Failed to delete project.",
+    "deletingMessage": "Deleting message...",
+    "deleteMessageSuccess": "Message deleted successfully!",
+    "deleteMessageError": "Failed to delete message."
   }
 }

@@ -3,13 +3,14 @@ import styles from './Dashboard.module.css';
 
 interface DeleteConfirmToastProps {
     t: TFunction;
+    title?: string;
     onConfirm: () => void;
     onCancel: () => void;
 }
 
-export const DeleteConfirmToast = ({ t, onConfirm, onCancel }: DeleteConfirmToastProps) => (
+export const DeleteConfirmToast = ({ t, title, onConfirm, onCancel }: DeleteConfirmToastProps) => (
     <span className={styles['confirm-toast']}>
-        {t('admin.dashboard.deleteConfirmation.title')}
+        {title ?? t('admin.dashboard.deleteConfirmation.title')}
         <button className={styles['confirm-toast-btn']} onClick={onConfirm}>
             {t('admin.dashboard.deleteConfirmation.yes')}
         </button>
