@@ -55,10 +55,7 @@ export const Dashboard = () => {
                     removeInquiry(id);
                     toast.dismiss(a.id); }}
                 onCancel={() => { toast.dismiss(a.id); }} />
-        ), {
-            duration: Infinity,
-        });
-    };
+        ), { duration: Infinity, }); };
 
     const stats = [
         { id: '01', labelKey: 'admin.dashboard.activeProjects', value: isProjectsLoading ? '...' : projects?.length ?? 0 },
