@@ -8,12 +8,18 @@ interface RecentInquiriesTableProps {
     messages?: MessageData[];
     isLoading?: boolean;
     onMessageClick: (_id: number) => void;
+    onDeleteMessage: (_id: number) => void;
+    emptyTextKey?: string;
+    showStatus?: boolean;
 }
 
 export const RecentInquiriesTable: React.FC<RecentInquiriesTableProps> = ({
                                                                               messages,
                                                                               isLoading = false,
-                                                                              onMessageClick
+                                                                              onMessageClick,
+                                                                              onDeleteMessage,
+                                                                              emptyTextKey = 'admin.dashboard.inquiries.empty',
+                                                                              showStatus = true
                                                                           }) => {
     const { t } = useTranslation();
 
@@ -22,7 +28,7 @@ export const RecentInquiriesTable: React.FC<RecentInquiriesTableProps> = ({
     }
 
     if (!messages || !Array.isArray(messages) || messages.length === 0) {
-        return <div className={styles['empty-text']}>{t('admin.dashboard.inquiries.empty')}</div>;
+        return <div className={styles['empty-text']}>{t(emptyTextKey)}</div>;
     }
 
     return (
@@ -33,7 +39,9 @@ export const RecentInquiriesTable: React.FC<RecentInquiriesTableProps> = ({
                     <th>{t('admin.dashboard.inquiries.client')}</th>
                     <th>{t('admin.dashboard.inquiries.message')}</th>
                     <th>{t('admin.dashboard.inquiries.date')}</th>
-                    <th style={{ textAlign: 'right' }}>{t('admin.dashboard.inquiries.status')}</th>
+                    <th style={{ textAlign: 'right' }}>
+                        {showStatus ? t('admin.dashboard.inquiries.status') : t('admin.dashboard.inquiries.actions')}
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -42,11 +50,14 @@ export const RecentInquiriesTable: React.FC<RecentInquiriesTableProps> = ({
                         key={msg.id}
                         message={msg}
                         onClick={() => onMessageClick(msg.id)}
+                        onDelete={onDeleteMessage}
+                        showStatus={showStatus}
                         labels={{
                             client: t('admin.dashboard.inquiries.client'),
                             message: t('admin.dashboard.inquiries.message'),
                             date: t('admin.dashboard.inquiries.date'),
                             status: t('admin.dashboard.inquiries.status'),
+                            delete: t('admin.dashboard.inquiries.delete'),
                         }}
                     />
                 ))}

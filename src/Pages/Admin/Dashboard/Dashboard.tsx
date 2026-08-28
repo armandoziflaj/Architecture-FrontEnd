@@ -5,9 +5,8 @@ import { SectionHeader } from '../../../Components/SectionHeader/SectionHeader.t
 import styles from './Dashboard.module.css';
 import { ProjectPreviewGrid } from "./ProjectPreviewGrid/ProjectPreviewGrid.tsx";
 import { RecentInquiriesTable } from "./RecentInquiry/RecentInquiriesTable.tsx";
-import { DeleteConfirmToast } from "./DeleteConfirmToast.tsx";
-import { useContactInquiries, useToggleInquiryRead, useVisitorCount } from "../../../hooks/useContactInquiry.ts";
-import { toast } from "react-hot-toast";
+import { showDeleteConfirmToast } from "./showDeleteConfirmToast.tsx";
+import { useContactInquiries, useDeleteInquiry, useToggleInquiryRead, useVisitorCount } from "../../../hooks/useContactInquiry.ts";
 import {useNavigate} from "react-router";
 
 const formatNumber = (num: number | undefined): string => {
@@ -23,33 +22,27 @@ export const Dashboard = () => {
     const { t, i18n } = useTranslation();
 
     const { data: projects, isLoading: isProjectsLoading } = useProjects(i18n.language, false);
-    const { data: inquiries, isLoading: isInquiriesLoading } = useContactInquiries();
+    const { data: inquiriesResponse, isLoading: isInquiriesLoading } = useContactInquiries(1, 8, true);
     const { data: visitorCountData, isLoading: isVisitorCountLoading } = useVisitorCount();
     const { mutate: removeProject } = useDeleteProject();
     const { mutate: toggleInquiryRead } = useToggleInquiryRead();
+    const { mutate: removeInquiry } = useDeleteInquiry();
 
     const handleEditProject = (id: number) => {
         navigate(`/admin/projects?edit=${id}`);
     };
 
     const handleDeleteProject = (id: number) => {
-        toast((a) => (
-            <DeleteConfirmToast
-                t={t}
-                onConfirm={() => {
-                    removeProject(id);
-                    toast.dismiss(a.id); }}
-                onCancel={() => { toast.dismiss(a.id); }} />
-        ), {
-            duration: Infinity,
-        });
+        showDeleteConfirmToast(t, () => { removeProject(id); });
     };
 
-    const unreadInquiries = inquiries?.filter(inquiry => !inquiry.isRead).length ?? 0;
+    const handleDeleteMessage = (id: number) => {
+        showDeleteConfirmToast(t, () => { removeInquiry(id); }, t('admin.dashboard.deleteConfirmation.messageTitle'));
+    };
 
     const stats = [
         { id: '01', labelKey: 'admin.dashboard.activeProjects', value: isProjectsLoading ? '...' : projects?.length ?? 0 },
-        { id: '02', labelKey: 'admin.dashboard.unreadInquiries', value: isInquiriesLoading ? '...' : unreadInquiries },
+        { id: '02', labelKey: 'admin.dashboard.unreadInquiries', value: isInquiriesLoading ? '...' : inquiriesResponse?.totalCount ?? 0 },
         { id: '03', labelKey: 'admin.dashboard.totalViews', value: isVisitorCountLoading ? '...' : formatNumber(visitorCountData?.data.count) },
     ];
 
@@ -74,14 +67,17 @@ export const Dashboard = () => {
 
             <section className={styles['section-wrapper']}>
                 <SectionHeader
-                    title={t('admin.dashboard.recentInquiries')}
+                    title={t('admin.dashboard.unreadInquiries')}
                     actionLabel={t('admin.dashboard.viewAllMessages')}
                     onActionClick={() => { navigate('/admin/messages'); }}
                 />
                 <RecentInquiriesTable
-                    messages={inquiries}
+                    messages={inquiriesResponse?.data}
                     isLoading={isInquiriesLoading}
                     onMessageClick={(id) => { toggleInquiryRead(id); }}
+                    onDeleteMessage={handleDeleteMessage}
+                    emptyTextKey="admin.dashboard.inquiries.emptyUnread"
+                    showStatus={false}
                 />
             </section>
 

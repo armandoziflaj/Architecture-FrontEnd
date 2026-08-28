@@ -90,7 +90,6 @@
         "activeProjects": "Ενεργά Έργα",
         "unreadInquiries": "Νέα Μηνύματα",
         "totalViews": "Συνολικές Προβολές",
-        "recentInquiries": "Πρόσφατα Μηνύματα",
         "viewAllMessages": "Προβολή Όλων ↗",
         "activeProjectsTitle": "Ενεργά Αρχιτεκτονικά Έργα",
         "manageFrameworks": "+ Διαχείριση Έργων ↗",
@@ -101,19 +100,30 @@
         },
         "deleteConfirmation": {
           "title": "Είστε σίγουροι ότι θέλετε να διαγράψετε αυτό το έργο;",
+          "messageTitle": "Είστε σίγουροι ότι θέλετε να διαγράψετε αυτό το μήνυμα;",
           "yes": "Ναι",
           "no": "Όχι"
         },
         "inquiries": {
           "loading": "Φόρτωση μηνυμάτων πελατών...",
           "empty": "Δεν βρέθηκαν πρόσφατα μηνύματα.",
+          "emptyUnread": "Δεν υπάρχουν νέα μηνύματα.",
           "client": "Πελάτης",
           "message": "Προεπισκόπηση Μηνύματος",
           "date": "Ημερομηνία",
           "status": "Κατάσταση",
+          "actions": "Ενέργειες",
           "new": "Νέο",
-          "read": "Διαβασμένο"
+          "read": "Διαβασμένο",
+          "delete": "Διαγραφή μηνύματος"
         }
+      },
+      "messages": {
+        "title": "Όλα τα Μηνύματα",
+        "backButton": "← Πίσω στον Πίνακα Ελέγχου",
+        "previous": "← Προηγούμενο",
+        "next": "Επόμενο →",
+        "pageStatus": "Σελίδα {{page}} από {{totalPages}}"
       },
       "projectManagement": {
         "editTitle": "Επεξεργασία Έργου #{{id}}",
@@ -156,6 +166,9 @@
         "updateError": "Η ενημέρωση του έργου απέτυχε.",
         "deletingProject": "Διαγραφή έργου...",
         "deleteSuccess": "Το έργο διαγράφηκε με επιτυχία!",
-        "deleteError": "Η διαγραφή του έργου απέτυχε."
+        "deleteError": "Η διαγραφή του έργου απέτυχε.",
+        "deletingMessage": "Διαγραφή μηνύματος...",
+        "deleteMessageSuccess": "Το μήνυμα διαγράφηκε με επιτυχία!",
+        "deleteMessageError": "Η διαγραφή του μηνύματος απέτυχε."
     }
 }

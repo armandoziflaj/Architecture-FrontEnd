@@ -1,6 +1,7 @@
 import { api } from './axiosInstance';
 import type {BaseResponse} from "../Types/BaseResponse.ts";
 import type {ContactInquiryResponse, InquiryRequest} from "../Types/InquiryRequest.ts";
+import type {PagedResponse} from "../Types/PagedResponse.ts";
 import type {VisitorCount} from "../Types/VisitorCount.ts";
 
 export const submitContactInquiry = async (
@@ -15,11 +16,14 @@ export const submitContactInquiry = async (
     return response.data;
 };
 export const getAllInquiries = async (
+    page = 1,
+    pageSize = 20,
+    onlyUnread = false,
     signal?: AbortSignal
-): Promise<BaseResponse<ContactInquiryResponse[]>> => {
-    const response = await api.get<BaseResponse<ContactInquiryResponse[]>>(
+): Promise<PagedResponse<ContactInquiryResponse[]>> => {
+    const response = await api.get<PagedResponse<ContactInquiryResponse[]>>(
         '/contactinquiries/admin/all',
-        { signal }
+        { params: { page, pageSize, onlyUnread }, signal }
     );
     return response.data;
 };
@@ -29,6 +33,17 @@ export const toggleInquiryRead = async (
 ): Promise<{ success: boolean; isRead: boolean }> => {
     const response = await api.put<{ success: boolean; isRead: boolean }>(
         `/contactinquiries/admin/${id}/toggle-read`
+    );
+    return response.data;
+};
+
+export const deleteInquiry = async (
+    id: number,
+    signal?: AbortSignal
+): Promise<BaseResponse<null>> => {
+    const response = await api.delete<BaseResponse<null>>(
+        `/contactinquiries/admin/${id}`,
+        { signal }
     );
     return response.data;
 };

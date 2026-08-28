@@ -92,24 +92,38 @@
     font-size: var(--font-size-sm);
 }
 
-.admin-table th, .admin-table td {
-    padding: var(--spacing-md) var(--spacing-lg);
-    border-bottom: 1px solid var(--color-border);
-}
-
 .admin-table th {
     font-weight: var(--font-weight-bold);
     text-transform: uppercase;
     color: var(--color-text-muted);
 }
 
-.admin-table tr:last-child td {
-    border-bottom: none;
+/* Per-cell divider only makes sense in the real table layout — on the
+   mobile card layout (InboxRow.module.css) each "row" is its own bordered
+   card, so there's no per-field line to draw. Scoping this to desktop
+   avoids the two rules fighting over one element by specificity. */
+@media (width > 768px) {
+    .admin-table th, .admin-table td {
+        padding: var(--spacing-md) var(--spacing-lg);
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .admin-table tr:last-child td {
+        border-bottom: none;
+    }
 }
 
 @media (width <= 768px) {
     .admin-table thead {
         display: none;
+    }
+
+    /* Each row now draws its own card border/shadow — the shared wrapper
+       box would just nest a box around a list of boxes. */
+    .table-wrapper {
+        border: none;
+        background: transparent;
+        border-radius: 0;
     }
 }
 

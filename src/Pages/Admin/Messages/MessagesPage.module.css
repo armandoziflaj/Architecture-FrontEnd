@@ -1,0 +1,69 @@
+.messages-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+    padding: var(--spacing-md);
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-lg);
+}
+
+.page-btn {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    background: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-primary), sans-serif;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: border-color var(--transition-duration) ease, color var(--transition-duration) ease;
+}
+
+.page-btn:hover:not(:disabled) {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+}
+
+.page-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.page-status {
+    font-family: var(--font-mono), monospace;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+}
+
+@media (width <= 600px) {
+    /* Status gets its own centered line above an evenly split
+       Previous/Next row — avoids the arrow+label wrapping onto separate
+       lines that a cramped inline row forces at this width. */
+    .page-status {
+        order: -1;
+        width: 100%;
+        text-align: center;
+    }
+
+    .page-btn {
+        flex: 1;
+        min-width: 0;
+        text-align: center;
+    }
+}
