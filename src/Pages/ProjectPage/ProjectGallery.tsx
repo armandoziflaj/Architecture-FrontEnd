@@ -27,7 +27,7 @@ const getBentoSpan = (ratio: number): BentoSpan => {
 export const ProjectGallery = ({ photos, altTextPrefix }: ProjectGalleryProps) => {
     const reduceMotion = useReducedMotion();
     const itemVariants = withReducedMotion(fadeUp, !!reduceMotion);
-    const [spans, setSpans] = useState<Record<string, BentoSpan>>({});
+    const [spans, setSpans] = useState<Map<string, BentoSpan>>(new Map());
 
     const getFullImageUrl = (rawUrl: string) => {
         if (rawUrl.startsWith('http')) {
@@ -42,7 +42,7 @@ export const ProjectGallery = ({ photos, altTextPrefix }: ProjectGalleryProps) =
 
     const handleImageLoad = (key: string) => (e: SyntheticEvent<HTMLImageElement>) => {
         const { naturalWidth, naturalHeight } = e.currentTarget;
-        setSpans((prev) => ({ ...prev, [key]: getBentoSpan(naturalWidth / naturalHeight) }));
+        setSpans((prev) => new Map(prev).set(key, getBentoSpan(naturalWidth / naturalHeight)));
     };
 
     return (
@@ -54,8 +54,8 @@ export const ProjectGallery = ({ photos, altTextPrefix }: ProjectGalleryProps) =
             variants={staggerContainer(0.08)}
         >
             {photos.map((photo, index) => {
-                const key = String(photo.id || index);
-                const span = spans[key] ?? 'square';
+                const key = String(photo.id ?? index);
+                const span = spans.get(key) ?? 'square';
 
                 return (
                     <motion.img
