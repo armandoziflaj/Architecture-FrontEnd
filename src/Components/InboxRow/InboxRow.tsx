@@ -1,11 +1,16 @@
+import { useState } from 'react';
 import styles from './InboxRow.module.css';
 import type { InboxRowProps } from "../../Types/IndexRow.ts";
 import { useTranslation } from 'react-i18next';
 
+const PREVIEW_LENGTH = 50;
+
 export const InboxRow = ({ message, onClick, onDelete, showStatus = true, labels }: InboxRowProps) => {
     const { t } = useTranslation();
+    const [isExpanded, setIsExpanded] = useState(false);
     const formattedDate = message.createdAt
                                 ? new Date(message.createdAt).toLocaleDateString() : 'N/A';
+    const isTruncatable = message.message.length > PREVIEW_LENGTH;
     return (
         <tr
             className={styles.row}
@@ -18,9 +23,21 @@ export const InboxRow = ({ message, onClick, onDelete, showStatus = true, labels
                 </div>
             </td>
             <td data-label={labels.message} className={styles['subject-text']}>
-                {message.message.length > 50
-                    ? `${message.message.substring(0, 50)}...`
-                    : message.message}
+                {isExpanded || !isTruncatable
+                    ? message.message
+                    : `${message.message.substring(0, PREVIEW_LENGTH)}...`}
+                {isTruncatable && (
+                    <button
+                        type="button"
+                        className={styles['expand-btn']}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            setIsExpanded((prev) => !prev);
+                        }}
+                    >
+                        {isExpanded ? t('admin.dashboard.inquiries.showLess') : t('admin.dashboard.inquiries.showMore')}
+                    </button>
+                )}
             </td>
             <td data-label={labels.date} className={styles['date-text']}>
                 {formattedDate}
