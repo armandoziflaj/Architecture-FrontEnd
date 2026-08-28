@@ -54,7 +54,7 @@ export const ProjectGallery = ({ photos, altTextPrefix }: ProjectGalleryProps) =
             variants={staggerContainer(0.08)}
         >
             {photos.map((photo, index) => {
-                const key = String(photo.id ?? index);
+                const key = String(photo.id);
                 const span = spans.get(key) ?? 'square';
 
                 return (
