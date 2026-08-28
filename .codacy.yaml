@@ -1,12 +1,11 @@
 ---
-# AI-assistant directive files (CLAUDE.md, GEMINI.md, PROJECT_KNOWLEDGE.md) are
+# AI-assistant directive files (CLAUDE.md, PROJECT_KNOWLEDGE.md) are
 # instructions for coding agents, not user-facing documentation or code — doc-
 # quality/comprehensibility rules (persona, tool docs, sentence length, etc.)
 # don't apply to them and produce persistent false positives. README.md is
 # intentionally NOT excluded here; it's a normal project doc.
 exclude_paths:
   - "CLAUDE.md"
-  - "GEMINI.md"
   - "PROJECT_KNOWLEDGE.md"
   # Generated/vendored files — not hand-written code, shouldn't be scanned
   # for complexity/style at all.
