@@ -2,7 +2,7 @@ import styles from './InboxRow.module.css';
 import type { InboxRowProps } from "../../Types/IndexRow.ts";
 import { useTranslation } from 'react-i18next';
 
-export const InboxRow = ({ message, onClick, onDelete, labels }: InboxRowProps) => {
+export const InboxRow = ({ message, onClick, onDelete, showStatus = true, labels }: InboxRowProps) => {
     const { t } = useTranslation();
     const formattedDate = message.createdAt
         ? new Date(message.createdAt).toLocaleDateString()
@@ -33,12 +33,14 @@ export const InboxRow = ({ message, onClick, onDelete, labels }: InboxRowProps) 
 
             <td data-label={labels.status} className={styles['status-cell']}>
                 <div className={styles['status-actions']}>
-                    {!message.isRead ? (
-                        <span className={styles['unread-badge']}>
-                            {t('admin.dashboard.inquiries.new')}<span className={styles.dot}>.</span>
-                        </span>
-                    ) : (
-                        <span className={styles['read-badge']}>{t('admin.dashboard.inquiries.read')}</span>
+                    {showStatus && (
+                        !message.isRead ? (
+                            <span className={styles['unread-badge']}>
+                                {t('admin.dashboard.inquiries.new')}<span className={styles.dot}>.</span>
+                            </span>
+                        ) : (
+                            <span className={styles['read-badge']}>{t('admin.dashboard.inquiries.read')}</span>
+                        )
                     )}
 
                     {onDelete && (

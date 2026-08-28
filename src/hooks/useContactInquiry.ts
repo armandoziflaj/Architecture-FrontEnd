@@ -25,15 +25,6 @@ export const useContactInquiries = (page = 1, pageSize = 20, onlyUnread = false)
     });
 };
 
-export const useUnreadInquiriesCount = () => {
-    return useQuery({
-        queryKey: ['admin-inquiries', 'unread-count'],
-        queryFn: ({ signal }) => getAllInquiries(1, 1, true, signal),
-        staleTime: 1000 * 60 * 2,
-        select: (data) => data.totalCount,
-    });
-};
-
 export const useToggleInquiryRead = () => {
     const queryClient = useQueryClient();
 

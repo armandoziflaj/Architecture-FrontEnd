@@ -6,7 +6,7 @@ import styles from './Dashboard.module.css';
 import { ProjectPreviewGrid } from "./ProjectPreviewGrid/ProjectPreviewGrid.tsx";
 import { RecentInquiriesTable } from "./RecentInquiry/RecentInquiriesTable.tsx";
 import { DeleteConfirmToast } from "./DeleteConfirmToast.tsx";
-import { useContactInquiries, useDeleteInquiry, useToggleInquiryRead, useUnreadInquiriesCount, useVisitorCount } from "../../../hooks/useContactInquiry.ts";
+import { useContactInquiries, useDeleteInquiry, useToggleInquiryRead, useVisitorCount } from "../../../hooks/useContactInquiry.ts";
 import { toast } from "react-hot-toast";
 import {useNavigate} from "react-router";
 
@@ -24,7 +24,6 @@ export const Dashboard = () => {
 
     const { data: projects, isLoading: isProjectsLoading } = useProjects(i18n.language, false);
     const { data: inquiriesResponse, isLoading: isInquiriesLoading } = useContactInquiries(1, 8, true);
-    const { data: unreadCount, isLoading: isUnreadCountLoading } = useUnreadInquiriesCount();
     const { data: visitorCountData, isLoading: isVisitorCountLoading } = useVisitorCount();
     const { mutate: removeProject } = useDeleteProject();
     const { mutate: toggleInquiryRead } = useToggleInquiryRead();
@@ -63,7 +62,7 @@ export const Dashboard = () => {
 
     const stats = [
         { id: '01', labelKey: 'admin.dashboard.activeProjects', value: isProjectsLoading ? '...' : projects?.length ?? 0 },
-        { id: '02', labelKey: 'admin.dashboard.unreadInquiries', value: isUnreadCountLoading ? '...' : unreadCount ?? 0 },
+        { id: '02', labelKey: 'admin.dashboard.unreadInquiries', value: isInquiriesLoading ? '...' : inquiriesResponse?.totalCount ?? 0 },
         { id: '03', labelKey: 'admin.dashboard.totalViews', value: isVisitorCountLoading ? '...' : formatNumber(visitorCountData?.data.count) },
     ];
 
@@ -98,6 +97,7 @@ export const Dashboard = () => {
                     onMessageClick={(id) => { toggleInquiryRead(id); }}
                     onDeleteMessage={handleDeleteMessage}
                     emptyTextKey="admin.dashboard.inquiries.emptyUnread"
+                    showStatus={false}
                 />
             </section>
 

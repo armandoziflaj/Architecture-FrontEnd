@@ -12,6 +12,7 @@ export interface InboxRowProps {
     message: MessageData;
     onClick?: (_id: number) => void;
     onDelete?: (_id: number) => void;
+    showStatus?: boolean;
     labels: {
         client: string;
         message: string;
