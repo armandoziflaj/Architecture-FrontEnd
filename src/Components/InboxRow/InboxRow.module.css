@@ -67,6 +67,24 @@ td {
     color: var(--color-text);
 }
 
+.expand-btn {
+    display: inline;
+    margin-left: var(--spacing-xs);
+    padding: 0;
+    background: none;
+    border: none;
+    color: var(--color-primary);
+    font-size: inherit;
+    font-weight: var(--font-weight-medium);
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.expand-btn:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+}
+
 .date-text {
     color: var(--color-text-muted);
     font-size: var(--font-size-sm);
@@ -164,10 +182,6 @@ td {
 
     .subject-text {
         color: var(--color-text-muted);
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
         line-height: 1.5;
     }
 }

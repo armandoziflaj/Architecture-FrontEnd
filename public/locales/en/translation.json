@@ -115,7 +115,9 @@
         "actions": "Actions",
         "new": "New",
         "read": "Read",
-        "delete": "Delete message"
+        "delete": "Delete message",
+        "showMore": "Show more",
+        "showLess": "Show less"
       }
     },
     "messages": {
