@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
-import { toast } from 'react-hot-toast';
 import { SectionHeader } from '../../../Components/SectionHeader/SectionHeader.tsx';
 import { RecentInquiriesTable } from '../Dashboard/RecentInquiry/RecentInquiriesTable.tsx';
-import { DeleteConfirmToast } from '../Dashboard/DeleteConfirmToast.tsx';
+import { showDeleteConfirmToast } from '../Dashboard/showDeleteConfirmToast.tsx';
 import { useContactInquiries, useDeleteInquiry, useToggleInquiryRead } from '../../../hooks/useContactInquiry.ts';
 import styles from './MessagesPage.module.css';
 
@@ -22,17 +21,7 @@ export const MessagesPage = () => {
     const totalPages = inquiriesResponse?.totalPages ?? 1;
 
     const handleDeleteMessage = (id: number) => {
-        toast((a) => (
-            <DeleteConfirmToast
-                t={t}
-                title={t('admin.dashboard.deleteConfirmation.messageTitle')}
-                onConfirm={() => {
-                    removeInquiry(id);
-                    toast.dismiss(a.id); }}
-                onCancel={() => { toast.dismiss(a.id); }} />
-        ), {
-            duration: Infinity,
-        });
+        showDeleteConfirmToast(t, () => { removeInquiry(id); }, t('admin.dashboard.deleteConfirmation.messageTitle'));
     };
 
     return (
